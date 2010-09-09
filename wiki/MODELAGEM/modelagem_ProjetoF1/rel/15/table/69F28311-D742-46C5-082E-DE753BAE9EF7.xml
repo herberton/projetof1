@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="Table" id="69F28311-D742-46C5-082E-DE753BAE9EF7" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" entitytype="" splittedTableID="" allow_type_substitution="true" minVolumes="0" expectedVolumes="0" maxVolumes="9999999" growthPercent="0" growthType="Year" normalForm="Third" adequatelyNormalized="NO" abbreviation="" oid_is_pk="false" use_default_color="true" background_color="null" foreground_color="null">
+		<name>Cliente</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<generator>E64E2D9F-C7C4-83D5-1FE2-2DD41535819E</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<include_in_ddl value="false" />
+		<beforeDrop value="" />
+		<beforeCreate value="" />
+		<beforeAlter value="" />
+		<afterCreate value="" />
+		<afterAlter value="" />
+		<endOfScript value="" />
+		<spatial_table value="false" />
+		<oid_pk_columns />
+		<engineering should="true" />
+		<des_obj_version version="1.0" />
+		<fonts>
+			<font_object>
+				<parameter name="fo_type" value="Title" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="1" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Column" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Datatype" />
+				<parameter name="font_color" value="-16744448" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="PK Element" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="FK Element" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="UK Element" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Not Null" />
+				<parameter name="font_color" value="-65536" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Key" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+		</fonts>
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+		<contained>
+			<object type="Column" id="E02DD285-B8D3-BB7A-98A1-DB5388208598" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="false" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>ID_CLIENTE</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>693428F0-AB05-7F9C-1C25-BA6ECC2283D6</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="133C14B5-2B31-C0C5-5597-37EF9C33F6F2" file="defaultdomains" />
+				<datatype dttype="packed" precision="7" scale="0" typename="NUMBER" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="NUMERIC" oid="LOGDT019" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="693428F0-AB05-7F9C-1C25-BA6ECC2283D6" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="B8F5CA81-FB10-9AA9-B492-42B84E1D73A8" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="false" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>NOME</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>4C272C7F-1139-319D-EA0B-990F7F2E38BF</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="722DB85A-6A77-545B-F6AF-94C1E1DF6CB0" file="defaultdomains" />
+				<datatype dttype="var" size="50" typename="VARCHAR2" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="VARCHAR" oid="LOGDT024" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="4C272C7F-1139-319D-EA0B-990F7F2E38BF" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="270F77A0-2ADD-8110-4547-B96FAB565098" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="true" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>DATA_NASCIMENTO</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>4D74DB1E-141A-E66A-660D-7DBE3D52820D</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="7139DAB9-B7B5-ED21-B6F0-9F77F3348854" file="defaultdomains" />
+				<datatype dttype="builtin" typename="DATE" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="Date" oid="LOGDT007" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="4D74DB1E-141A-E66A-660D-7DBE3D52820D" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="18E53C03-3043-230C-9849-57FC80623F4C" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="false" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>SEXO</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>A8DE5399-7590-7A11-736D-68E204A01512</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="2762A22F-4F9E-157E-1CAC-135B8A4115F8" file="defaultdomains" />
+				<datatype dttype="fixed" size="1" typename="CHAR" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="CHAR" oid="LOGDT025" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="A8DE5399-7590-7A11-736D-68E204A01512" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="09BA283A-2AAB-86EA-F7D0-4AB8C96C4332" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="true" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>CPF</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>D08B455C-05DF-2C60-93BB-94CA6576A41E</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="DOM3000004" file="defaultdomains" />
+				<datatype dttype="var" size="11" typename="VARCHAR2" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="VARCHAR" oid="LOGDT024" />
+				<use value="logical type" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="D08B455C-05DF-2C60-93BB-94CA6576A41E" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="152BE23D-08DC-EFED-701E-264CA6FC47F7" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="true" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>RG</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>A39CDC1D-B786-901B-B628-CB4DD22FD137</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="DOM3000004" file="defaultdomains" />
+				<datatype dttype="var" size="9" typename="VARCHAR2" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="VARCHAR" oid="LOGDT024" />
+				<use value="logical type" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="A39CDC1D-B786-901B-B628-CB4DD22FD137" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="496ED3D7-7B0C-677D-7FF9-834455F749E0" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="true" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>ALTURA</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>8023DBE3-8276-A17F-4A75-FC71F98CFF00</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="DOM3000004" file="defaultdomains" />
+				<datatype dttype="packed" precision="" scale="" typename="FLOAT" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="FLOAT" oid="LOGDT021" />
+				<use value="logical type" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="8023DBE3-8276-A17F-4A75-FC71F98CFF00" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Column" id="3DDAFB12-0B08-E40D-1835-7797823981F1" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="true" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>QTD_VISITAS</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>F0B3B6BA-4DD8-F2CF-0772-52BADC81CA47</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<domain oid="DOM3000004" file="defaultdomains" />
+				<datatype dttype="fixed" size="" typename="INTEGER" />
+				<abbreviation />
+				<reference value="false" />
+				<logicaltype dttype="Integer" oid="LOGDT011" />
+				<use value="logical type" />
+				<sourcetype sort="" />
+				<computed value="false" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<security />
+				<ui_defaults readOnly="false" displayedOnReports="true" displayedOnForms="true" displayAs="Text" />
+				<eng_attribute_id eng_id="F0B3B6BA-4DD8-F2CF-0772-52BADC81CA47" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+		</contained>
+		<key>
+			<object type="Index" id="87ECBFCC-1271-3BB9-CF2C-C1CAC00B23AF" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" pk="true" indexstate="Primary Constraint">
+				<name>PK_CLIENTE</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-07 16:40:13</timestamp>
+				</alter>
+				<generator>838A703D-76D1-F4A9-03AE-185A95A2EC87</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering should="true" />
+				<des_obj_version version="1.0" />
+				<functional></functional>
+				<contains type="Column" sortorder="ASC">E02DD285-B8D3-BB7A-98A1-DB5388208598</contains>
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+		</key>
+	</object>
+</metadatadoc>

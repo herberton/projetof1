@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="FKIndexAssociation" id="15BD767D-9378-18C5-2B97-170FC99CC945" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" tableid="7D930C53-1EE8-0E1C-3253-13EBBE5779C6" reftableid="A39A7004-CB25-A37B-A1F9-4F54F7A6927E" references="6134FACD-5EB4-0347-A673-453215F241F4" localindexid="29968DB8-642F-4581-5176-9B13F27E79BC" delrule="CASCADE" mandatory="true" transferable="true" use_default_color="true" background_color="null" foreground_color="null">
+		<name>FK_FILA_BRINQUEDO</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<generator>D49A53DF-F99E-0E0E-0535-9F79DDA8C9D6</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<engineering should="true" />
+		<des_obj_version version="1.0" />
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+	</object>
+</metadatadoc>

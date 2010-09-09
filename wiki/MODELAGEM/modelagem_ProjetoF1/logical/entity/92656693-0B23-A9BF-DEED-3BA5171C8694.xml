@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="Entity" id="92656693-0B23-A9BF-DEED-3BA5171C8694" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" entitytype="" allow_type_substitution="true" strategy="Single Table" minVolumes="0" expectedVolumes="0" maxVolumes="9999999" growthPercent="0" growthType="Year" normalForm="Third" adequatelyNormalized="NO" use_default_color="true" background_color="null" foreground_color="null">
+		<name>Status_Brinquedo</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-04 19:59:11</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 14:12:25</timestamp>
+		</alter>
+		<generator>93AE217F-DC1C-3D65-00DF-81C8F138B941</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<parent inherits="false" />
+		<engineering>
+			<relational_design id="AFE48C82-B64B-0FBC-0646-6F912E0B84A0" should="true" />
+		</engineering>
+		<des_obj_version version="1.0" />
+		<fonts>
+			<font_object>
+				<parameter name="fo_type" value="Title" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="1" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Attribute" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Datatype" />
+				<parameter name="font_color" value="-16744448" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="PK Element" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="FK Element" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="UK Element" />
+				<parameter name="font_color" value="-16776961" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Not Null" />
+				<parameter name="font_color" value="-65536" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+			<font_object>
+				<parameter name="fo_type" value="Key" />
+				<parameter name="font_color" value="-16777216" />
+				<parameter name="font_name" value="Dialog" />
+				<parameter name="font_size" value="10" />
+				<parameter name="font_style" value="0" />
+			</font_object>
+		</fonts>
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+		<contained>
+			<object type="Attribute" id="0B5E5B41-B61E-C7B0-C557-AFA94E399C5A" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="false" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>ID_STATUS_BRINQUEDO</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 19:59:11</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 20:40:44</timestamp>
+				</alter>
+				<generator>CA81AB1A-9EE5-1307-049D-E6F1D7AB221C</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering>
+					<relational_design id="AFE48C82-B64B-0FBC-0646-6F912E0B84A0" should="true" />
+				</engineering>
+				<des_obj_version version="1.0" />
+				<domain oid="F61221CF-179E-CAE9-91CA-6BB0B0E34EB0" file="defaultdomains" />
+				<datatype dttype="packed" precision="3" scale="0" typename="NUMBER" />
+				<reference value="false" />
+				<logicaltype dttype="NUMERIC" oid="LOGDT019" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<source value="" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+			<object type="Attribute" id="51A2D302-7B83-3530-B615-ACB896DB8A04" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" unique="false" allownull="false" usedomainconstraints="true" is_oid="false" structured_attribute_id="" fk="false">
+				<name>DESCRICAO</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 19:59:11</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 22:27:46</timestamp>
+				</alter>
+				<generator>52231083-B267-FD23-3143-290962A42D3C</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="object.property.defaultvalue" value="" />
+					<parameter name="object.property.usesdefault" value="false" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering>
+					<relational_design id="AFE48C82-B64B-0FBC-0646-6F912E0B84A0" should="true" />
+				</engineering>
+				<des_obj_version version="1.0" />
+				<domain oid="9B0ADAC5-A9F8-1C8C-DBF4-76AF27B546FD" file="defaultdomains" />
+				<datatype dttype="var" size="100" typename="VARCHAR2" />
+				<reference value="false" />
+				<logicaltype dttype="VARCHAR" oid="LOGDT024" />
+				<use value="domain" />
+				<sourcetype sort="" />
+				<formula desc="" />
+				<subtypeSubstitution value="true" />
+				<restricted_substitution value="false" />
+				<source value="" />
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+		</contained>
+		<key>
+			<object type="Candidate Key" id="E4CC5A89-5B82-24B4-D794-24D60F419C55" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="false" use_default_color="true" background_color="null" foreground_color="null" pk="true" keystate="Primary Key" synonym="">
+				<name>PK_STATUSBRINQUEDO</name>
+				<comment></comment>
+				<notes></notes>
+				<alter type="created">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 19:59:11</timestamp>
+				</alter>
+				<alter type="changed">
+					<user>RicardoMMO</user>
+					<timestamp>2010-08-04 20:21:20</timestamp>
+				</alter>
+				<generator>EF5656A6-3DA0-3EB1-1639-F1ADF62A4C0B</generator>
+				<properties>
+					<parameter name="design.owner" value="modelagem_ProjetoF1" />
+					<parameter name="object.existsinrepository" value="true" />
+					<parameter name="property.comment.rdbms" value="" />
+				</properties>
+				<engineering>
+					<relational_design id="AFE48C82-B64B-0FBC-0646-6F912E0B84A0" should="true" />
+				</engineering>
+				<des_obj_version version="1.0" />
+				<contains type="Attribute">0B5E5B41-B61E-C7B0-C557-AFA94E399C5A</contains>
+				<documents />
+				<parties />
+				<changerequests />
+				<measurements />
+			</object>
+		</key>
+	</object>
+</metadatadoc>

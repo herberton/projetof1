@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="Relation" id="9198B6FA-ED61-45AF-45C6-885C98725BBF" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" use_default_color="true" background_color="null" foreground_color="null">
+		<name>FK_BRINQUEDO_CATRACA</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-04 19:59:11</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-04 20:16:25</timestamp>
+		</alter>
+		<generator>82856A07-A526-C59B-D8D8-B010B52B55A9</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="object.property.relation.connection.src.name" value="" />
+			<parameter name="object.property.relation.connection.tgt.name" value="" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<connection endpoint="source" card="1" entity="DDDEE293-8CFC-2A2E-1ACA-0A7E13320947" allownull="true" />
+		<connection endpoint="target" card="*" entity="BD39C7C6-6727-4C4E-5621-67F5FD4D57AD" allownull="true" />
+		<dominant_role>null</dominant_role>
+		<identifying>false</identifying>
+		<engineering>
+			<relational_design id="9DC6382D-BCC1-FF06-50D9-FE280B59A608" should="true" />
+		</engineering>
+		<des_obj_version version="1.0" />
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+	</object>
+</metadatadoc>

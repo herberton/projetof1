@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="FKIndexAssociation" id="9737577C-F6EA-724B-3D47-D118539317E7" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" tableid="2820B144-5D34-11A7-1F29-39C25AF82E6F" reftableid="69F28311-D742-46C5-082E-DE753BAE9EF7" references="87ECBFCC-1271-3BB9-CF2C-C1CAC00B23AF" localindexid="FD92B1A0-6EE4-1D5E-B60A-123A5828B583" delrule="SET NULL" mandatory="false" transferable="true" use_default_color="true" background_color="null" foreground_color="null">
+		<name>FK_CLIENTE_HISTCLIENTBRINQ</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<generator>1E9FC446-B7A5-90BE-F63D-3D111A279FF7</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<engineering should="true" />
+		<des_obj_version version="1.0" />
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+	</object>
+</metadatadoc>

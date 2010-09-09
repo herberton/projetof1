@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0" stdes_version="2.2">
+	<!-- Specific properties for physical objects of type: Structured Types -->
+
+	<object oid="47E390DE-0671-C4B1-8428-0F45CBEE18F8" type="SType" role="contains" marked_generate="true" />
+	<!-- Specific properties for physical objects of type: TypeElements -->
+
+	<!-- Specific properties for physical objects of type: Methods -->
+
+	<!-- Specific properties for physical objects of type: Method Parameters -->
+
+	<!-- Specific properties for physical objects of type: Collection Types -->
+
+		<!-- RDBMS objects of type: Databases -->
+
+		<!-- RDBMS objects of type: Tablespaces -->
+
+		<!-- RDBMS objects of type: Temp Tablespaces -->
+
+		<!-- RDBMS objects of type: Undo Tablespaces -->
+
+		<!-- RDBMS objects of type: DataFile -->
+
+		<!-- RDBMS objects of type: RLG -->
+
+		<!-- RDBMS objects of type: Users -->
+
+		<!-- RDBMS objects of type: QuotaItem -->
+
+	<!-- Specific properties for physical objects of type: Tables -->
+
+	<object oid="109F7564-0093-448F-9C76-DD2B2CCD9C25" type="Table" role="contains" marked_generate="true" />
+	<object oid="210156C6-4E20-9F3E-E9E4-CEE265048256" type="Table" role="contains" marked_generate="true" />
+	<object oid="2820B144-5D34-11A7-1F29-39C25AF82E6F" type="Table" role="contains" marked_generate="true" />
+	<object oid="5C9238AB-6464-D28A-4BB6-9BC66AE9F008" type="Table" role="contains" marked_generate="true" />
+	<object oid="69F28311-D742-46C5-082E-DE753BAE9EF7" type="Table" role="contains" marked_generate="true" />
+	<object oid="7091F48A-14E6-1469-5CEF-C5716764E000" type="Table" role="contains" marked_generate="true" />
+	<object oid="7D930C53-1EE8-0E1C-3253-13EBBE5779C6" type="Table" role="contains" marked_generate="true" />
+	<object oid="A39A7004-CB25-A37B-A1F9-4F54F7A6927E" type="Table" role="contains" marked_generate="true" />
+	<object oid="D8B4AF27-C7B4-073E-9F08-7FB776C438D8" type="Table" role="contains" marked_generate="true" />
+	<object oid="E2B73E8C-FEB9-1653-7EB4-7195236D0DC7" type="Table" role="contains" marked_generate="true" />
+	<object oid="E8244A05-33B9-EBEE-1391-C6ECBE4E1AF2" type="Table" role="contains" marked_generate="true" />
+		<!-- RDBMS objects of type: External Tables -->
+
+		<!-- RDBMS objects of type: ExternCol -->
+
+		<!-- RDBMS objects of type: ListTemplatePart -->
+
+		<!-- RDBMS objects of type: Clusters -->
+
+		<!-- RDBMS objects of type: CI -->
+
+		<!-- RDBMS objects of type: Segment Templates -->
+
+		<!-- RDBMS objects of type: Rollback Segments -->
+
+		<!-- RDBMS objects of type: Snapshots -->
+
+		<!-- RDBMS objects of type: PL -->
+
+		<!-- RDBMS objects of type: Partition -->
+
+		<!-- RDBMS objects of type: LP -->
+
+		<!-- RDBMS objects of type: LS -->
+
+		<!-- RDBMS objects of type: HP -->
+
+		<!-- RDBMS objects of type: LobStorage -->
+
+		<!-- RDBMS objects of type: IHP -->
+
+		<!-- RDBMS objects of type: LobStorage -->
+
+		<!-- RDBMS objects of type: Roles -->
+
+	<!-- Specific properties for physical objects of type: Views -->
+
+		<!-- RDBMS objects of type: Sequences -->
+
+	<object oid="1908176D-190D-CF5B-B222-37E70044810B" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="AF5B76CB-DF24-4714-2051-55F30F4D8EA6" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="C6DDC1EE-A8D1-C1D7-D10C-A3338616B834" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="C87A248A-D853-7AEF-487C-DAADA682222A" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="B04C9C2C-FDD1-C13A-6ECB-C8DE25CC553D" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="855CDABD-3F83-BBFA-9A64-A24C6A9E92E6" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="09C3EA0C-B254-CB1E-F134-4B7667BC46D9" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="81FDD94B-1C36-C0DA-1880-0D1C36E69C9E" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="AC2374BB-6765-02C7-AFAD-F8F6963B471C" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="D63D5708-53A4-4ACD-72A6-FA6BCB81265A" type="Sequence" role="contains" marked_generate="true" />
+	<object oid="FA22F7B3-15AC-C6BE-0C36-19BE64565E81" type="Sequence" role="contains" marked_generate="true" />
+		<!-- RDBMS objects of type: Permissions -->
+
+		<!-- RDBMS objects of type: IGPL -->
+
+		<!-- RDBMS objects of type: IGP -->
+
+		<!-- RDBMS objects of type: CC -->
+
+		<!-- RDBMS objects of type: Synonyms -->
+
+		<!-- RDBMS objects of type: NNC -->
+
+		<!-- RDBMS objects of type: Directories -->
+
+		<!-- RDBMS objects of type: Trg -->
+
+		<!-- RDBMS objects of type: Stored Procedures -->
+
+		<!-- RDBMS objects of type: Level -->
+
+		<!-- RDBMS objects of type: Hierarchy -->
+
+		<!-- RDBMS objects of type: Attr -->
+
+		<!-- RDBMS objects of type: Dimensions -->
+
+		<!-- RDBMS objects of type: BJI -->
+
+		<!-- RDBMS objects of type: Contexts -->
+
+		<!-- RDBMS objects of type: Disk Groups -->
+
+		<!-- RDBMS objects of type: FG -->
+
+		<!-- RDBMS objects of type: ASM -->
+
+		<!-- RDBMS objects of type: LIP -->
+
+</metadatadoc>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="Sequence" id="D63D5708-53A4-4ACD-72A6-FA6BCB81265A">
+		<name>SEQ_TERMINAL_CONSULTA</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:43:58</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:44:04</timestamp>
+		</alter>
+		<properties>
+			<parameter name="object.property.auto.Cache" value="" />
+			<parameter name="object.property.auto.Cycle" value="NO" />
+			<parameter name="object.property.auto.GeneratedInRDBMS" value="false" />
+			<parameter name="object.property.auto.IncrementBy" value="1" />
+			<parameter name="object.property.auto.LongName" value="SEQ_TERMINAL_CONSULTA" />
+			<parameter name="object.property.auto.MarkedGenerate" value="true" />
+			<parameter name="object.property.auto.MaxValue" value="" />
+			<parameter name="object.property.auto.MinValue" value="1" />
+			<parameter name="object.property.auto.Name" value="SEQ_TERMINAL_CONSULTA" />
+			<parameter name="object.property.auto.NameHasQuotes" value="false" />
+			<parameter name="object.property.auto.NoCache" value="NO" />
+			<parameter name="object.property.auto.Order" value="NO" />
+			<parameter name="object.property.auto.RawObject" value="false" />
+			<parameter name="object.property.auto.StartWith" value="1" />
+			<parameter name="object.property.auto.User" value="NO_OBJECT" />
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+	</object>
+</metadatadoc>

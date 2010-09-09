@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="Relation" id="1E9FC446-B7A5-90BE-F63D-3D111A279FF7" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" use_default_color="true" background_color="null" foreground_color="null">
+		<name>FK_CLIENTE_HISTCLIENTBRINQ</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-04 19:59:11</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-04 22:47:42</timestamp>
+		</alter>
+		<generator>5FC0A5AD-F60F-2AAD-4EED-494D9AB7D11A</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="object.property.relation.connection.src.name" value="" />
+			<parameter name="object.property.relation.connection.tgt.name" value="" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<connection endpoint="source" card="1" entity="E64E2D9F-C7C4-83D5-1FE2-2DD41535819E" allownull="true" />
+		<connection endpoint="target" card="*" entity="7E5DBE95-680E-7933-6739-780CDFA00912" allownull="true" />
+		<dominant_role>null</dominant_role>
+		<identifying>false</identifying>
+		<engineering>
+			<relational_design id="D10D39BC-66FD-0BBD-9914-7644995813FD" should="true" />
+		</engineering>
+		<des_obj_version version="1.0" />
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+	</object>
+</metadatadoc>

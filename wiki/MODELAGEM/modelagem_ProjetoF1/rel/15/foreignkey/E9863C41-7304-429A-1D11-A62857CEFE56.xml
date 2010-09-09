@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadatadoc version="2.0">
+	<object type="FKIndexAssociation" id="E9863C41-7304-429A-1D11-A62857CEFE56" rep_oid="null" rep_ovid="null" is_checkedout="false" checkedout_by="" visible_in_main_view="true" tableid="7D930C53-1EE8-0E1C-3253-13EBBE5779C6" reftableid="E2B73E8C-FEB9-1653-7EB4-7195236D0DC7" references="7EAE6F06-745A-C755-E89A-BC9475D7BEA6" localindexid="194635A2-6375-74B5-2506-89D68342557F" delrule="CASCADE" mandatory="true" transferable="true" use_default_color="true" background_color="null" foreground_color="null">
+		<name>FK_FILA_DISPOSITIVO</name>
+		<comment></comment>
+		<notes></notes>
+		<alter type="created">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<alter type="changed">
+			<user>RicardoMMO</user>
+			<timestamp>2010-08-07 16:40:13</timestamp>
+		</alter>
+		<generator>6CA8FA0D-D33C-A6FA-270C-D8D485042717</generator>
+		<properties>
+			<parameter name="design.owner" value="modelagem_ProjetoF1" />
+			<parameter name="object.existsinrepository" value="true" />
+			<parameter name="property.comment.rdbms" value="" />
+		</properties>
+		<engineering should="true" />
+		<des_obj_version version="1.0" />
+		<documents />
+		<parties />
+		<changerequests />
+		<measurements />
+	</object>
+</metadatadoc>
