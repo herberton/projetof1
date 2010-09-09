@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+<rich:messages id="messages" showDetail="true" showSummary="true">
+	<f:facet name="errorMarker">
+		<h:graphicImage url="/images/icons/icon_error.png" />
+	</f:facet>
+	<f:facet name="passedMarker">
+		<h:graphicImage url="/images/icons/icon_correct.png" />
+	</f:facet>
+	<f:facet name="infoMarker">
+		<h:graphicImage url="/images/icons/icon_info.png" />
+	</f:facet>
+	<f:facet name="warnMarker">
+		<h:graphicImage url="/images/icons/icon_warning.png" />
+	</f:facet>
+</rich:messages>
+<a4j:form ajaxSubmit="true">
+	<rich:modalPanel id="modalPanelLogin" minHeight="10" minWidth="10"
+		showWhenRendered="true" rendered="#{mensagemExibirMsg}"
+		moveable="true" autosized="true">
+
+		<rich:panel id="panel_modalLogin" rendered="true"
+			bodyClass="panelUpdate"
+			style="text-align:center;width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<h:graphicImage url="#{mensagemIcone}" />
+			<rich:spacer height="10" />
+			<h:outputText value="#{mensagemMensagem}"
+				style="font-size: 12px" />
+			<rich:spacer height="10" />
+			<h:panelGrid columns="2" cellspacing="10px">
+				<a4j:commandButton id="closeModalLogin" alt="Voltar à tela de login"
+					type="button" value="OK"
+					onclick="Richfaces.hideModalPanel('modalPanelLogin')">
+					<f:setPropertyActionListener target="#{mensagemExibirMsg}"
+						value="false" />
+				</a4j:commandButton>
+			</h:panelGrid>
+		</rich:panel>
+
+	</rich:modalPanel>
+</a4j:form>
+</body>
+</html>
