@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:param name="defaultBean" value="#{bairroMB}" />
+	<ui:param name="defaultModel" value="#{bairroDataModel}" />
+	<ui:param name="entidade" value="#{bairroBundle['entidade']}" />
+	<ui:param name="nomeEntidade" value="#{bairroMB.bairro.nome}" />
+	<ui:param name="mensagemIcone" value="#{bairroMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem" value="#{bairroMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo" value="#{bairroMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{bairroMB.mensagem.exibirMsg}" />
+
+	<ui:param name="superMB" value="#{bairroMB}" />
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir" alt="#{aplicacaoBundle['botao.sim']}"
+			type="button" value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="tabelaBairro, searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{bairroMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{bairroBundle['titulo.pagina']}" />
+		</h:outputFormat>
+        <a4j:keepAlive beanName="bairroDataModel" />
+		<a4j:keepAlive beanName="bairroMB" />
+		<a4j:keepAlive beanName="lovCidadeMB" />
+		<a4j:keepAlive beanName="listaValorTabAux" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="4"
+					columnClasses="panelUpdateRow1, panelUpdateRow1, panelUpdateRow2">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{bairroBundle['nome.label']}" />
+						<h:inputText value="#{bairroMB.nome}" />
+					</h:panelGrid>
+					<rich:spacer width="20px" />
+					<a4j:commandButton id="buttonPesquisar" alt="#{aplicacaoBundle['botao.pesquisar']}"
+						type="submit"
+						reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+						value="#{aplicacaoBundle['botao.pesquisar']}" />
+					<a4j:commandButton id="buttonNovoTipoDoc" alt="#{aplicacaoBundle['botao.novo']}"
+						reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+						action="#{bairroMB.prepareAdicionar}" value="#{aplicacaoBundle['botao.novo']}" />
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+		<rich:panel id="tabelaBairro"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<rich:dataTable id="dataTableBairro" value="#{bairroDataModel}"
+					var="objeto" rowClasses="row1, row2" rows="19"
+					cellspacing="0" cellpadding="0" border="1"
+					styleClass="dataTableBody"
+					columnsWidth="0*,0*,0*,60"
+					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{bairroBundle['nome.label']}" reRender="dataTableBairro">
+								<a4j:actionparam name="sortField" value="nome" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.nome}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{bairroBundle['abrev.label']}"
+								reRender="dataTableBairro">
+								<a4j:actionparam name="sortField" value="abrev" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.abrev}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{bairroBundle['cidade.label']}" reRender="dataTableBairro">
+								<a4j:actionparam name="sortField" value="cid.nome" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.nomeCidade}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+						</f:facet>
+						<a4j:region selfRendered="true">
+							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+								reRenderAfterComplete="panel_modalVisualizar"
+								alt="#{aplicacaoBundle['botao.visualizar']}"
+								action="#{bairroMB.carregarVisualizacao}"
+								rendered="#{objeto.idBairro != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{bairroMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+								reRenderAfterComplete="addUpdateBlock"
+								alt="#{aplicacaoBundle['botao.editar']}"
+								action="#{bairroMB.carregarEdicao}"
+								rendered="#{objeto.idBairro != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{bairroMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
+								reRenderAfterComplete="panel_modalExcluir"
+								alt="#{aplicacaoBundle['botao.excluir']}"
+								action="#{bairroMB.carregarExclusao}"
+								rendered="#{objeto.idBairro != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{bairroMB.view}" />
+							</a4j:commandButton>
+						</a4j:region>
+					</h:column>
+					<f:facet name="footer">
+						<rich:datascroller />
+					</f:facet>
+				</rich:dataTable>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+		<rich:panel id="panel_editBairro" rendered="true"
+			bodyClass="panelUpdate"
+			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="3" id="panelFormEditBlockBairro"
+					columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+					<h:outputLabel value="* #{bairroBundle['nome.label']}" />
+					<h:inputText value="#{bairroMB.bairro.nome}" id="nome">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="nome" errorStyle="color: darkred;" />
+					<h:outputLabel value="#{bairroBundle['abrev.label']}" />
+					<h:inputText value="#{bairroMB.bairro.abrev}" id="abrev">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="abrev" errorStyle="color: darkred;" />
+					<h:outputLabel value="* #{bairroBundle['cidade.label']}" />
+					<h:column>
+						<a4j:region selfRendered="true">
+							<h:outputText
+								value="#{(bairroMB.bairro.cidade == null or bairroMB.bairro.cidade.nomeCidade == null)?enderecamentoBundle['lovCidade.label']:bairroMB.bairro.cidade.nomeCidade}" />
+							<a4j:commandButton image="/images/icons/lupa.png"
+								ajaxRendered="true"
+								oncomplete="Richfaces.showModalPanel('modalPanelCidade');"
+								rendered="#{bairroMB.bairro.cidade == null or bairroMB.bairro.cidade.nomeCidade == null}"
+								reRenderAfterComplete="modalPanelCidade" alt="#{aplicacaoBundle['botao.lupa.abrir']']}"
+								style=" width : 14px;">
+								<f:setPropertyActionListener target="#{lovCidadeMB.exibir}"
+									value="true" />
+							</a4j:commandButton>
+							<a4j:commandButton image="/images/icons/cross.png"
+								ajaxRendered="true" action="#{bairroMB.removerSelecao}"
+								rendered="#{bairroMB.bairro.cidade != null and bairroMB.bairro.cidade.nomeCidade != null}"
+								reRenderAfterComplete="addUpdateBlock" alt="#{aplicacaoBundle['botao.lupa.removerselecao']}"
+								style=" width : 16px;" />
+						</a4j:region>
+					</h:column>
+					<rich:spacer />
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<rich:spacer height="10" />
+					<h:column>
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{bairroMB.editarState}"
+							alt="#{aplicacaoBundle['botao.salvar']}" type="button"
+							value="#{aplicacaoBundle['botao.salvar']}" action="#{bairroMB.editar}" />
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{bairroMB.adicionarState}"
+							alt="#{aplicacaoBundle['botao.incluir']}" type="button"
+							value="#{aplicacaoBundle['botao.incluir']}" action="#{bairroMB.adicionar}" />
+						<rich:spacer width="10" />
+						<a4j:commandButton reRender="searchlistBlock"
+							alt="#{aplicacaoBundle['botao.voltar']}" immediate="true" type="button"
+							value="#{aplicacaoBundle['botao.voltar']}"
+							action="#{bairroMB.voltar}" />
+					</h:column>
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+	<ui:define name="modalExcluir">
+		<h:panelGrid columns="2" id="gridModalExcluir"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{bairroBundle['nome.label']}" />
+			<h:outputText value="#{bairroMB.bairro.nome}" />
+			<h:outputLabel value="#{bairroBundle['abrev.label']}" />
+			<h:outputText value="#{bairroMB.bairro.abrev}" />
+			<h:outputLabel value="#{bairroBundle['cidade.label']}" />
+			<h:outputText value="#{bairroMB.bairro.cidade.nomeCidade}" />
+		</h:panelGrid>
+	</ui:define>
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{bairroBundle['nome.label']}" />
+			<h:outputText value="#{bairroMB.bairro.nome}" />
+			<h:outputLabel value="#{bairroBundle['abrev.label']}" />
+			<h:outputText value="#{bairroMB.bairro.abrev}" />
+			<h:outputLabel value="#{bairroBundle['cidade.label']}" />
+			<h:outputText value="#{bairroMB.bairro.cidade.nomeCidade}" />
+		</h:panelGrid>
+	</ui:define>
+
+	<ui:define name="other">
+		<ui:include src="/includes/list_of_values/lov_cidade.xhtml" />
+	</ui:define>
+</ui:composition>

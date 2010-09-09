@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5"
+ xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <display-name>base</display-name>
+ <context-param>
+  <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+  <param-value>resources.application</param-value>
+ </context-param>
+ <context-param>
+  <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+  <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+  <param-value>client</param-value>
+ </context-param>
+ <!--
+		<context-param> <param-name>facelets.BUILD_BEFORE_RESTORE</param-name>
+		<param-value>true</param-value> </context-param>
+	-->
+ <context-param>
+  <param-name>org.richfaces.SKIN</param-name>
+  <param-value>#{aplicacaoSkin.skinAtual}</param-value>
+ </context-param>
+ <context-param>
+  <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+  <param-value>enable</param-value>
+ </context-param>
+ <context-param>
+  <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+  <param-value>.xhtml</param-value>
+ </context-param>
+ <context-param>
+  <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <param-name>quasar.skins</param-name>
+  <param-value>quasarBlue,Quasar Azul;quasarColor,Quasar Color;quasarGreen,Quasar Verde;quasarGrey,Quasar Cinza;quasarLilac,Quasar Lilás;quasarOrange,Quasar Laranja;quasarPink,Quasar Rosa;</param-value>
+ </context-param>
+ <context-param>
+  <description>select utilizado para montar o menu</description>
+  <param-name>select.menu.perfil</param-name>
+  <param-value>select p.id_perfil from perfil p inner join usuario u on p.id_perfil=u.id_perfil where u.login=?</param-value>
+ </context-param>
+ <context-param>
+  <description>select que retorna as funcionalidades para montar o menu</description>
+  <param-name>select.menu.funcionalidade</param-name>
+  <param-value>select funcionalidade.nome,
+       funcionalidade.acesso,
+       modulo_sistema.nome,
+       (select ms.nome
+          from modulo_sistema ms
+         where ms.id_modulo = modulo_sistema.id_modulo_pai) modulo_pai,
+       funcionalidade.ordem_func,
+       modulo_sistema.posicao
+  from funcionalidade, modulo_sistema, perfil_funcionalidade
+ where modulo_sistema.id_modulo = funcionalidade.id_modulo
+   and funcionalidade.id_func = perfil_funcionalidade.id_func
+   and perfil_funcionalidade.id_perfil = 1
+ order by modulo_sistema.posicao, funcionalidade.nome, modulo_pai</param-value>
+ </context-param>
+ <context-param>
+  <description>select que retorna os módulos para montar o menu</description>
+  <param-name>select.menu.modulo</param-name>
+  <param-value>select modulo_sistema.nome, modulo_sistema.descricao
+  from modulo_sistema
+ where modulo_sistema.id_modulo in
+       (select distinct funcionalidade.id_modulo
+          from funcionalidade, perfil_funcionalidade
+         where funcionalidade.id_func = perfil_funcionalidade.id_func
+           and perfil_funcionalidade.id_perfil = ?)
+ order by modulo_sistema.posicao</param-value>
+ </context-param>
+ <filter>
+  <display-name>RichFaces Filter</display-name>
+  <filter-name>richfaces</filter-name>
+  <filter-class>org.ajax4jsf.Filter</filter-class>
+ </filter>
+ <filter>
+  <display-name>Login Filter</display-name>
+  <filter-name>loginFilter</filter-name>
+  <filter-class>qcs.webproject.login.filtro.LoginFilter</filter-class>
+ </filter>
+ <filter>
+  <filter-name>hibernateSessionFilter</filter-name>
+  <filter-class>qcs.base.web.filtro.HibernateSessionFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>richfaces</filter-name>
+  <servlet-name>Faces Servlet</servlet-name>
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>FORWARD</dispatcher>
+  <dispatcher>INCLUDE</dispatcher>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>loginFilter</filter-name>
+  <url-pattern>/default/*</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>hibernateSessionFilter</filter-name>
+  <servlet-name>Faces Servlet</servlet-name>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>loginFilter</filter-name>
+  <url-pattern>/pages/*</url-pattern>
+ </filter-mapping>
+ <servlet>
+  <servlet-name>Faces Servlet</servlet-name>
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.xhtml</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.faces</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.jsf</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.qcs</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>pages/index.xhtml</welcome-file>
+  <welcome-file>index.htm</welcome-file>
+  <welcome-file>index.jsp</welcome-file>
+  <welcome-file>default.html</welcome-file>
+  <welcome-file>default.htm</welcome-file>
+  <welcome-file>default.jsp</welcome-file>
+ </welcome-file-list>
+ <security-constraint>
+  <web-resource-collection>
+   <web-resource-name>Restricted to Secure role</web-resource-name>
+   <url-pattern>/pages/*</url-pattern>
+  </web-resource-collection>
+  <!-- <web-resource-collection>
+   <web-resource-name>Security for index</web-resource-name>
+   <url-pattern>/default/*</url-pattern>
+  </web-resource-collection>-->
+  <auth-constraint>
+   <role-name>Quasar</role-name>
+   <role-name>Administrador</role-name>
+   <role-name>BASIC</role-name>
+  </auth-constraint>
+ </security-constraint>
+ <login-config>
+  <auth-method>FORM</auth-method>
+  <realm-name>BASE-web-SECURITY</realm-name>
+  <form-login-config>
+   <form-login-page>/default/login/login.xhtml</form-login-page>
+   <form-error-page>/default/login/login.xhtml</form-error-page>
+  </form-login-config>
+ </login-config>
+ <security-role>
+  <role-name>Quasar</role-name>
+ </security-role>
+ <security-role>
+  <role-name>BASIC</role-name>
+ </security-role>
+ <security-role>
+  <role-name>Administrador</role-name>
+ </security-role>
+</web-app>
