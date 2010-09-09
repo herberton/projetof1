@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:param name="defaultBean" value="#{dispositivoMB}" />
+	<ui:param name="defaultModel" value="#{dispositivoDataModel}" />
+	<ui:param name="entidade" value="#{dispositivoBundle['entidade']}" />
+	<ui:param name="nomeEntidade" value="#{dispositivoMB.dispositivo.ip}" />
+	<ui:param name="mensagemIcone" value="#{dispositivoMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem" value="#{dispositivoMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo" value="#{dispositivoMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{dispositivoMB.mensagem.exibirMsg}" />
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir"
+			alt="#{aplicacaoBundle['botao.excluir']}" type="button"
+			value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{statusDispositivoMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{perfilBundle['header.titulo']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="dispositivoDataModel" />
+		<a4j:keepAlive beanName="dispositivoMB" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<a4j:region selfRendered="true">
+			<rich:panel id="panel_search" rendered="true"
+				bodyClass="panelHeaderFooterClass"
+				style="border:none;margin:0;padding:0;width:100%;">
+				<h:panelGrid columns="4">
+					<h:panelGrid columns="2"
+						columnClasses="panelUpdateRow1, panelUpdateRow2">
+						<h:outputLabel value="IP" />
+						<h:inputText value="#{dispositivoMB.ip}" />
+					</h:panelGrid>
+					
+					<rich:spacer width="20px" />
+					<a4j:commandButton id="buttonPesquisar"
+						alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
+						reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+						value="#{aplicacaoBundle['botao.pesquisar']}" />
+					<a4j:commandButton id="buttonNovoDispositivo"
+						alt="#{aplicacaoBundle['botao.novo']}"
+						reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+						action="#{dispositivoMB.prepareAdicionar}"
+						value="#{aplicacaoBundle['botao.novo']}" />
+				</h:panelGrid>
+			</rich:panel>
+			<rich:panel id="tabelaDispositivo"
+				style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+				<rich:dataTable id="dataTableDispositivo" value="#{dispositivoDataModel}"
+					var="objeto" columnsWidth="0*, 0*, 80" rowClasses="row1, row2"
+					rows="19" cellspacing="0" cellpadding="0" border="1"
+					styleClass="dataTableBody"
+					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="IP"
+								reRender="dataTableDispositivo">
+								<a4j:actionparam name="sortField" value="ip" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.ip}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Descrição"
+								reRender="dataTableDispositivo">
+								<a4j:actionparam name="sortField" value="sd.descricao" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.descricaoStatusDispositivo}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+						</f:facet>
+						<a4j:region selfRendered="true">
+							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+								reRenderAfterComplete="panel_modalVisualizar"
+								alt="#{aplicacaoBundle['botao.visualizar']}"
+								action="#{dispositivoMB.carregarVisualizacao}"
+								rendered="#{objeto.idDispositivo != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{dispositivoMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+								reRender="addUpdateBlock,valorTabAuxCombo"
+								action="#{dispositivoMB.carregarEdicao}"
+								alt="#{aplicacaoBundle['botao.editar']}"
+								rendered="#{objeto.idDispositivo != null}"
+								style="FONT-SIZE: x-large;">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{dispositivoMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
+								reRenderAfterComplete="panel_modalExcluir"
+								alt="#{aplicacaoBundle['botao.excluir']}"
+								action="#{dispositivoMB.carregarExclusao}"
+								rendered="#{objeto.idDispositivo != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{dispositivoMB.view}" />
+							</a4j:commandButton>
+						</a4j:region>
+					</h:column>
+
+					<f:facet name="footer">
+						<rich:datascroller />
+					</f:facet>
+				</rich:dataTable>
+
+
+
+			</rich:panel>
+		</a4j:region>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+		<rich:panel id="panel_editDispositivo" rendered="true"
+			bodyClass="panelUpdate"
+			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<h:panelGrid columns="2" id="panelFormEditBlockDispositivo"
+				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+				<h:outputLabel value="IP" />
+				<rich:column>
+					<h:inputText value="#{dispositivoMB.dispositivo.ip}" size="15"
+						id="ip"
+						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
+						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
+					</h:inputText>
+				</rich:column>
+				<h:outputLabel value="Descrição" />
+				<rich:column>
+					<h:inputText value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}" size="15"
+						id="descricao"
+						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
+						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
+					</h:inputText>
+				</rich:column>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<rich:spacer height="10" />
+				<rich:column>
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{dispositivoMB.editarState}"
+						alt="#{aplicacaoBundle['botao.salvar']}" type="button"
+						value="#{aplicacaoBundle['botao.salvar']}"
+						action="#{dispositivoMB.editar}" />
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{dispositivoMB.adicionarState}"
+						alt="#{aplicacaoBundle['botao.incluir']}" type="button"
+						value="#{aplicacaoBundle['botao.incluir']}"
+						action="#{dispositivoMB.adicionar}" />
+					<rich:spacer width="10" />
+					<a4j:commandButton reRender="searchlistBlock"
+						alt="#{aplicacaoBundle['botao.voltar']}" immediate="true"
+						type="button" value="#{aplicacaoBundle['botao.voltar']}"
+						action="#{dispositivoMB.voltar}" />
+				</rich:column>
+			</h:panelGrid>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="modalExcluir">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+		
+			<h:outputLabel value="IP" />
+			<h:outputText value="#{dispositivoMB.dispositivo.ip}" />
+
+		</h:panelGrid>
+	</ui:define>
+	
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="IP" />
+			<h:outputText value="#{dispositivoMB.dispositivo.ip}" />
+			<h:outputLabel value="Descrição" />
+			<h:outputText value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}" />
+			
+		</h:panelGrid>
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a4j:outputPanel id="lovModuloSistemaOutputPanel" ajaxRendered="true">
+	<rich:modalPanel id="modalPanelModuloSistema" minHeight="20" minWidth="300"
+		moveable="true" autosized="true" showWhenRendered="true"
+		rendered="#{(lovModuloSistemaMB.exibir == 'true')?'true':'false'}">
+		<f:facet name="header">
+			<h:outputText value="#{moduloSistemaBundle['lov.modulosistema.titulo']}" />
+		</f:facet>
+		<rich:panel id="panel_modalModuloSistema" bodyClass="panelUpdate"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<a4j:form ajaxSubmit="true">
+					<h:panelGrid columns="5">
+						<h:outputLabel value="#{moduloSistemaBundle['lov.modulosistema.modulo']}" />
+						<h:inputText value="#{lovModuloSistemaMB.nomeModulo}" size="35"/>
+						<rich:spacer width="7" />
+						<a4j:commandButton reRender="dataTableModuloSistema" alt="#{aplicacaoBundle['botao.pesquisar']}"
+							value="#{aplicacaoBundle['botao.pesquisar']}" />
+						<a4j:commandButton value="#{aplicacaoBundle['botao.lov.limpar']}"
+							action="#{lovModuloSistemaMB.limpar}" alt="#{aplicacaoBundle['botao.lov.limpar']}"/>
+					</h:panelGrid>
+				</a4j:form>
+				<a4j:form ajaxSubmit="true">
+					<rich:dataTable id="dataTableModuloSistema"
+						value="#{lovModuloSistemaDataModel}" var="objeto"
+						rowClasses="row1, row2" width="100%" rows="10" cellspacing="0"
+						cellpadding="0" border="1" styleClass="dataTableBody"
+						onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+						<h:column>
+							<f:facet name="header">
+								<a4j:commandLink value="#{moduloSistemaBundle['lov.modulosistema.modulo']}"
+									reRender="dataTableModuloSistema">
+									<a4j:actionparam name="sortField" value="nome" />
+								</a4j:commandLink>
+							</f:facet>
+							<a4j:commandLink value="#{objeto.nome}"
+								action="#{superMB.atualizarSelecao}">
+								<f:setPropertyActionListener
+									target="#{lovModuloSistemaMB.idModuloSistemaSelecionado}"
+									value="#{objeto.idModulo}" />
+								<f:setPropertyActionListener
+									target="#{lovModuloSistemaMB.exibir}" value="false" />
+							</a4j:commandLink>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<a4j:commandLink
+									value="#{moduloSistemaBundle['lov.modulosistema.descricao']}"
+									reRender="dataTableModuloSistema">
+									<a4j:actionparam name="sortField" value="descricao" />
+								</a4j:commandLink>
+							</f:facet>
+							<h:outputText value="#{objeto.descritivo}" />
+						</h:column>
+						<f:facet name="footer">
+							<rich:datascroller />
+						</f:facet>
+					</rich:dataTable>
+					<h:panelGrid columns="3">
+						<rich:spacer height="3" />
+						<a4j:commandButton alt="#{aplicacaoBundle['botao.lov.cancelar']}"
+							value="#{aplicacaoBundle['botao.lov.cancelar']}">
+							<f:setPropertyActionListener
+								target="#{lovModuloSistemaMB.exibir}" value="false" />
+						</a4j:commandButton>
+					</h:panelGrid>
+				</a4j:form>
+			</a4j:region>
+		</rich:panel>
+		</rich:modalPanel>
+</a4j:outputPanel>
+</body>
+</html>
