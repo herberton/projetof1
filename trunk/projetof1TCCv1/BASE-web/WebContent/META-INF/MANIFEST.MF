@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: BASE-modulo.jar 
+ BASE-seguranca.jar 
+ BASE-tabaux.jar 
+ BASE-pessoa.jar 
+ BASE-enderecamento.jar 
+ BASE-model.jar
+

@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"> 
+
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:param name="defaultBean" value="#{funcionalidadeMB}" />
+	<ui:param name="defaultModel" value="#{funcionalidadeDataModel}" />
+	<ui:param name="entidade" value="#{funcionalidadeBundle['entidade']}" />
+	<ui:param name="nomeEntidade"
+		value="#{funcionalidadeMB.funcionalidade.nome}" />
+	<ui:param name="mensagemIcone"
+		value="#{funcionalidadeMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem"
+		value="#{funcionalidadeMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{funcionalidadeMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{funcionalidadeMB.mensagem.exibirMsg}" />
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{funcionalidadeBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="funcionalidadeMB" />
+		<a4j:keepAlive beanName="funcionalidadeDataModel" />
+	</ui:define>
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir" alt="#{aplicacaoBundle['botao.sim']}"
+			type="button" value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="tabelaFuncionalidade, searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{funcionalidadeMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{funcionalidadeBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="funcionalidadeDataModel" />
+		<a4j:keepAlive beanName="funcionalidadeMB" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+
+			<h:outputText
+				value="#{funcionalidadeBundle['perfilAcesso.label']} #{funcionalidadeMB.perfilView.nomePerfilAcesso}"
+				styleClass="textoDestaque" />
+
+			<rich:spacer height="7" />
+			<h:panelGrid columns="4">
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="2"
+						columnClasses="panelUpdateRow1, panelUpdateRow2">
+						<h:outputLabel value="#{funcionalidadeBundle['nome.lable']}" />
+						<h:inputText value="#{funcionalidadeMB.nomeFuncionalidade}"
+							size="30" />
+						<h:outputLabel value="#{funcionalidadeBundle['modulo.label']}" />
+						<h:selectOneMenu value="#{funcionalidadeMB.idMod}">
+							<f:selectItem itemLabel="" itemValue="0" />
+							<f:selectItems
+								value="#{listaModuloSistema.selectItemsModuloSistema}" />
+						</h:selectOneMenu>
+					</h:panelGrid>
+					<h:panelGrid columns="2"
+						columnClasses="panelUpdateRow1, panelUpdateRow2">
+						<h:outputLabel
+							value="#{funcionalidadeBundle['visivelMenu.lable']}" />
+						<h:selectOneRadio value="#{funcionalidadeMB.visivel}">
+							<f:selectItem
+								itemLabel="#{funcionalidadeBundle['pesquisa.visivelMenu.ambos.label']}"
+								itemValue="" />
+							<f:selectItem
+								itemLabel="#{funcionalidadeBundle['pesquisa.visivelMenu.sim.label']}"
+								itemValue="S" />
+							<f:selectItem
+								itemLabel="#{funcionalidadeBundle['pesquisa.visivelMenu.naolabel']}"
+								itemValue="N" />
+						</h:selectOneRadio>
+					</h:panelGrid>
+				</h:panelGrid>
+				<rich:spacer width="20px" />
+				<a4j:commandButton id="buttonPesquisar"
+					alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
+					reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+					value="#{aplicacaoBundle['botao.pesquisar']}" />
+				<a4j:commandButton id="buttonNovoFuncionalidade"
+					alt="#{aplicacaoBundle['botao.novo']}"
+					reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+					action="#{funcionalidadeMB.prepareAdicionar}"
+					value="#{aplicacaoBundle['botao.novo']}" />
+			</h:panelGrid>
+		</rich:panel>
+		<rich:panel id="tabelaFuncionalidade"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<rich:dataTable id="dataTableFuncionalidade"
+				value="#{funcionalidadeDataModel}" var="objeto"
+				rowClasses="row1, row2" width="100%" rows="19" cellspacing="0"
+				cellpadding="0" border="1" styleClass="dataTableBody"
+				onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+				onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{funcionalidadeBundle['nome.lable']}"
+							reRender="dataTableFuncionalidade">
+							<a4j:actionparam name="sortField" value="nome" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{objeto.nomeFuncionalidade}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink
+							value="#{funcionalidadeBundle['descricao.lable']}"
+							reRender="dataTableFuncionalidade">
+							<a4j:actionparam name="sortField" value="descricao" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{objeto.descricaoFuncionalidade}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink
+							value="#{funcionalidadeBundle['visivelMenu.lable']}"
+							reRender="dataTableFuncionalidade">
+							<a4j:actionparam name="sortField" value="visivelMenu" />
+						</a4j:commandLink>
+					</f:facet>
+					<rich:spacer width="35" />
+					<h:graphicImage
+						rendered="#{objeto.idFuncionalidade != null and objeto.visivel}"
+						value="#{aplicacaoBundle['icone.sim']}" />
+					<h:graphicImage
+						rendered="#{objeto.idFuncionalidade != null and !objeto.visivel}"
+						value="#{aplicacaoBundle['icone.nao']}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{funcionalidadeBundle['modulo.label']}"
+							reRender="dataTableFuncionalidade">
+							<a4j:actionparam name="sortField" value="modSist.nome" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{objeto.modulo}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+					</f:facet>
+					<a4j:region ajaxRendered="true">
+						<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+							oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+							reRenderAfterComplete="panel_modalVisualizar"
+							alt="#{aplicacaoBundle['botao.visualizar']}"
+							action="#{funcionalidadeMB.carregarVisualizacao}"
+							rendered="#{objeto.idFuncionalidade != null}">
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{funcionalidadeMB.view}" />
+						</a4j:commandButton>
+						<rich:spacer width="7" />
+						<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+							reRenderAfterComplete="addUpdateBlock"
+							alt="#{aplicacaoBundle['botao.editar']}"
+							action="#{funcionalidadeMB.carregarEdicao}"
+							rendered="#{objeto.idFuncionalidade != null}">
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{funcionalidadeMB.view}" />
+						</a4j:commandButton>
+						<rich:spacer width="7" />
+						<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
+							oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
+							reRenderAfterComplete="panel_modalExcluir"
+							alt="#{aplicacaoBundle['botao.excluir']}"
+							action="#{funcionalidadeMB.carregarExclusao}"
+							rendered="#{objeto.idFuncionalidade != null}">
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{funcionalidadeMB.view}" />
+						</a4j:commandButton>
+					</a4j:region>
+				</h:column>
+
+				<f:facet name="footer">
+					<rich:datascroller />
+				</f:facet>
+			</rich:dataTable>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+		<rich:panel id="panel_editFuncionalidade" rendered="true"
+			bodyClass="panelUpdate"
+			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<h:panelGrid columns="3" id="panelFormEditBlockFuncionalidade"
+				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+				<h:outputLabel value="#{funcionalidadeBundle['nome.lable']}" />
+				<h:inputText value="#{funcionalidadeMB.funcionalidade.nome}"
+					size="20" id="nome"
+					readonly="#{!funcionalidadeMB.editarState and !funcionalidadeMB.adicionarState}"
+					style="#{!funcionalidadeMB.editarState ? 'color: black;' : ''}">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<rich:message for="nome" errorStyle="color: darkred;" />
+
+				<h:outputLabel value="#{funcionalidadeBundle['descricao.lable']}" />
+				<h:inputTextarea
+					value="#{funcionalidadeMB.funcionalidade.descricao}" size="60"
+					id="descricao" rows="4" cols="40"
+					readonly="#{!funcionalidadeMB.editarState and !funcionalidadeMB.adicionarState}"
+					style="#{!funcionalidadeMB.editarState ? 'color: black;' : ''}">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputTextarea>
+				<rich:message for="descricao" errorStyle="color: darkred;" />
+
+				<h:outputLabel
+					value="#{funcionalidadeBundle['moduloSistema.lable']}" />
+				<h:selectOneMenu
+					value="#{funcionalidadeMB.funcionalidade.moduloSistema.idModulo}"
+					id="idModulo">
+					<f:selectItems
+						value="#{listaModuloSistema.selectItemsModuloSistema}" />
+					<rich:ajaxValidator event="onblur" />
+				</h:selectOneMenu>
+				<rich:message for="idModulo" errorStyle="color: darkred;" />
+
+				<h:outputLabel value="#{funcionalidadeBundle['ordemFunc.lable']}" />
+				<h:inputText value="#{funcionalidadeMB.funcionalidade.ordemFunc}"
+					size="1" id="posicaoMenu"
+					readonly="#{!funcionalidadeMB.editarState and !funcionalidadeMB.adicionarState}"
+					style="#{!funcionalidadeMB.editarState ? 'color: black;' : ''}">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<rich:message for="posicaoMenu" errorStyle="color: darkred;" />
+
+				<h:outputLabel value="#{funcionalidadeBundle['acesso.label']}" />
+				<h:inputText value="#{funcionalidadeMB.funcionalidade.acesso}"
+					size="25" id="acesso"
+					readonly="#{!funcionalidadeMB.editarState and !funcionalidadeMB.adicionarState}"
+					style="#{!funcionalidadeMB.editarState ? 'color: black;' : ''}">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<rich:message for="acesso" errorStyle="color: darkred;" />
+
+				<h:outputLabel value="#{funcionalidadeBundle['visivelMenu.lable']}" />
+				<h:selectBooleanCheckbox id="visivelMenuAux"
+					value="#{funcionalidadeMB.funcionalidade.visivelMenuBoolean}">
+					<rich:ajaxValidator event="onfocus" />
+				</h:selectBooleanCheckbox>
+				<rich:message for="visivelMenuAux" errorStyle="color: darkred;" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="1">
+				<rich:spacer height="10" />
+				<rich:column>
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{funcionalidadeMB.editarState}"
+						alt="#{aplicacaoBundle['botao.salvar']}" type="button"
+						value="#{aplicacaoBundle['botao.salvar']}"
+						action="#{funcionalidadeMB.editar}" />
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{funcionalidadeMB.adicionarState}"
+						alt="#{aplicacaoBundle['botao.incluir']}" type="button"
+						value="#{aplicacaoBundle['botao.incluir']}"
+						action="#{funcionalidadeMB.adicionar}" />
+					<rich:spacer width="10" />
+					<a4j:commandButton reRender="searchlistBlock"
+						alt="#{aplicacaoBundle['botao.voltar']}" immediate="true"
+						type="button" value="Voltar" action="#{funcionalidadeMB.voltar}" />
+				</rich:column>
+			</h:panelGrid>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="modalExcluir">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel
+				value="#{funcionalidadeBundle['funcionalidadeAcesso.pesqExcl.label']}" />
+			<h:outputText value="#{funcionalidadeMB.funcionalidade.nome}" />
+			<h:outputLabel
+				value="#{funcionalidadeBundle['descricaoFuncionalidade.pesqExcl.label']}" />
+			<h:outputText value="#{funcionalidadeMB.funcionalidade.descricao}" />
+		</h:panelGrid>
+	</ui:define>
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel
+				value="#{funcionalidadeBundle['funcionalidadeAcesso.pesqExcl.label']}" />
+			<h:outputText value="#{funcionalidadeMB.funcionalidade.nome}" />
+			<h:outputLabel
+				value="#{funcionalidadeBundle['descricaoFuncionalidade.pesqExcl.label']}" />
+			<h:outputText value="#{funcionalidadeMB.funcionalidade.descricao}" />
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
+
+</html>

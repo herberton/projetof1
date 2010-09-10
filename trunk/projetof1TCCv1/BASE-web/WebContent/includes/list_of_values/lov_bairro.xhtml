@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a4j:outputPanel id="lovBairroOutputPanel" ajaxRendered="true">
+	<rich:modalPanel id="modalPanelBairro" minHeight="20" minWidth="300"
+		moveable="true" autosized="true" ajaxSingle="true"
+		showWhenRendered="true"
+		reRender="modalPanelBairro"
+		rendered="#{(lovBairroMB.exibir=='true')?'true':'false'}">
+		<f:facet name="header">
+			<h:outputText value="#{bairroBundle['lov.bairro.titulo']}" />
+		</f:facet>
+		<rich:panel id="panel_modalBairro" bodyClass="panelUpdate"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<a4j:form ajaxSubmit="true">
+					<h:panelGrid columns="3">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{bairroBundle['lov.bairro.cidade']}" />
+							<h:inputText value="#{lovBairroMB.nomeCidade}"/>
+							<h:outputLabel value="#{bairroBundle['lov.bairro.bairro']}" />
+							<h:inputText value="#{lovBairroMB.nome}" />
+						</h:panelGrid>
+						<rich:spacer width="7" />
+						<a4j:commandButton reRender="dataTableBairro,modalPanelBairro"
+							ajaxRendered="true" type="submit" value="#{aplicacaoBundle['botao.pesquisar']}" />
+					</h:panelGrid>
+				</a4j:form>
+				<a4j:form ajaxSubmit="true">
+					<rich:dataTable id="dataTableBairro" value="#{lovBairroDataModel}"
+						var="objeto" rowClasses="row1, row2" width="100%" rows="10"
+						cellspacing="0" cellpadding="0" border="1"
+						styleClass="dataTableBody"
+						onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+						<h:column>
+							<f:facet name="header">
+								<a4j:commandLink value="#{bairroBundle['lov.bairro.bairro']}" reRender="dataTableBairro">
+									<a4j:actionparam name="sortField" value="nome" />
+								</a4j:commandLink>
+							</f:facet>
+							<a4j:commandLink value="#{objeto.nome}"
+								action="#{superMB.atualizarSelecao}">
+								<f:setPropertyActionListener
+									target="#{lovBairroMB.idBairroSelecionado}"
+									value="#{objeto.idBairro}" />
+								<f:setPropertyActionListener target="#{lovBairroMB.exibir}"
+									value="false" />
+							</a4j:commandLink>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<a4j:commandLink value="#{bairroBundle['lov.bairro.cidade']}" reRender="dataTablePessoa">
+									<a4j:actionparam name="sortField" value="cid.nomeCidade" />
+								</a4j:commandLink>
+							</f:facet>
+							<h:outputText value="#{objeto.nomeCidade}" />
+						</h:column>
+						<f:facet name="footer">
+							<rich:datascroller />
+						</f:facet>
+					</rich:dataTable>
+					<rich:spacer height="3" />
+					<a4j:commandButton value="#{aplicacaoBundle['botao.cancelar']}">
+						<f:setPropertyActionListener target="#{lovBairroMB.exibir}"
+							value="false" />
+					</a4j:commandButton>
+				</a4j:form>
+			</a4j:region>
+		</rich:panel>
+	</rich:modalPanel>
+</a4j:outputPanel>
+</body>
+</html>
