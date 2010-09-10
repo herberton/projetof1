@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<ui:param name="nomeEntidade" value="#{usuarioMB.usuario.login}" />
+	<ui:param name="defaultBean" value="#{usuarioMB}" />
+	<ui:param name="defaultModel" value="#{usuarioDataModel}" />
+	<ui:param name="entidade" value="#{usuarioBundle['entidade']}" />
+	<ui:param name="mensagemIcone"
+		value="#{moduloSistemaMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem"
+		value="#{moduloSistemaMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{moduloSistemaMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{moduloSistemaMB.mensagem.exibirMsg}" />
+	<ui:param name="superMB" value="#{usuarioMB}" />
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir"
+			alt="#{aplicacaoBundle['botao.excluir']}" type="button"
+			value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{usuarioMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{usuarioBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="usuarioDataModel" />
+		<a4j:keepAlive beanName="usuarioMB" />
+		<a4j:keepAlive beanName="lovPessoaMB" />
+		<a4j:keepAlive beanName="lovPessoaDataProvider" />
+		<a4j:keepAlive beanName="lovPessoaDataModel" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="9" cellspacing="3"
+					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
+					<h:outputLabel value="#{usuarioBundle['login.label']}" />
+					<h:inputText value="#{usuarioMB.login}" size="8" />
+					<h:outputLabel value="#{usuarioBundle['cpfOuCnpj.label']}" />
+					<h:inputText value="#{usuarioMB.cpfOuCnpj}" size="13" />
+					<h:outputLabel value="#{usuarioBundle['pessoa.label']}" />
+					<h:inputText value="#{usuarioMB.nomePessoa}" />
+					<rich:spacer width="20px" />
+					<h:panelGrid columns="2" cellspacing="5">
+						<a4j:commandButton id="buttonPesquisar"
+							alt="#{aplicacaoBundle['botao.pesquisar']} #{usuarioBundle['entidade']}"
+							type="submit"
+							reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+							value="#{aplicacaoBundle['botao.pesquisar']}" />
+						<a4j:commandButton id="buttonNovoUsuario"
+							alt="#{aplicacaoBundle['botao.novo']} ' #{usuarioBundle['entidade']}'"
+							reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+							action="#{usuarioMB.prepareAdicionar}"
+							value="#{aplicacaoBundle['botao.novo']}" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+		<rich:panel id="panelDataTableUsuario"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<rich:dataTable id="dataTableUsuario" value="#{usuarioDataModel}"
+					var="objeto" rowClasses="row1, row2" rows="19"
+					columnsWidth="0*, 0*, 0*, 2, 2, 75" cellspacing="0" cellpadding="0"
+					border="1" styleClass="dataTableBody"
+					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{usuarioBundle['pessoa.label']}"
+								reRender="dataTableUsuario">
+								<a4j:actionparam name="sortField" value="pes.nomePessoa" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.nomePessoa}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{usuarioBundle['login.label']}"
+								reRender="dataTableUsuario">
+								<a4j:actionparam name="sortField" value="login" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.login}" />
+					</rich:column>
+					<rich:column dir="ltr">
+						<f:facet name="header">
+							<a4j:commandLink value="#{usuarioBundle['cpfOuCnpj.label']}"
+								reRender="dataTableUsuario">
+								<a4j:actionparam name="sortField"
+									value="#{(objeto.cpf != null)?'pes.cpf':'pes.cnpj'}" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText rendered="#{objeto.cpf != null}"
+							value="#{objeto.cpf}" converter="CPFConverter" />
+						<h:outputText rendered="#{objeto.cnpj != null}"
+							value="#{objeto.cnpj}" />
+					</rich:column>
+					<rich:column width="2">
+						<f:facet name="header">
+							<a4j:commandLink value="#{usuarioBundle['ativo.label']}"
+								reRender="dataTableUsuario">
+								<a4j:actionparam name="sortField" value="ativo" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:graphicImage rendered="#{objeto.idUsuario != null and objeto.ativo}"
+							value="#{aplicacaoBundle['icone.sim']}" />
+						<h:graphicImage rendered="#{objeto.idUsuario != null and !objeto.ativo}"
+							value="#{aplicacaoBundle['icone.nao']}" />
+					</rich:column>
+					<rich:column width="2">
+						<f:facet name="header">
+							<a4j:commandLink
+								value="#{usuarioBundle['bloqueado.abrev.label']}"
+								reRender="dataTableUsuario">
+								<a4j:actionparam name="sortField" value="bloqueado" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:graphicImage rendered="#{objeto.idUsuario != null and objeto.bloqueado}"
+							value="#{aplicacaoBundle['icone.sim']}" />
+						<h:graphicImage rendered="#{objeto.idUsuario != null and !objeto.bloqueado}"
+							value="#{aplicacaoBundle['icone.nao']}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+						</f:facet>
+						<a4j:region selfRendered="true">
+							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+								reRenderAfterComplete="panel_modalVisualizar"
+								alt="#{aplicacaoBundle['botao.visualizar']}"
+								action="#{usuarioMB.carregarVisualizacao}"
+								rendered="#{objeto.idUsuario != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{usuarioMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+								reRenderAfterComplete="addUpdateBlock"
+								alt="#{aplicacaoBundle['botao.editar']}"
+								action="#{usuarioMB.carregarEdicao}"
+								rendered="#{objeto.idUsuario != null and (statusAplicacao.usuarioLogado.administradorBoolean || statusAplicacao.usuarioLogado.masterBoolean)}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{usuarioMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
+								reRenderAfterComplete="panel_modalExcluir"
+								alt="#{aplicacaoBundle['botao.excluir']}"
+								action="#{usuarioMB.carregarExclusao}"
+								rendered="#{objeto.idUsuario != null and (statusAplicacao.usuarioLogado.administradorBoolean || statusAplicacao.usuarioLogado.masterBoolean)}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{usuarioMB.view}" />
+							</a4j:commandButton>
+							<a4j:commandButton
+								rendered="#{objeto.idUsuario != null and !objeto.ativo and statusAplicacao.usuarioLogado.administradorBoolean}"
+								image="#{aplicacaoBundle['icone.ativar']}"
+								action="#{usuarioMB.ativar}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{usuarioMB.view}" />
+							</a4j:commandButton>
+							<a4j:commandButton
+								rendered="#{objeto.idUsuario != null and objeto.ativo and (statusAplicacao.usuarioLogado.administradorBoolean)}"
+								image="#{aplicacaoBundle['icone.desativar']}"
+								action="#{usuarioMB.desativar}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{usuarioMB.view}" />
+							</a4j:commandButton>
+						</a4j:region>
+					</rich:column>
+					<f:facet name="footer">
+						<rich:datascroller />
+					</f:facet>
+				</rich:dataTable>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+		<rich:panel id="panel_editUsuario" rendered="true"
+			bodyClass="panelUpdate"
+			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="3" id="panelFormEditBlockUsuario"
+					columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+					<h:outputLabel value="#{usuarioBundle['login.label']} *" />
+					<h:inputText value="#{usuarioMB.usuario.login}" id="usr">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="usr" errorStyle="color: darkred;" />
+					<h:outputLabel
+						rendered="#{usuarioMB.usuario.senha == null || statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						value="#{usuarioBundle['senha.label']} *" />
+					<h:inputSecret
+						rendered="#{usuarioMB.usuario.senha == null || statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						value="#{usuarioMB.usuario.senha}" id="senha"
+						converter="MD5Converter">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputSecret>
+					<rich:message
+						rendered="#{usuarioMB.usuario.senha == null || statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						for="senha" errorStyle="color: darkred;" />
+					<h:outputLabel
+						rendered="#{statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						value="#{usuarioBundle['dicaSenha.label']}" />
+					<h:inputText
+						rendered="#{statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						value="#{usuarioMB.usuario.dicaSenha}" id="dicaSenha">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message
+						rendered="#{statusAplicacao.usuarioLogado.idUsuario == usuarioMB.usuario.idUsuario || statusAplicacao.usuarioLogado.administradorBoolean}"
+						for="dicaSenha" errorStyle="color: darkred;" />
+					<h:outputLabel value="#{usuarioBundle['perfil.label']} *" />
+					<h:selectOneMenu value="#{usuarioMB.usuario.idPerfil}"
+						rendered="true" id="perfil"
+						requiredMessage="#{aplicacaoBundle['msg.campo.obrigatorio']}">
+						<f:selectItem />
+						<f:selectItems value="#{listaPerfil.selectItemsPerfil}" />
+					</h:selectOneMenu>
+					<rich:message for="perfil" errorStyle="color: darkred;" />
+					<h:outputLabel value="#{usuarioBundle['pessoa.label']} *" />
+					<h:column>
+						<h:outputText
+							value="#{((usuarioMB.usuario.pessoa == null or usuarioMB.usuario.pessoa.nomePessoa == null)?(pessoaBundle['lov.label.vazio']):usuarioMB.usuario.pessoa.nomePessoa)}" />
+						<a4j:commandButton
+							image="#{aplicacaoBundle['botao.lupa.abrir.icone']}"
+							ajaxRendered="true"
+							oncomplete="Richfaces.showModalPanel('modalPanelPessoa');"
+							reRenderAfterComplete="modalPanelPessoa"
+							alt="#{aplicacaoBundle['botao.lupa.abrir']}"
+							style=" width : 14px;">
+							<f:setPropertyActionListener target="#{lovPessoaMB.exibir}"
+								value="true" />
+						</a4j:commandButton>
+						<a4j:commandButton
+							image="#{aplicacaoBundle['botao.lupa.removerselecao.icone']}"
+							ajaxRendered="true" action="#{usuarioMB.removerSelecao}"
+							rendered="#{usuarioMB.usuario.pessoa != null and usuarioMB.usuario.pessoa.nomePessoa != null}"
+							reRenderAfterComplete="addUpdateBlock"
+							alt="#{aplicacaoBundle['botao.lupa.removerselecao']}"
+							style=" width : 16px;" />
+					</h:column>
+					<rich:message for="pessoa" errorStyle="color: darkred;" />
+					<h:outputLabel value="#{usuarioBundle['observacao.label']}" />
+					<h:inputTextarea id="observacao" cols="50" rows="3"
+						value="#{usuarioMB.usuario.observacao}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputTextarea>
+					<rich:message for="observacao" errorStyle="color: darkred;" />
+					<!-- Bloqueado -->
+					<h:outputLabel rendered="#{usuarioMB.usuario.idUsuario != null}"
+						value="#{usuarioBundle['bloqueado.label']}" />
+					<h:selectBooleanCheckbox
+						rendered="#{usuarioMB.usuario.idUsuario != null}"
+						value="#{usuarioMB.usuario.bloqueadoBoolean}" />
+					<rich:message rendered="#{usuarioMB.usuario.idUsuario != null}"
+						for="bloqueado" errorStyle="color: darkred;" />
+					<!-- Auditor -->
+					<h:outputLabel
+						rendered="#{statusAplicacao.usuarioLogado.auditorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioBundle['auditor.label']}" />
+					<h:selectBooleanCheckbox id="auditor"
+						rendered="#{statusAplicacao.usuarioLogado.auditorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioMB.usuario.auditorBoolean}" />
+					<rich:message
+						rendered="#{statusAplicacao.usuarioLogado.auditorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						for="auditor" errorStyle="color: darkred;" />
+					<!-- Administrador -->
+					<h:outputLabel
+						rendered="#{statusAplicacao.usuarioLogado.administradorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioBundle['administrador.label']}" />
+					<h:selectBooleanCheckbox id="administrador"
+						rendered="#{statusAplicacao.usuarioLogado.administradorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioMB.usuario.administradorBoolean}" />
+					<rich:message
+						rendered="#{statusAplicacao.usuarioLogado.administradorBoolean || statusAplicacao.usuarioLogado.masterBoolean}"
+						for="administrador" errorStyle="color: darkred;" />
+					<!-- Master -->
+					<h:outputLabel
+						rendered="#{statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioBundle['master.label']}" />
+					<h:selectBooleanCheckbox id="master"
+						rendered="#{statusAplicacao.usuarioLogado.masterBoolean}"
+						value="#{usuarioMB.usuario.masterBoolean}" />
+					<rich:message
+						rendered="#{statusAplicacao.usuarioLogado.masterBoolean}"
+						for="master" errorStyle="color: darkred;" />
+				</h:panelGrid>
+				<h:panelGrid columns="6" cellspacing="5px"
+					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2"
+					rendered="#{usuarioMB.usuario.idUsuario != null and statusAplicacao.usuarioLogado.auditorBoolean}">
+					<h:outputLabel value="#{usuarioBundle['usuarioAtiva.label']}" />
+					<h:outputText id="usuarioAtiva"
+						value="#{usuarioMB.usuario.usuarioAtiva.login}" />
+					<h:outputLabel rendered="#{usuarioMB.usuario.usuarioAlt != null}"
+						value="#{usuarioBundle['usuarioAlt.label']}" />
+					<h:outputText rendered="#{usuarioMB.usuario.usuarioAlt != null}"
+						id="usuarioAlt" value="#{usuarioMB.usuario.usuarioAlt.login}" />
+					<h:outputLabel
+						rendered="#{usuarioMB.usuario.usuarioDesativa != null}"
+						value="#{usuarioBundle['usuarioDesativa.label']}" />
+					<h:outputText
+						rendered="#{usuarioMB.usuario.usuarioDesativa != null}"
+						id="usuarioDesativa"
+						value="#{usuarioMB.usuario.usuarioDesativa.login}" />
+
+					<h:outputLabel value="#{usuarioBundle['dataAtivacao.label']}" />
+					<h:outputText id="dataAtivacao"
+						value="#{usuarioMB.usuario.dataAtivacao}"
+						converter="#{aplicacaoBundle['date.hora.converter']}" />
+					<h:outputLabel
+						rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+						value="#{usuarioBundle['dataUltAlteracao.label']}" />
+					<h:outputText
+						rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+						id="dataUltAlteracao"
+						value="#{usuarioMB.usuario.dataUltAlteracao}"
+						converter="#{aplicacaoBundle['date.hora.converter']}" />
+					<h:outputLabel
+						rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+						value="#{usuarioBundle['dataDesativacao.label']}" />
+					<h:outputText
+						rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+						id="dataDesativacao" value="#{usuarioMB.usuario.dataDesativacao}"
+						converter="#{aplicacaoBundle['date.hora.converter']}" />
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<rich:spacer height="10" />
+					<h:column>
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{usuarioMB.editarState}"
+							alt="#{aplicacaoBundle['botao.salvar']}" type="button"
+							value="#{aplicacaoBundle['botao.salvar']}"
+							action="#{usuarioMB.editar}" />
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{usuarioMB.adicionarState}"
+							alt="#{aplicacaoBundle['botao.incluir']}" type="button"
+							value="#{aplicacaoBundle['botao.incluir']}"
+							action="#{usuarioMB.adicionar}" />
+						<rich:spacer width="10" />
+						<a4j:commandButton reRender="searchlistBlock"
+							alt="#{aplicacaoBundle['botao.voltar']}" immediate="true"
+							type="button" value="#{aplicacaoBundle['botao.voltar']}"
+							action="#{usuarioMB.voltar}" />
+					</h:column>
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+	<ui:define name="modalExcluir">
+		<h:panelGrid columns="2" id="gridModalExcluir"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{usuarioBundle['pessoa.label']}" />
+			<h:outputText value="#{usuarioMB.usuario.pessoa.nomePessoa}" />
+			<h:outputLabel value="#{usuarioBundle['login.label']}" />
+			<h:outputText value="#{usuarioMB.usuario.login}" />
+			<h:outputLabel value="#{usuarioBundle['perfil.label']}" />
+			<h:outputText value="#{usuarioMB.usuario.perfil.nomePerfil}" />
+		</h:panelGrid>
+	</ui:define>
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="4" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2, panelUpdateRow1, panelUpdateRow2, panelUpdateRow1, panelUpdateRow2"
+			cellspacing="2px">
+			<h:outputLabel value="#{usuarioBundle['login.label']}" />
+			<h:outputText value="#{usuarioMB.usuario.login}" />
+			<h:outputLabel value="#{usuarioBundle['pessoa.label']}" />
+			<h:outputLabel value="#{usuarioMB.usuario.pessoa.nomePessoa}" />
+			<h:outputLabel value="#{usuarioBundle['perfil.label']}" />
+			<h:outputText value="#{usuarioMB.usuario.perfil.nomePerfil}" />
+			<h:outputLabel value="#{usuarioBundle['status.label']}" />
+			<h:outputText
+				value="#{((usuarioMB.usuario.ativo == 'S')?(usuarioBundle['ativo.label']):(usuarioBundle['inativo.label']))} #{((usuarioMB.usuario.bloqueado == 'S')?(usuarioBundle['bloqueado.label']):'')} #{((usuarioMB.usuario.masterBoolean)?(usuarioBundle['master.label']):'')} #{((usuarioMB.usuario.auditorBoolean)?(usuarioBundle['auditor.label']):'')} #{((usuarioMB.usuario.administradorBoolean)?(usuarioBundle['administrador.label']):'')}" />
+		</h:panelGrid>
+		<h:panelGrid columns="4"
+			columnClasses="panelUpdateRow1, panelUpdateRow2, panelUpdateRow1, panelUpdateRow2"
+			cellspacing="5px"
+			rendered="#{statusAplicacao.usuarioLogado.auditorBoolean}">
+			<!-- Ativação -->
+			<h:outputText value="#{usuarioBundle['dataAtivacao.label.info']}" />
+			<h:outputText converter="#{aplicacaoBundle['date.converter']}"
+				value="#{usuarioMB.usuario.dataAtivacao}" />
+			<h:outputText value="#{usuarioBundle['usuarioAtiva.label.info']}" />
+			<h:outputText value="#{usuarioMB.usuario.usuarioAtiva.login}" />
+			<!-- Desativação -->
+			<h:outputText rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+				value="#{usuarioBundle['dataDesativacao.label.info']}" />
+			<h:outputText converter="#{aplicacaoBundle['date.converter']}"
+				rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+				value="#{usuarioMB.usuario.dataDesativacao}" />
+			<h:outputText rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+				value="#{usuarioBundle['usuarioDesativa.label.info']}" />
+			<h:outputText rendered="#{usuarioMB.usuario.dataDesativacao != null}"
+				value="#{usuarioMB.usuario.usuarioDesativa.login}" />
+			<!-- Alteração -->
+			<h:outputText
+				rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+				value="#{usuarioBundle['dataUltAlteracao.label.info']}" />
+			<h:outputText converter="#{aplicacaoBundle['date.converter']}"
+				rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+				value="#{usuarioMB.usuario.dataUltAlteracao}" />
+			<h:outputText
+				rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+				value="#{usuarioBundle['usuarioAlt.label.info']}" />
+			<h:outputText
+				rendered="#{usuarioMB.usuario.dataUltAlteracao != null}"
+				value="#{usuarioMB.usuario.usuarioAlt.login}" />
+		</h:panelGrid>
+		<h:panelGrid cellspacing="2"
+			columnClasses="panelUpdateRow1, panelUpdateRow2"
+			rendered="#{usuarioMB.usuario.observacao != null}">
+			<h:outputLabel value="#{usuarioBundle['observacao.label']}" />
+			<h:inputTextarea cols="50" readonly="true" rows="3"
+				value="#{usuarioMB.usuario.observacao}" />
+		</h:panelGrid>
+	</ui:define>
+
+	<ui:define name="other">
+		<ui:include src="/includes/list_of_values/lov_pessoa.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:param name="defaultBean" value="#{perfilUsuarioMB}" />
+	<ui:param name="defaultModel" value="#{perfilUsuarioDataModel}" />
+	<ui:param name="entidade" value="#{perfilUsuarioBundle['entidade']}" />
+	<ui:param name="nomeEntidade"
+		value="#{perfilUsuarioMB.perfilUsuario.perfil.nomePerfil}" />
+	<ui:param name="mensagemIcone"
+		value="#{perfilUsuarioMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem"
+		value="#{perfilUsuarioMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{perfilUsuarioMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{perfilUsuarioMB.mensagem.exibirMsg}" />
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{perfilUsuarioBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="perfilUsuarioMB" />
+		<a4j:keepAlive beanName="perfilUsuarioDataModel" />
+	</ui:define>
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir"
+			alt="#{aplicacaoBundle['botao.sim']}" type="button"
+			value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="tabelaFuncionalidade, searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{perfilUsuarioMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{perfilUsuarioBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="perfilUsuarioDataModel" />
+		<a4j:keepAlive beanName="perfilUsuarioMB" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+			<h:outputText
+				value="#{perfilUsuarioBundle['perfilUsuario.label']} #{perfilUsuarioMB.perfilView.nomePerfilAcesso}"
+				styleClass="textoDestaque" />
+		</rich:panel>
+		<br />
+		<h:panelGrid columns="2">
+			<h:panelGrid columns="5"
+				columnClasses="panelUpdateRow1, panelUpdateRow2, panelUpdateRow1, panelUpdateRow2">
+				<h:outputLabel value="#{perfilUsuarioBundle['perfil.label']}" />
+				<h:selectOneMenu value="#{perfilUsuarioMB.idPerfil}">
+					<f:selectItem itemLabel="" itemValue="0" />
+					<f:selectItems value="#{listaPerfil.selectItemsPerfil}" />
+				</h:selectOneMenu>
+				<h:outputLabel value="#{perfilUsuarioBundle['usuario.label']}" />
+				<h:inputText value="#{perfilUsuarioMB.usuario}" size="45" />
+				<rich:spacer width="5px" />
+				<h:outputLabel
+					value="#{perfilUsuarioBundle['dataAtivacao.label']} #{perfilUsuarioBundle['data.inicial.de']}" />
+				<rich:calendar id="dataAtivacaoDe" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataAtivaInicial}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+				<h:outputLabel value="#{perfilUsuarioBundle['data.inicial.ate']}" />
+				<rich:calendar id="dataAtivacaoAte" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataAtivaFinal}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+				<rich:spacer width="5px" />
+				<h:outputLabel
+					value="#{perfilUsuarioBundle['dataDesativacao.label']} #{perfilUsuarioBundle['data.inicial.de']}" />
+				<rich:calendar id="dataDesativacaoDe" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataDesativaInicial}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+				<h:outputLabel value="#{perfilUsuarioBundle['data.inicial.ate']}" />
+				<rich:calendar id="dataDesativacaoAte" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataDesativaFinal}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+				<rich:spacer width="5px" />
+				<h:outputLabel
+					value="#{perfilUsuarioBundle['dataUltAlteracao.label']} #{perfilUsuarioBundle['data.inicial.de']}" />
+				<rich:calendar id="dataUltAlteracaoDe" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataUltInicial}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+				<h:outputLabel value="#{perfilUsuarioBundle['data.inicial.ate']}" />
+				<rich:calendar id="dataUltAlteracaoAte" locale="pt_BR"
+					value="#{perfilUsuarioMB.dataUltFinal}"
+					style="#{!perfilUsuarioMB.editarState ? 'color: black;' : ''}"
+					datePattern="dd/MM/yyyy">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</rich:calendar>
+			</h:panelGrid>
+			<a4j:commandButton id="buttonPesquisar"
+				alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
+				reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+				value="#{aplicacaoBundle['botao.pesquisar']}" />
+		</h:panelGrid>
+
+		<rich:panel id="tabelaPerfilUsuario"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<rich:dataTable id="dataTablePerfilUsuario"
+				value="#{perfilUsuarioDataModel}" var="perfUsu" width="100%"
+				rowClasses="row1, row2" rows="19" cellspacing="0" cellpadding="0"
+				border="1" styleClass="dataTableBody"
+				onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+				onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{perfilUsuarioBundle['usuario.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="usu.login" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.usuario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{perfilUsuarioBundle['perfil.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="perfUsu.nomePerfil" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.perfil}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{perfilUsuarioBundle['ativo.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="ativo" />
+						</a4j:commandLink>
+					</f:facet>
+					<rich:spacer width="8" />
+					<h:graphicImage
+						rendered="#{perfUsu.idPerfilUsuario != null and perfUsu.ativo}"
+						value="#{aplicacaoBundle['icone.sim']}" />
+					<h:graphicImage
+						rendered="#{perfUsu.idPerfilUsuario != null and !perfUsu.ativo}"
+						value="#{aplicacaoBundle['icone.nao']}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink value="#{perfilUsuarioBundle['ativacao.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="dataAtivacao" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.dataAtivacao}"
+						converter="DateBRConverter" />
+					<h:outputText value=" - "
+						rendered="#{perfUsu.dataAtivacao != null and perfUsu.usuarioAtiva != null}" />
+					<h:outputText value="#{perfUsu.usuarioAtiva}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink
+							value="#{perfilUsuarioBundle['desativacao.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="dataDesativacao" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.dataDesativacao}"
+						converter="DateBRConverter" />
+					<h:outputText value=" - "
+						rendered="#{perfUsu.dataDesativacao != null and perfUsu.usuarioDesativa != null}" />
+					<h:outputText value="#{perfUsu.usuarioDesativa}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink
+							value="#{perfilUsuarioBundle['ultimaAlteracao.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="dataUltAlteracao" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.dataUltAlteracao}"
+						converter="DateBRConverter" />
+					<h:outputText value=" - "
+						rendered="#{perfUsu.dataUltAlteracao != null and perfUsu.usuarioUltAlt != null}" />
+					<h:outputText value="#{perfUsu.usuarioUltAlt}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<a4j:commandLink
+							value="#{perfilUsuarioBundle['observacao.label']}"
+							reRender="dataTablePerfilUsuario">
+							<a4j:actionparam name="sortField" value="observacao" />
+						</a4j:commandLink>
+					</f:facet>
+					<h:outputText value="#{perfUsu.observacao}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+					</f:facet>
+					<a4j:region ajaxRendered="true">
+						<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+							oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+							reRenderAfterComplete="panel_modalVisualizar"
+							alt="#{aplicacaoBundle['botao.visualizar']}"
+							action="#{perfilUsuarioMB.carregarVisualizacao}"
+							rendered="#{perfUsu.idPerfilUsuario != null}">
+							<f:setPropertyActionListener value="#{perfUsu}"
+								target="#{perfilUsuarioMB.view}" />
+						</a4j:commandButton>
+					</a4j:region>
+				</h:column>
+				<f:facet name="footer">
+					<rich:datascroller />
+				</f:facet>
+			</rich:dataTable>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{perfilUsuarioBundle['usuario.label']}" />
+			<h:outputText value="#{perfilUsuarioMB.perfilUsuario.usuario.login}" />
+			<h:outputLabel value="#{perfilUsuarioBundle['perfil.label']}" />
+			<h:outputText
+				value="#{perfilUsuarioMB.perfilUsuario.perfil.nomePerfil}" />
+			<h:outputLabel value="#{perfilUsuarioBundle['ativo.label']}" />
+			<h:graphicImage
+				value="/images/icons/#{(perfilUsuarioMB.perfilUsuario.ativo == 'S')?'icon_correct.png':'icon_error.png'}" />
+			<h:outputLabel value="#{perfilUsuarioBundle['ativacao.label']}" />
+			<h:panelGrid columns="3">
+				<h:outputText value="#{perfilUsuarioMB.perfilUsuario.dataAtivacao}">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</h:outputText>
+				<h:outputText value=" - "
+					rendered="#{perfilUsuarioMB.perfilUsuario.dataAtivacao != null and perfilUsuarioMB.perfilUsuario.usuarioAtiva.login != null}" />
+				<h:outputText
+					value="#{perfilUsuarioMB.perfilUsuario.usuarioAtiva.login}" />
+			</h:panelGrid>
+			<h:outputLabel value="#{perfilUsuarioBundle['desativacao.label']}" />
+			<h:panelGrid columns="3">
+				<h:outputText
+					value="#{perfilUsuarioMB.perfilUsuario.dataDesativacao}">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</h:outputText>
+				<h:outputText value=" - "
+					rendered="#{perfilUsuarioMB.perfilUsuario.dataDesativacao != null and perfilUsuarioMB.perfilUsuario.usuarioDesativa.login != null}" />
+				<h:outputText
+					value="#{perfilUsuarioMB.perfilUsuario.usuarioDesativa.login}">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:panelGrid>
+			<h:outputLabel
+				value="#{perfilUsuarioBundle['ultimaAlteracao.label']}" />
+			<h:panelGrid columns="3">
+				<h:outputText
+					value="#{perfilUsuarioMB.perfilUsuario.dataUltAlteracao}">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</h:outputText>
+				<h:outputText value=" - "
+					rendered="#{perfilUsuarioMB.perfilUsuario.dataUltAlteracao != null and perfilUsuarioMB.perfilUsuario.usuarioAlt.login != null}" />
+				<h:outputText
+					value="#{perfilUsuarioMB.perfilUsuario.usuarioAlt.login}">
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:panelGrid>
+			<h:outputLabel value="#{perfilUsuarioBundle['observacao.label']}" />
+			<h:outputText value="#{perfilUsuarioMB.perfilUsuario.observacao}" />
+		</h:panelGrid>
+	</ui:define>
+
+</ui:composition>
+
+</html>

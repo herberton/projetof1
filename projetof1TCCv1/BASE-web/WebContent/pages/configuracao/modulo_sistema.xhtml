@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:param name="defaultBean" value="#{moduloSistemaMB}" />
+	<ui:param name="defaultModel" value="#{moduloSistemaDataModel}" />
+	<ui:param name="entidade" value="#{moduloSistemaBundle['entidade']}" />
+	<ui:param name="nomeEntidade" value="#{moduloSistemaMB.moduloSistema.nome}" />
+	<ui:param name="mensagemIcone"
+		value="#{moduloSistemaMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem"
+		value="#{moduloSistemaMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{moduloSistemaMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{moduloSistemaMB.mensagem.exibirMsg}" />
+	<ui:param name="superMB" value="#{moduloSistemaMB}" />
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir" alt="#{aplicacaoBundle['botao.excluir']}"
+			type="button" value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="tabelaModuloSistema, searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{moduloSistemaMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{moduloSistemaBundle['titulo.pagina']}"/>
+		</h:outputFormat>
+        <a4j:keepAlive beanName="moduloSistemaDataModel" />
+		<a4j:keepAlive beanName="moduloSistemaMB" />
+		<a4j:keepAlive beanName="lovModuloSistemaMB" />
+		<a4j:keepAlive beanName="lovModuloSistemaDataModel" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+
+			<h:panelGrid columns="5"
+				columnClasses="panelUpdateRow1, panelUpdateRow2">
+				<h:outputLabel value="#{moduloSistemaBundle['nome.label']}" />
+				<h:inputText value="#{moduloSistemaMB.nomeModulo}" />
+				<rich:spacer width="20px" />
+				<a4j:commandButton id="buttonPesquisar"
+					alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
+					reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+					value="#{aplicacaoBundle['botao.pesquisar']}" />
+				<a4j:commandButton id="buttonNovoModuloSistema"
+					alt="#{aplicacaoBundle['botao.novo']}"
+					reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+					action="#{moduloSistemaMB.prepareAdicionar}"
+					value="#{aplicacaoBundle['botao.novo']}" />
+			</h:panelGrid>
+		</rich:panel>
+		<rich:panel id="tabelaModuloSistema"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<rich:dataTable id="dataTableModuloSistema"
+					value="#{moduloSistemaDataModel}" var="objeto"
+					rowClasses="row1, row2" width="100%" rows="19" cellspacing="0"
+					cellpadding="0" border="1" styleClass="dataTableBody"
+					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{moduloSistemaBundle['nome.label']}"
+								reRender="dataTableModuloSistema">
+								<a4j:actionparam name="sortField" value="nome" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.nomeModulo}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="#{moduloSistemaBundle['posicao.lable']}"
+								reRender="dataTableModuloSistema">
+								<a4j:actionparam name="sortField" value="posicao" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.posicao}" />
+					</h:column>
+
+
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink
+								value="#{moduloSistemaBundle['descricao.label']}"
+								reRender="dataTableModuloSistema">
+								<a4j:actionparam name="sortField" value="descricao" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.descricao}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink
+								value="#{moduloSistemaBundle['principal.label']}"
+								reRender="dataTableModuloSistema">
+								<a4j:actionparam name="sortField" value="principal" />
+							</a4j:commandLink>
+						</f:facet>
+						<rich:spacer width="18"/>
+						<h:graphicImage rendered="#{objeto.idModulo != null and objeto.principal}"
+							value="#{aplicacaoBundle['icone.sim']}" />
+						<h:graphicImage rendered="#{objeto.idModulo != null and !objeto.principal}"
+							value="#{aplicacaoBundle['icone.nao']}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+						</f:facet>
+						<a4j:region ajaxRendered="true">
+							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
+								reRenderAfterComplete="panel_modalVisualizar" alt="#{aplicacaoBundle['botao.visualizar']}"
+								action="#{moduloSistemaMB.carregarVisualizacao}"
+								rendered="#{objeto.nomeModulo != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{moduloSistemaMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+								reRenderAfterComplete="addUpdateBlock" alt="#{aplicacaoBundle['botao.editar']}"
+								action="#{moduloSistemaMB.carregarEdicao}"
+								rendered="#{objeto.nomeModulo != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{moduloSistemaMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
+								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
+								reRenderAfterComplete="panel_modalExcluir" alt="#{aplicacaoBundle['botao.excluir']}"
+								rendered="#{objeto.nomeModulo != null}"
+								action="#{moduloSistemaMB.carregarExclusao}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{moduloSistemaMB.view}" />
+							</a4j:commandButton>
+						</a4j:region>
+					</h:column>
+
+					<f:facet name="footer">
+						<rich:datascroller />
+					</f:facet>
+				</rich:dataTable>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+		<rich:panel id="panel_editModuloSistema" rendered="true"
+			bodyClass="panelUpdate"
+			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="3" id="panelFormEditBlockModuloSistema"
+					columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+					<h:outputLabel value="#{moduloSistemaBundle['nome.label']}" />
+					<h:inputText value="#{moduloSistemaMB.moduloSistema.nome}"
+						size="70" id="nome"
+						readonly="#{!moduloSistemaMB.editarState and !moduloSistemaMB.adicionarState}"
+						style="#{!moduloSistemaMB.editarState ? 'color: black;' : ''}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="nome" errorStyle="color: darkred;" />
+
+					<h:outputLabel value="#{moduloSistemaBundle['descricao.label']}" />
+					<h:inputTextarea value="#{moduloSistemaMB.moduloSistema.descricao}"
+						size="2000" id="descritvo" cols="70"
+						readonly="#{!moduloSistemaMB.editarState and !moduloSistemaMB.adicionarState}"
+						style="#{!moduloSistemaMB.editarState ? 'color: black;' : ''}"
+						rows="5">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputTextarea>
+					<rich:message for="descritvo" errorStyle="color: darkred;" />
+
+					<h:outputLabel value="#{moduloSistemaBundle['posicao.lable']}" />
+					<h:inputText value="#{moduloSistemaMB.moduloSistema.posicao}"
+						size="3" id="posicao"
+						readonly="#{!moduloSistemaMB.editarState and !moduloSistemaMB.adicionarState}"
+						style="#{!moduloSistemaMB.editarState ? 'color: black;' : ''}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="posicao" errorStyle="color: darkred;" />
+
+					<h:outputLabel value="#{moduloSistemaBundle['moduloPai.label']}" />
+					<h:column>
+						<h:outputText id="moduloSistema"
+							value="#{((moduloSistemaMB.moduloSistema.moduloPai == null or moduloSistemaMB.moduloSistema.moduloPai.nome == null)?(moduloSistemaBundle['msg.moduloSuperior.label']):(moduloSistemaMB.moduloSistema.moduloPai.nome))}" />
+						<rich:spacer width="5" />
+						<a4j:commandButton image="/images/icons/lupa.png" rendered="true"
+							oncomplete="Richfaces.showModalPanel('modalPanelModuloSistema');"
+							reRenderAfterComplete="modalPanelModuloSistema"
+							alt="#{aplicacaoBundle['botao.lupa.abrir']}">
+							<f:setPropertyActionListener
+								target="#{lovModuloSistemaMB.exibir}" value="true" />
+						</a4j:commandButton>
+						<a4j:commandButton image="/images/icons/cross.png"
+							ajaxRendered="true" action="#{moduloSistemaMB.removerSelecao}"
+							rendered="#{moduloSistemaMB.moduloSistema.moduloPai != null and moduloSistemaMB.moduloSistema.moduloPai.nome != null}"
+							reRenderAfterComplete="addUpdateBlock" alt="#{aplicacaoBundle['botao.lupa.removerselecao']}" />
+					</h:column>
+					<rich:message for="moduloSistema" errorStyle="color: darkred;" />
+
+					<h:outputLabel value="#{moduloSistemaBundle['principal.label']}" />
+					<h:selectBooleanCheckbox id="principalAux"
+						value="#{moduloSistemaMB.moduloSistema.principalBoolean}" />
+					<rich:message for="principalAux" errorStyle="color: darkred;" />
+
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<h:panelGrid columns="3">
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{moduloSistemaMB.editarState}" alt="#{aplicacaoBundle['botao.salvar']}"
+						type="button" value="#{aplicacaoBundle['botao.salvar']}"
+						action="#{moduloSistemaMB.editar}" />
+					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+						rendered="#{moduloSistemaMB.adicionarState}" alt="#{aplicacaoBundle['botao.incluir']}"
+						type="button" value="#{aplicacaoBundle['botao.incluir']}"
+						action="#{moduloSistemaMB.adicionar}" />
+					<a4j:commandButton reRender="searchlistBlock" alt="#{aplicacaoBundle['botao.voltar']}"
+						immediate="true" type="button"
+						value="#{aplicacaoBundle['botao.voltar']}"
+						action="#{moduloSistemaMB.voltar}" />
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="modalExcluir">
+		<h:panelGrid columns="2" id="gridModalExcluir"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{moduloSistemaBundle['nome.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.nome}" />
+			<h:outputLabel value="#{moduloSistemaBundle['descricao.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.descricao}" />
+			<h:outputLabel value="#{moduloSistemaBundle['posicao.lable']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.posicao}" />
+			<h:outputLabel value="#{moduloSistemaBundle['moduloPai.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.moduloPai.nome}" />
+			<h:outputLabel value="#{moduloSistemaBundle['principal.label']}" />
+			<h:outputText
+				value="#{((moduloSistemaMB.moduloSistema.principal == 'S')?(aplicacaoBundle['label.sim']):(aplicacaoBundle['label.nao']))}" />
+		</h:panelGrid>
+	</ui:define>
+	<ui:define name="modalVisualizar">
+		<h:panelGrid columns="2" id="gridModalVisualizar"
+			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			<h:outputLabel value="#{moduloSistemaBundle['nome.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.nome}" />
+			<h:outputLabel value="#{moduloSistemaBundle['descricao.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.descricao}" />
+			<h:outputLabel value="#{moduloSistemaBundle['posicao.lable']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.posicao}" />
+			<h:outputLabel value="#{moduloSistemaBundle['moduloPai.label']}" />
+			<h:outputText value="#{moduloSistemaMB.moduloSistema.moduloPai.nome}" />
+			<h:outputLabel value="#{moduloSistemaBundle['principal.label']}" />
+			<h:outputText
+				value="#{((moduloSistemaMB.moduloSistema.principal == 'S')?(aplicacaoBundle['label.sim']):(aplicacaoBundle['label.nao']))}" />
+		</h:panelGrid>
+	</ui:define>
+
+	<ui:define name="other">
+		<ui:include src="/includes/list_of_values/lov_modulo_sistema.xhtml" />
+	</ui:define>
+
+</ui:composition>
+</html>

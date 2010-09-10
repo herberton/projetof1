@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+.messageErrorClass { /*font-family: serif;
+	font-size: 20px;
+	margin: 20px 20px 20px 20px;
+	text-align: left;*/
+	
+}
+
+.markerClass { /*margin: 20px 20px 20px 20px;
+	text-align: left;*/
+	
+}
+
+.mensagemConfirmacao {
+	font-size: 11px;
+	font-weight: bolder;
+}
+</style>
+</head>
+<body>
+
+<a4j:form ajaxSubmit="true">
+	<rich:modalPanel id="modalPanelMensagem" minHeight="20" minWidth="300"
+		moveable="true" autosized="true" showWhenRendered="true"
+		rendered="#{mensagemExibirMsg == null ? 'false' : mensagemExibirMsg}">
+		<f:facet name="header">
+			<h:outputText value="#{mensagemTitulo}" />
+		</f:facet>
+		<!-- <f:facet name="controls">
+			<a4j:commandButton style="cursor:pointer"
+				onclick="Richfaces.hideModalPanel('modalPanelMensagem')"
+				image="/images/icons/ico_close.gif">
+				<f:setPropertyActionListener target="#{mensagemExibirMsg}"
+					value="false" />
+			</a4j:commandButton>
+		</f:facet>-->
+		<rich:panel id="panel_modalMensagem" bodyClass="panelUpdate"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+
+			<h:panelGrid columns="1" style="text-align:center;">
+				<rich:messages id="messages" ajaxRendered="true" showDetail="true"
+					showSummary="true">
+					<f:facet name="errorMarker">
+						<h:graphicImage url="/images/icons/icon_error.png" />
+					</f:facet>
+					<f:facet name="passedMarker">
+						<h:graphicImage url="/images/icons/icon_correct.png" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage url="/images/icons/icon_info.png" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage url="/images/icons/icon_warning.png" />
+					</f:facet>
+				</rich:messages>
+				<h:graphicImage value="#{mensagemIcone}" url="#{mensagemIcone}" />
+				<rich:spacer width="3" />
+				<h:outputLabel styleClass="mensagemConfirmacao"
+					value="#{mensagemMensagem}" />
+				<rich:spacer height="20" />
+				<a4j:region selfRendered="true">
+					<a4j:commandButton id="closeModalMensagem"
+						alt="Voltar para tela anterior" type="button" value="OK"
+						onclick="Richfaces.hideModalPanel('modalPanelMensagem')">
+						<f:setPropertyActionListener target="#{mensagemExibirMsg}"
+							value="false" />
+					</a4j:commandButton>
+				</a4j:region>
+			</h:panelGrid>
+		</rich:panel>
+	</rich:modalPanel>
+</a4j:form>
+
+
+</body>
+</html>
