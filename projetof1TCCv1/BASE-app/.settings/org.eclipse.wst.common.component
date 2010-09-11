@@ -18,9 +18,6 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="BASE-model-modulo.jar" deploy-path="/" handle="module:/resource/BASE-model-modulo/BASE-model-modulo">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="BASE-enderecamento.jar" deploy-path="/" handle="module:/resource/BASE-enderecamento/BASE-enderecamento">
             <dependency-type>uses</dependency-type>
         </dependent-module>
