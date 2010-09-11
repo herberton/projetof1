@@ -25,6 +25,7 @@ public class BrinquedoTransformer implements ResultTransformer{
 		view.setQntFilaFisica((Integer) values[4]);
 		view.setQntMaxFilaFisica((Integer) values[5]);
 		view.setStatusBrinquedo((Long) values[6]);
+		view.setDescricaoStatusBrinquedo((String) values[7]);
 
 		return view;
 	}
