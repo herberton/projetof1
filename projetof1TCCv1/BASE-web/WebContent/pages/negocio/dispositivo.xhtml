@@ -15,8 +15,10 @@
 	<ui:param name="entidade" value="#{dispositivoBundle['entidade']}" />
 	<ui:param name="nomeEntidade" value="#{dispositivoMB.dispositivo.ip}" />
 	<ui:param name="mensagemIcone" value="#{dispositivoMB.mensagem.icone}" />
-	<ui:param name="mensagemMensagem" value="#{dispositivoMB.mensagem.mensagem}" />
-	<ui:param name="mensagemTitulo" value="#{dispositivoMB.mensagem.titulo}" />
+	<ui:param name="mensagemMensagem"
+		value="#{dispositivoMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{dispositivoMB.mensagem.titulo}" />
 	<ui:param name="mensagemExibirMsg"
 		value="#{dispositivoMB.mensagem.exibirMsg}" />
 
@@ -26,7 +28,7 @@
 			value="#{aplicacaoBundle['botao.sim']}"
 			reRenderAfterComplete="searchlistBlock"
 			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
-			action="#{statusDispositivoMB.excluir}" />
+			action="#{dispositivoMB.excluir}" />
 	</ui:define>
 
 	<ui:define name="title">
@@ -47,52 +49,86 @@
 						columnClasses="panelUpdateRow1, panelUpdateRow2">
 						<h:outputLabel value="IP" />
 						<h:inputText value="#{dispositivoMB.ip}" />
+
+						<h:outputLabel value="Status Dispositivo" />
+						<h:selectOneMenu value="#{dispositivoMB.idStatusDispositivo}"
+							id="idStatusBrinquedo">
+							<f:selectItem itemLabel="Todos" itemValue="" />
+							<f:selectItems
+								value="#{listaStatusDispositivo.selectItemsStatusDispositivo}" />
+						</h:selectOneMenu>
+
+						<h:outputLabel value="Dispositivos" />
+						<h:selectOneMenu value="#{dispositivoMB.utilizados}"
+							id="idUtilizados">
+							<f:selectItem itemLabel="Todos" itemValue="" />
+							<f:selectItem itemLabel="Utilizados" itemValue="sim" />
+							<f:selectItem itemLabel="Não Utilizados" itemValue="não" />
+						</h:selectOneMenu>
 					</h:panelGrid>
-					
+
+					<h:panelGrid columns="2">
+						<a4j:commandButton id="buttonPesquisar"
+							alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
+							reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+							value="#{aplicacaoBundle['botao.pesquisar']}" />
+						<a4j:commandButton id="buttonNovoDispositivo"
+							alt="#{aplicacaoBundle['botao.novo']}"
+							reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
+							action="#{dispositivoMB.prepareAdicionar}"
+							value="#{aplicacaoBundle['botao.novo']}" />
+
+					</h:panelGrid>
 					<rich:spacer width="20px" />
-					<a4j:commandButton id="buttonPesquisar"
-						alt="#{aplicacaoBundle['botao.pesquisar']}" type="submit"
-						reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
-						value="#{aplicacaoBundle['botao.pesquisar']}" />
-					<a4j:commandButton id="buttonNovoDispositivo"
-						alt="#{aplicacaoBundle['botao.novo']}"
-						reRenderAfterComplete="simpleTogglePanelBody, addUpdateBlock"
-						action="#{dispositivoMB.prepareAdicionar}"
-						value="#{aplicacaoBundle['botao.novo']}" />
+
 				</h:panelGrid>
 			</rich:panel>
 			<rich:panel id="tabelaDispositivo"
 				style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
-				<rich:dataTable id="dataTableDispositivo" value="#{dispositivoDataModel}"
-					var="objeto" columnsWidth="0*, 0*, 80" rowClasses="row1, row2"
-					rows="19" cellspacing="0" cellpadding="0" border="1"
+				<rich:dataTable id="dataTableDispositivo"
+					value="#{dispositivoDataModel}" var="objeto"
+					columnsWidth="2, 0*,0*, 80" rowClasses="row1, row2" rows="19"
+					cellspacing="0" cellpadding="0" border="1"
 					styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+
+
 					<h:column>
 						<f:facet name="header">
-							<a4j:commandLink value="IP"
-								reRender="dataTableDispositivo">
+							<a4j:commandLink value="Código" reRender="dataTableDispositivo">
+								<a4j:actionparam name="sortField" value="idDispositivo" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.idDispositivo}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<a4j:commandLink value="IP" reRender="dataTableDispositivo">
 								<a4j:actionparam name="sortField" value="ip" />
 							</a4j:commandLink>
 						</f:facet>
 						<h:outputText value="#{objeto.ip}" />
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">
-							<a4j:commandLink value="Descrição"
+							<a4j:commandLink value="Status Dispositivo"
 								reRender="dataTableDispositivo">
 								<a4j:actionparam name="sortField" value="sd.descricao" />
 							</a4j:commandLink>
 						</f:facet>
 						<h:outputText value="#{objeto.descricaoStatusDispositivo}" />
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
 						</f:facet>
 						<a4j:region selfRendered="true">
+
+
 							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
 								oncomplete="Richfaces.showModalPanel('modalPanelVisualizar');"
 								reRenderAfterComplete="panel_modalVisualizar"
@@ -102,6 +138,8 @@
 								<f:setPropertyActionListener value="#{objeto}"
 									target="#{dispositivoMB.view}" />
 							</a4j:commandButton>
+
+
 							<rich:spacer width="7" />
 							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
 								reRender="addUpdateBlock,valorTabAuxCombo"
@@ -140,25 +178,45 @@
 		<rich:panel id="panel_editDispositivo" rendered="true"
 			bodyClass="panelUpdate"
 			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
-			<h:panelGrid columns="2" id="panelFormEditBlockDispositivo"
+			<h:panelGrid columns="3" id="panelFormEditBlockDispositivo"
 				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+
+				<h:outputLabel value="Código" />
+				<rich:column>
+					<h:inputText value="#{dispositivoMB.dispositivo.idDispositivo}"
+						size="5" id="idDispositivo"
+						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
+						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}"
+						disabled="true">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+				</rich:column>
+				<rich:spacer />
+
 				<h:outputLabel value="IP" />
 				<rich:column>
 					<h:inputText value="#{dispositivoMB.dispositivo.ip}" size="15"
 						id="ip"
 						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
 						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
+						<rich:ajaxValidator event="onblur" />
 					</h:inputText>
 				</rich:column>
-				<h:outputLabel value="Descrição" />
+				<rich:message for="ip" errorStyle="color: darkred;" />
+
+
+				<h:outputLabel value="Status Dispositivo" />
 				<rich:column>
-					<h:inputText value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}" size="15"
-						id="descricao"
+					<h:inputText
+						value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}"
+						size="15" id="descricao"
 						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
 						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
+						<rich:ajaxValidator event="onblur" />
 					</h:inputText>
 				</rich:column>
-				
+				<rich:message for="descricao" errorStyle="color: darkred;" />
+
 			</h:panelGrid>
 			<h:panelGrid columns="1">
 				<rich:spacer height="10" />
@@ -186,21 +244,30 @@
 	<ui:define name="modalExcluir">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
-		
+
 			<h:outputLabel value="IP" />
 			<h:outputText value="#{dispositivoMB.dispositivo.ip}" />
 
 		</h:panelGrid>
 	</ui:define>
-	
+
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+
+			<h:outputLabel value="Código" />
+			<h:outputText value="#{dispositivoMB.dispositivo.idDispositivo}" />
+
 			<h:outputLabel value="IP" />
 			<h:outputText value="#{dispositivoMB.dispositivo.ip}" />
-			<h:outputLabel value="Descrição" />
-			<h:outputText value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}" />
-			
+
+			<h:outputLabel value="Status Dispositivo" />
+			<h:outputText
+				value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}" />
+
+			<h:outputLabel value="Cliente que está utilizando" />
+			<h:outputText value="#{dispositivoMB.dispositivo.cliente.nome}" />
+
 		</h:panelGrid>
 
 
