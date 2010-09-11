@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:a4j="http://richfaces.org/a4j">
- 
+
 <ui:composition
 	template="/default/templates/estados_esq_menu_template.xhtml">
 
@@ -72,66 +72,42 @@
 		<rich:panel id="panelDataTableBrinquedo"
 			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
 			<a4j:region selfRendered="true">
-				<rich:dataTable id="dataTableBrinquedo" value="#{brinquedoDataModel}"
-					var="objeto" rowClasses="row1, row2" rows="19"
-					columnsWidth="0*, 0*, 0*,80" cellspacing="0" cellpadding="0"
-					border="1" styleClass="dataTableBody"
+				<rich:dataTable id="dataTableBrinquedo"
+					value="#{brinquedoDataModel}" var="objeto" rowClasses="row1, row2"
+					rows="19" columnsWidth="0*, 0*, 0*,80" cellspacing="0"
+					cellpadding="0" border="1" styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+
 					<rich:column>
 						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['nomeBrinquedo.label']}"
+							<a4j:commandLink value="Código" reRender="dataTableBrinquedo">
+								<a4j:actionparam name="sortField" value="idBrinquedo" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.idBrinquedo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink
+								value="#{brinquedoBundle['nomeBrinquedo.label']}"
 								reRender="dataTableBrinquedo">
 								<a4j:actionparam name="sortField" value="nome" />
 							</a4j:commandLink>
 						</f:facet>
 						<h:outputText value="#{objeto.nome}" />
 					</rich:column>
+
 					<rich:column>
 						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['tempMensagem.label']}"
+							<a4j:commandLink value="Status Brinquedo"
 								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="tempoMensagem" />
+								<a4j:actionparam name="sortField" value="idStatusBrinquedo" />
 							</a4j:commandLink>
 						</f:facet>
-						<h:outputText value="#{objeto.tempoMensagem}" />
+						<h:outputText value="#{objeto.idStatusBrinquedo}" />
 					</rich:column>
-					<rich:column dir="ltr">
-						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['tempFila.label']}"
-								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="estimativaTempoFila" />
-							</a4j:commandLink>
-						</f:facet>
-						<h:outputText value="#{objeto.estimativaTempoFila}" />
-					</rich:column>
-					<rich:column dir="ltr">
-						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['qntFilaFisica.label']}"
-								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="qtdPessoasFilaFisica" />
-							</a4j:commandLink>
-						</f:facet>
-						<h:outputText value="#{objeto.qntFilaFisica}" />
-					</rich:column>
-					<rich:column dir="ltr">
-						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['maxFilaFisica.label']}"
-								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="qtdMaxPessoasFilaFisica" />
-							</a4j:commandLink>
-						</f:facet>
-						<h:outputText value="#{objeto.qntMaxFilaFisica}" />
-					</rich:column>
-					<rich:column dir="ltr">
-						<f:facet name="header">
-							<a4j:commandLink value="#{brinquedoBundle['statusBrinquedo.label']}"
-								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="statusBrinquedo" />
-							</a4j:commandLink>
-						</f:facet>
-						<h:outputText value="#{objeto.statusBrinquedo}" />
-					</rich:column>
+
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
@@ -181,6 +157,14 @@
 			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
 			<h:panelGrid columns="3" id="panelFormEditBlockBrinquedo"
 				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+
+				<h:outputLabel value="Código" />
+				<h:inputText value="#{brinquedoMB.brinquedo.idBrinquedo}" size="5"
+					id="idBrinquedo"
+					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
+					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
+				</h:inputText>
+
 				<h:outputLabel value="#{brinquedoBundle['nomeBrinquedo.label']}" />
 				<h:inputText value="#{brinquedoMB.brinquedo.nome}" size="20"
 					id="nome"
@@ -191,8 +175,8 @@
 				<rich:message for="nome" errorStyle="color: darkred;" />
 
 				<h:outputLabel value="#{brinquedoBundle['tempMensagem.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.tempoMensagem}" size="60"
-					id="tempoMensagem"
+				<h:inputText value="#{brinquedoMB.brinquedo.tempoMensagem}"
+					size="60" id="tempoMensagem"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
@@ -200,50 +184,69 @@
 				<rich:message for="tempoMensagem" errorStyle="color: darkred;" />
 
 				<h:outputLabel value="#{brinquedoBundle['tempFila.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.estimativaTempoFila}" size="60"
-					id="estimativaTempoFila"
+				<h:inputText value="#{brinquedoMB.brinquedo.estimativaTempoFila}"
+					size="60" id="estimativaTempoFila"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
 				</h:inputText>
-				<rich:message for="estimativaTempoFila" errorStyle="color: darkred;" />		
-				
+				<rich:message for="estimativaTempoFila" errorStyle="color: darkred;" />
+
 				<h:outputLabel value="#{brinquedoBundle['qntFilaFisica.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.qtdPessoasFilaFisica}" size="60"
-					id="qtdPessoasFilaFisica"
+				<h:inputText value="#{brinquedoMB.brinquedo.qtdPessoasFilaFisica}"
+					size="60" id="qtdPessoasFilaFisica"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
 				</h:inputText>
-				<rich:message for="qtdPessoasFilaFisica" errorStyle="color: darkred;" />		
-				
+				<rich:message for="qtdPessoasFilaFisica"
+					errorStyle="color: darkred;" />
+
 				<h:outputLabel value="#{brinquedoBundle['maxFilaFisica.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" size="60"
+				<h:inputText
+					value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" size="60"
 					id="qtdMaxPessoasFilaFisica"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
 				</h:inputText>
-				<rich:message for="qtdMaxPessoasFilaFisica" errorStyle="color: darkred;" />		
+				<rich:message for="qtdMaxPessoasFilaFisica"
+					errorStyle="color: darkred;" />
+
+
+				<h:inputTextarea value="#{brinquedoMB.brinquedo.observacao}"
+					size="60" id="obs" rows="4" cols="40"
+					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
+					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputTextarea>
+				<rich:message for="obs" errorStyle="color: darkred;" />
+
+				<h:outputLabel value="Status Brinquedo" />
+				<h:selectOneMenu
+					value="#{brinquedoMB.brinquedo.statusBrinquedo.idStatusBrinquedo}"
+					id="idStatusBrinquedo">
+					<f:selectItems
+						value="#{listaStatusBrinquedo.selectItemsStatusBrinquedo}" />
+					<rich:ajaxValidator event="onblur" />
+				</h:selectOneMenu>
+				<rich:message for="idStatusBrinquedo" errorStyle="color: darkred;" />
+
 			</h:panelGrid>
 
 			<h:panelGrid columns="1">
 				<rich:spacer height="10" />
 				<rich:column>
 					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
-						rendered="#{brinquedoMB.editarState}"
-						alt="Salvar" type="button"
-						value="Salvar"
-						action="#{brinquedoMB.editar}" />
+						rendered="#{brinquedoMB.editarState}" alt="Salvar" type="button"
+						value="Salvar" action="#{brinquedoMB.editar}" />
 					<a4j:commandButton reRenderAfterComplete="searchlistBlock"
-						rendered="#{brinquedoMB.adicionarState}"
-						alt="Incluir" type="button"
-						value="Incluir"
-						action="#{brinquedoMB.adicionar}" />
+						rendered="#{brinquedoMB.adicionarState}" alt="Incluir"
+						type="button" value="Incluir" action="#{brinquedoMB.adicionar}" />
 					<rich:spacer width="10" />
-					<a4j:commandButton reRender="searchlistBlock"
-						alt="Voltar" immediate="true"
-						type="button" value="Voltar" action="#{brinquedoMB.voltar}" />
+					<a4j:commandButton reRender="searchlistBlock" alt="Voltar"
+						immediate="true" type="button" value="Voltar"
+						action="#{brinquedoMB.voltar}" />
 				</rich:column>
 			</h:panelGrid>
 		</rich:panel>
@@ -254,6 +257,32 @@
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+
+			<h:outputLabel value="Código" />
+			<h:outputText value="#{brinquedoMB.brinquedo.idBrinquedo}" />
+
+			<h:outputLabel value="Nome" />
+			<h:outputText value="#{brinquedoMB.brinquedo.nome}" />
+
+			<h:outputLabel value="Tempo de Mensagem" />
+			<h:outputText value="#{brinquedoMB.brinquedo.tempoMensagem}" />
+
+			<h:outputLabel value="Estimativa Tempo Fila" />
+			<h:outputText value="#{brinquedoMB.brinquedo.estimativaTempoFila}" />
+
+			<h:outputLabel value="Qtde de Pessoas Fila Fisica" />
+			<h:outputText value="#{brinquedoMB.brinquedo.qtdPessoasFilaFisica}" />
+
+			<h:outputLabel value="Qtde Máximo de Pessoas Fila Física" />
+			<h:outputText value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" />
+
+			<h:outputLabel value="Observação" />
+			<h:outputText value="#{brinquedoMB.brinquedo.observacao}" />
+
+			<h:outputLabel value="Status Brinquedo" />
+			<h:outputText value="#{brinquedoMB.brinquedo.statusBrinquedo.descricao}" />
+
+
 
 		</h:panelGrid>
 	</ui:define>
