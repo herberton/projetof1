@@ -105,6 +105,7 @@ implements BrinquedoDao {
 			pList.add(Projections.property("qtdPessoasFilaFisica"));
 			pList.add(Projections.property("qtdMaxPessoasFilaFisica"));
 			pList.add(Projections.property("statusBrinq.idStatusBrinquedo"));
+			pList.add(Projections.property("statusBrinq.descricao"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){

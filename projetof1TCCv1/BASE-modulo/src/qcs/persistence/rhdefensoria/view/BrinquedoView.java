@@ -13,6 +13,7 @@ public class BrinquedoView implements Serializable{
 	private Integer qntFilaFisica;
 	private Integer qntMaxFilaFisica;
 	private Long statusBrinquedo;
+	private String descricaoStatusBrinquedo;
 	
 	public Long getIdBrinquedo() {
 		return idBrinquedo;
@@ -56,4 +57,12 @@ public class BrinquedoView implements Serializable{
 	public void setStatusBrinquedo(Long statusBrinquedo) {
 		this.statusBrinquedo = statusBrinquedo;
 	}
+	public String getDescricaoStatusBrinquedo() {
+		return descricaoStatusBrinquedo;
+	}
+	public void setDescricaoStatusBrinquedo(String descricaoStatusBrinquedo) {
+		this.descricaoStatusBrinquedo = descricaoStatusBrinquedo;
+	}
+	
+	
 }
