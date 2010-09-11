@@ -7,7 +7,7 @@ public class LovBrinquedoView implements Serializable{
 
 	private Long idBrinquedo;
 	private String nomeBrinquedo;
-	private String observacao;
+	private String nomeStatusBrinquedo;
 	
 	public Long getIdBrinquedo() {
 		return idBrinquedo;
@@ -21,11 +21,13 @@ public class LovBrinquedoView implements Serializable{
 	public void setNomeBrinquedo(String nomeBrinquedo) {
 		this.nomeBrinquedo = nomeBrinquedo;
 	}
-	public String getObservacao() {
-		return observacao;
+	public String getNomeStatusBrinquedo() {
+		return nomeStatusBrinquedo;
 	}
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setNomeStatusBrinquedo(String nomeStatusBrinquedo) {
+		this.nomeStatusBrinquedo = nomeStatusBrinquedo;
 	}
+
+
 	
 }

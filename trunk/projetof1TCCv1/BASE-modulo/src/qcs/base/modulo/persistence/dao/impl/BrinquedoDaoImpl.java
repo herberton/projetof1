@@ -111,7 +111,7 @@ implements BrinquedoDao {
 			if(atributosFiltros != null){
 
 				//filtra brinquedos pelo nome do brinquedos
-				String nome = (String)atributosFiltros.get("nomeBrinquedo");
+				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
@@ -195,11 +195,12 @@ implements BrinquedoDao {
 		log.debug("BrinquedoDaoImpl : listOfValuesWihtFilter\n\tparâmetros:");
 		try{
 			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("statusBrinquedo", "statusBrinq", Criteria.LEFT_JOIN);
 
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idBrinquedo"));
 			pList.add(Projections.property("nome"));
-			pList.add(Projections.property("observacao"));
+			pList.add(Projections.property("statusBrinq.descricao"));
 
 			c.setProjection(pList);
 

@@ -20,7 +20,7 @@ public class LovBrinquedoTransformer implements ResultTransformer{
 		LovBrinquedoView view = new LovBrinquedoView();
 		view.setIdBrinquedo((Long) values[0]);
 		view.setNomeBrinquedo((String) values[1]);
-		view.setObservacao((String) values[2]);
+		view.setNomeStatusBrinquedo((String) values[2]);
 		
 		return view;
 	}
