@@ -21,17 +21,20 @@ public class DispositivoMB extends BaseMB{
 	private DispositivoDataProvider dataProvider;
 	private DispositivoView view;
 	
+	//FILTROS
 	private String ip;
 	private Long idStatusDispositivo;
-	
+	private String utilizados;
 	private Map<String, Object> atributosFiltros;
-	
 	
 	//CONSTRUTOR...
 	public DispositivoMB() { super(); }
 	
-	
 	//GET...
+	
+	public String getUtilizados() {
+		return utilizados;
+	}
 	public Dispositivo getDispositivo() {
 		return dispositivo;
 	}
@@ -62,11 +65,21 @@ public class DispositivoMB extends BaseMB{
 		atributosFiltros.remove("idStatusDispositivo");
 		atributosFiltros.put("idStatusDispositivo", getIdStatusDispositivo());
 		
+		
+		atributosFiltros.remove("utilizados");
+		atributosFiltros.put("utilizados", utilizados);
+		
 		return atributosFiltros;
 	}
 	
 	
 	//SET...
+
+
+	public void setUtilizados(String utilizados) {
+		this.utilizados = utilizados;
+	}
+	
 	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
 	}
@@ -93,7 +106,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Incluindo Dispositivo: " + getDispositivo().getIdDispositivo());
 			
-			setDispositivo(getDataProvider().incluir(getDispositivo()));
+			dispositivo = getDataProvider().consultar(view.getIdDispositivo());
 			this.pesquisar(); 
 			
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -122,7 +135,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Editando Dispositivo: " + getDispositivo().getIdDispositivo());
 			
-			getDataProvider().alterar(getDispositivo());
+			getDataProvider().alterar(dispositivo);
 			this.pesquisar(); 
 			
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -137,7 +150,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Excluindo Dispositivo: " + getDispositivo().getIdDispositivo());
 			
-			getDataProvider().excluir(getDispositivo());
+			getDataProvider().excluir(dispositivo);
 			this.pesquisar(); 
 			
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -172,7 +185,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Vizualizando Dispositivo: " + getView().getIdDispositivo());
 			
-			setDispositivo(getDataProvider().consultar(getView().getIdDispositivo()));
+			dispositivo = getDataProvider().consultar(view.getIdDispositivo());
 			this.pesquisar();
 			
 		}catch(Exception e){
@@ -184,7 +197,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Editando Dispositivo: " + getView().getIdDispositivo());
 			
-			setDispositivo(getDataProvider().consultar(getView().getIdDispositivo()));
+			dispositivo = getDataProvider().consultar(view.getIdDispositivo());
 			prepareEditar();
 			
 		}catch(Exception e){
@@ -196,7 +209,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Carregando Excluindo Dispositivo: " + getView().getIdDispositivo());
 			
-			setDispositivo(getDataProvider().consultar(getView().getIdDispositivo()));
+			dispositivo = getDataProvider().consultar(view.getIdDispositivo());
 			pesquisar();
 			
 		}catch(Exception e){
