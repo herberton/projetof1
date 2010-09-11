@@ -55,7 +55,14 @@ implements CatracaDao {
 				if(descricao != null && !descricao.trim().isEmpty()){				
 					c.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
 				}
-				
+
+				//filtra catracas pelo nome do brinquedo
+				String nomeBrinquedo = (String)atributosFiltros.get("nomeBrinquedo");
+				log.debug("\tdescricao listWithFilterToView: "+descricao);
+				if(nomeBrinquedo != null && !nomeBrinquedo.trim().isEmpty()){				
+					c.add(Restrictions.ilike("brinq.nome", nomeBrinquedo, MatchMode.ANYWHERE));
+				}				
+
 			}
 			//informa qual a primeira posição para retorno
 			c.setFirstResult(first);
@@ -99,7 +106,13 @@ implements CatracaDao {
 				if(descricao != null && !descricao.trim().isEmpty()){				
 					c.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
 				}
-				
+
+				//filtra catracas pelo nome do brinquedo
+				String nomeBrinquedo = (String)atributosFiltros.get("nomeBrinquedo");
+				log.debug("\tdescricao listWithFilterToView: "+descricao);
+				if(nomeBrinquedo != null && !nomeBrinquedo.trim().isEmpty()){				
+					c.add(Restrictions.ilike("brinq.nome", nomeBrinquedo, MatchMode.ANYWHERE));
+				}					
 			}
 
 			//informa qual a primeira posição para retorno
@@ -136,7 +149,8 @@ implements CatracaDao {
 	public int getMaxRows(Map<String, Object> atributosFiltros) throws InfrastructureException, Exception {
 		try{	
 			Criteria c = getSession().createCriteria(classeEntidade);
-		
+			c.createAlias("brinquedo", "brinq", Criteria.LEFT_JOIN);			
+
 			if(atributosFiltros != null){
 
 				//filtra catracas pelo nome da catraca
@@ -146,6 +160,13 @@ implements CatracaDao {
 					c.add(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE));
 				}
 				
+				//filtra catracas pelo nome do brinquedo
+				String nomeBrinquedo = (String)atributosFiltros.get("nomeBrinquedo");
+				log.debug("\tdescricao listWithFilterToView: "+descricao);
+				if(nomeBrinquedo != null && !nomeBrinquedo.trim().isEmpty()){				
+					c.add(Restrictions.ilike("brinq.nome", nomeBrinquedo, MatchMode.ANYWHERE));
+				}					
+
 			}
 
 
@@ -157,5 +178,5 @@ implements CatracaDao {
 			throw e;
 		}
 	}
-	
+
 }
