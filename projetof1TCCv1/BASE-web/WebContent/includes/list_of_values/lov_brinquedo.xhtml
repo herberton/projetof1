@@ -14,7 +14,7 @@
 		moveable="true" autosized="true" showWhenRendered="true"
 		rendered="#{lovBrinquedoMB.exibir == 'true'}">
 		<f:facet name="header">
-			<h:outputText value="#{brinquedoBundle['lov.brinquedo.titulo']}" />
+			<h:outputText value="Lista de Brinquedos" />
 		</f:facet>
 		<rich:panel id="panel_modalBrinquedo" bodyClass="panelUpdate"
 			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
@@ -23,7 +23,7 @@
 					<h:panelGrid columns="3">
 						<h:panelGrid columns="2">
 							<h:outputLabel
-								value="#{brinquedoBundle['lov.brinquedo.nomeBrinquedo']}" />
+								value="Nome Brinquedo" />
 							<h:inputText value="#{lovBrinquedoMB.nomeBrinquedo}" />
 						</h:panelGrid>
 						<rich:spacer width="7" />
@@ -36,12 +36,28 @@
 						value="#{lovBrinquedoDataModel}" var="objeto"
 						rowClasses="row1, row2" width="100%" rows="8" cellspacing="0"
 						cellpadding="0" border="1" styleClass="dataTableBody"
-						columnsWidth="5,5"
+						columnsWidth="2,5,5"
 						onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
 
 
-
+						<rich:column>
+							<f:facet name="header">
+								<a4j:commandLink value="Código" reRender="dataTableBrinquedo">
+									<a4j:actionparam name="sortField" value="idBrinquedo" />
+								</a4j:commandLink>
+							</f:facet>
+							<a4j:commandLink value="#{objeto.idBrinquedo}"
+								action="#{superMB.atualizarSelecao}">
+								<f:setPropertyActionListener
+									target="#{lovBrinquedoMB.idBrinquedoSelecionado}"
+									value="#{objeto.idBrinquedo}" />
+								<f:setPropertyActionListener target="#{lovBrinquedoMB.exibir}"
+									value="false" />
+							</a4j:commandLink>
+						</rich:column>
+						
+						
 						<rich:column>
 							<f:facet name="header">
 								<a4j:commandLink value="Nome" reRender="dataTableBrinquedo">
@@ -60,12 +76,12 @@
 
 						<rich:column>
 							<f:facet name="header">
-								<a4j:commandLink value="Observação"
+								<a4j:commandLink value="Status Brinquedo"
 									reRender="dataTableBrinquedo">
-									<a4j:actionparam name="sortField" value="observacao" />
+									<a4j:actionparam name="sortField" value="statusBrinq.descricao" />
 								</a4j:commandLink>
 							</f:facet>
-							<a4j:commandLink value="#{objeto.observacao}"
+							<a4j:commandLink value="#{objeto.nomeStatusBrinquedo}"
 								action="#{superMB.atualizarSelecao}">
 								<f:setPropertyActionListener
 									target="#{lovBrinquedoMB.idBrinquedoSelecionado}"

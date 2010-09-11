@@ -39,7 +39,7 @@ public class CatracaDataModel extends GenericDataModel<CatracaView, Catraca, Lon
 
 	@Override
 	public String getDefaultSortField() {
-		return "descricao";
+		return "idCatraca";
 	}
 
 	@Override
