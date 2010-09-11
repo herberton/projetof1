@@ -1103,6 +1103,26 @@
    <value>#{clienteDataProvider}</value>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>listaStatusBrinquedoDataProvider</managed-bean-name>
+  <managed-bean-class>qcs.base.negocio.web.list.ListaStatusBrinquedoDataProvider</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>org.hibernate.Session</property-class>
+   <value>#{requestScope.hibernateSession}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>listaStatusBrinquedo</managed-bean-name>
+  <managed-bean-class>qcs.base.negocio.web.list.ListaStatusBrinquedo</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>listaStatusBrinquedoDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.list.ListaStatusBrinquedoDataProvider</property-class>
+   <value>#{listaStatusBrinquedoDataProvider}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <display-name>logradouro</display-name>
   <from-view-id>/pages/enderecamento/logradouro.xhtml</from-view-id>
