@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import qcs.base.negocio.Brinquedo;
 import qcs.base.negocio.web.dataprov.BrinquedoDataProvider;
+import qcs.base.negocio.web.dataprov.StatusBrinquedoDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
 import qcs.persistence.rhdefensoria.view.BrinquedoView;
@@ -17,15 +18,28 @@ public class BrinquedoMB extends BaseMB {
 	private static final long serialVersionUID = 1L;
 
 	private BrinquedoDataProvider brinquedoDataProvider;
+	private StatusBrinquedoDataProvider statusBrinquedoDataProvider;
 	private Brinquedo brinquedo;
 	private BrinquedoView view;
 	private Map<String, Object> atributosFiltros;
 
+	private Long idStatusBrinquedoTransient;
+
 	//FILTROS DA TELA
 	private String nome;
-	
 	private Long statusBrinquedo;
-	
+
+
+	public Long getIdStatusBrinquedoTransient() {
+		if(!isAdicionarState())
+			idStatusBrinquedoTransient = brinquedo.getStatusBrinquedo().getIdStatusBrinquedo();
+		return idStatusBrinquedoTransient;
+	}
+
+	public void setIdStatusBrinquedoTransient(Long idStatusBrinquedoTransient) {
+		this.idStatusBrinquedoTransient = idStatusBrinquedoTransient;
+	}
+
 	public Brinquedo getBrinquedo() {
 		return brinquedo;
 	}
@@ -49,7 +63,7 @@ public class BrinquedoMB extends BaseMB {
 	public void setStatusBrinquedo(Long statusBrinquedo) {
 		this.statusBrinquedo = statusBrinquedo;
 	}
-	
+
 	public Map<String, Object> getAtributosFiltros(){
 		if(atributosFiltros == null)atributosFiltros = new HashMap<String, Object>();
 
@@ -60,7 +74,7 @@ public class BrinquedoMB extends BaseMB {
 
 		return atributosFiltros;
 	}
-	
+
 	public void setAtributosFiltros(Map<String, Object> atributosFiltros) {
 		this.atributosFiltros = atributosFiltros;
 	}
@@ -90,7 +104,7 @@ public class BrinquedoMB extends BaseMB {
 	public void adicionar() {
 		try{
 			log.debug("Incluindo Brinquedo: "+brinquedo.getIdBrinquedo());
-
+			brinquedo.setStatusBrinquedo(getStatusBrinquedoDataProvider().consultar(idStatusBrinquedoTransient));
 			brinquedo = getBrinquedoDataProvider().incluir(brinquedo);
 			this.pesquisar(); 
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -103,7 +117,7 @@ public class BrinquedoMB extends BaseMB {
 	protected void clear() {
 		this.nome = "";
 		this.statusBrinquedo = null;
-		
+
 		if(getCurrentState() == null || getCurrentState().equals(PESQUISAR_STATE)){
 			this.brinquedo = new Brinquedo();
 		}else{
@@ -115,6 +129,7 @@ public class BrinquedoMB extends BaseMB {
 	public void editar() {
 		try{
 			log.debug("Editando Brinquedo: "+brinquedo.getIdBrinquedo());
+			brinquedo.setStatusBrinquedo(getStatusBrinquedoDataProvider().consultar(idStatusBrinquedoTransient));
 			getBrinquedoDataProvider().alterar(brinquedo);
 			this.pesquisar();
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoAlteracaoApartirDe(getTextoDocumento());
@@ -182,6 +197,15 @@ public class BrinquedoMB extends BaseMB {
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
 		}
+	}
+
+	public StatusBrinquedoDataProvider getStatusBrinquedoDataProvider() {
+		return statusBrinquedoDataProvider;
+	}
+
+	public void setStatusBrinquedoDataProvider(
+			StatusBrinquedoDataProvider statusBrinquedoDataProvider) {
+		this.statusBrinquedoDataProvider = statusBrinquedoDataProvider;
 	}
 
 
