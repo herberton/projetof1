@@ -49,8 +49,19 @@
 			<a4j:region selfRendered="true">
 				<h:panelGrid columns="9" cellspacing="3"
 					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
+
+
 					<h:outputLabel value="Nome" />
-					<h:inputText value="#{brinquedoMB.nome}" size="8" />
+					<h:inputText value="#{brinquedoMB.nome}" size="40" />
+					<rich:spacer width="20px" />
+
+
+					<h:outputLabel value="Status Brinquedo" />
+					<h:selectOneMenu value="#{brinquedoMB.statusBrinquedo}"
+						id="pstatusBrinquedo">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<f:selectItems value="#{listaStatusBrinquedo.selectItemsStatusBrinquedo}" />
+					</h:selectOneMenu>
 
 					<rich:spacer width="20px" />
 
@@ -74,7 +85,7 @@
 			<a4j:region selfRendered="true">
 				<rich:dataTable id="dataTableBrinquedo"
 					value="#{brinquedoDataModel}" var="objeto" rowClasses="row1, row2"
-					rows="19" columnsWidth="0*, 0*, 0*,80" cellspacing="0"
+					rows="19" columnsWidth="2, 50, 5,40" cellspacing="0"
 					cellpadding="0" border="1" styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
@@ -87,6 +98,8 @@
 						</f:facet>
 						<h:outputText value="#{objeto.idBrinquedo}" />
 					</rich:column>
+
+
 					<rich:column>
 						<f:facet name="header">
 							<a4j:commandLink
@@ -102,10 +115,10 @@
 						<f:facet name="header">
 							<a4j:commandLink value="Status Brinquedo"
 								reRender="dataTableBrinquedo">
-								<a4j:actionparam name="sortField" value="idStatusBrinquedo" />
+								<a4j:actionparam name="sortField" value="statusBrinq.descricao" />
 							</a4j:commandLink>
 						</f:facet>
-						<h:outputText value="#{objeto.idStatusBrinquedo}" />
+						<h:outputText value="#{objeto.descricaoStatusBrinquedo}" />
 					</rich:column>
 
 					<rich:column>
@@ -162,11 +175,13 @@
 				<h:inputText value="#{brinquedoMB.brinquedo.idBrinquedo}" size="5"
 					id="idBrinquedo"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
-					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
+					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}"
+					disabled="true">
 				</h:inputText>
+				<rich:message for="idBrinquedo" errorStyle="color: darkred;" />
 
 				<h:outputLabel value="#{brinquedoBundle['nomeBrinquedo.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.nome}" size="20"
+				<h:inputText value="#{brinquedoMB.brinquedo.nome}" size="40"
 					id="nome"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
@@ -175,8 +190,8 @@
 				<rich:message for="nome" errorStyle="color: darkred;" />
 
 				<h:outputLabel value="#{brinquedoBundle['tempMensagem.label']}" />
-				<h:inputText value="#{brinquedoMB.brinquedo.tempoMensagem}"
-					size="60" id="tempoMensagem"
+				<h:inputText value="#{brinquedoMB.brinquedo.tempoMensagem}" size="5"
+					id="tempoMensagem"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
@@ -185,7 +200,7 @@
 
 				<h:outputLabel value="#{brinquedoBundle['tempFila.label']}" />
 				<h:inputText value="#{brinquedoMB.brinquedo.estimativaTempoFila}"
-					size="60" id="estimativaTempoFila"
+					size="5" id="estimativaTempoFila"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
@@ -194,7 +209,7 @@
 
 				<h:outputLabel value="#{brinquedoBundle['qntFilaFisica.label']}" />
 				<h:inputText value="#{brinquedoMB.brinquedo.qtdPessoasFilaFisica}"
-					size="60" id="qtdPessoasFilaFisica"
+					size="5" id="qtdPessoasFilaFisica"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
@@ -204,7 +219,7 @@
 
 				<h:outputLabel value="#{brinquedoBundle['maxFilaFisica.label']}" />
 				<h:inputText
-					value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" size="60"
+					value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" size="5"
 					id="qtdMaxPessoasFilaFisica"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
 					style="#{!brinquedoMB.editarState ? 'color: black;' : ''}">
@@ -213,7 +228,7 @@
 				<rich:message for="qtdMaxPessoasFilaFisica"
 					errorStyle="color: darkred;" />
 
-
+				<h:outputLabel value="Observação" />
 				<h:inputTextarea value="#{brinquedoMB.brinquedo.observacao}"
 					size="60" id="obs" rows="4" cols="40"
 					readonly="#{!brinquedoMB.editarState and !brinquedoMB.adicionarState}"
@@ -223,8 +238,7 @@
 				<rich:message for="obs" errorStyle="color: darkred;" />
 
 				<h:outputLabel value="Status Brinquedo" />
-				<h:selectOneMenu
-					value="#{brinquedoMB.brinquedo.statusBrinquedo.idStatusBrinquedo}"
+				<h:selectOneMenu value="#{brinquedoMB.idStatusBrinquedoTransient}"
 					id="idStatusBrinquedo">
 					<f:selectItems
 						value="#{listaStatusBrinquedo.selectItemsStatusBrinquedo}" />
@@ -274,13 +288,15 @@
 			<h:outputText value="#{brinquedoMB.brinquedo.qtdPessoasFilaFisica}" />
 
 			<h:outputLabel value="Qtde Máximo de Pessoas Fila Física" />
-			<h:outputText value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" />
+			<h:outputText
+				value="#{brinquedoMB.brinquedo.qtdMaxPessoasFilaFisica}" />
 
 			<h:outputLabel value="Observação" />
 			<h:outputText value="#{brinquedoMB.brinquedo.observacao}" />
 
 			<h:outputLabel value="Status Brinquedo" />
-			<h:outputText value="#{brinquedoMB.brinquedo.statusBrinquedo.descricao}" />
+			<h:outputText
+				value="#{brinquedoMB.brinquedo.statusBrinquedo.descricao}" />
 
 
 

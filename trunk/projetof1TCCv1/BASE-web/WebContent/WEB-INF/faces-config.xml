@@ -827,6 +827,11 @@
    <property-class>qcs.base.negocio.web.dataprov.BrinquedoDataProvider</property-class>
    <value>#{brinquedoDataProvider}</value>
   </managed-property>
+  <managed-property>
+   <property-name>statusBrinquedoDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.StatusBrinquedoDataProvider</property-class>
+   <value>#{statusBrinquedoDataProvider}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>brinquedoDataModel</managed-bean-name>

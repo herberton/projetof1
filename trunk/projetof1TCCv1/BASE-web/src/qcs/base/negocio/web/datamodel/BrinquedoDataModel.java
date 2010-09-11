@@ -39,7 +39,7 @@ public class BrinquedoDataModel extends GenericDataModel<BrinquedoView, Brinqued
 
 	@Override
 	public String getDefaultSortField() {
-		return "nome";
+		return "idBrinquedo";
 	}
 
 	@Override
