@@ -21,6 +21,19 @@
     NAME="output4" PATH="/pages/tabelaauxiliar/tabela_auxiliar.xhtml"
     TARGET="rules:#pages#tabelaauxiliar#tabela_auxiliar.xhtml"
     TITLE="tabela_auxiliar" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="pessoa::#pages#pessoa#pessoa.xhtml"
+    NAME="output" PATH="/pages/pessoa/pessoa.xhtml"
+    TARGET="rules:#pages#pessoa#pessoa.xhtml" TITLE="pessoa" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="perfil_funcionalidades::#pages#seguranca#perfil_funcionalidades.xhtml"
+    NAME="output5" PATH="/pages/seguranca/perfil_funcionalidades.xhtml"
+    TARGET="rules:#pages#seguranca#perfil_funcionalidades.xhtml"
+    TITLE="perfil_funcionalidades" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modulo_sistema::#pages#configuracao#modulo_sistema.xhtml"
+    NAME="output6" PATH="/pages/configuracao/modulo_sistema.xhtml"
+    TARGET="rules:#pages#configuracao#modulo_sistema.xhtml"
+    TITLE="modulo_sistema" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#enderecamento#cidade.xhtml"
@@ -56,4 +69,12 @@
  <PROCESS-ITEM NAME="rules:#pages#seguranca#perfil.xhtml"
   PATH="/pages/seguranca/perfil.xhtml" SHAPE="181,168,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM
+  NAME="rules:#pages#seguranca#perfil_funcionalidades.xhtml"
+  PATH="/pages/seguranca/perfil_funcionalidades.xhtml"
+  SHAPE="304,561,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#configuracao#modulo_sistema.xhtml"
+  PATH="/pages/configuracao/modulo_sistema.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#pessoa#pessoa.xhtml"
+  PATH="/pages/pessoa/pessoa.xhtml" SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
