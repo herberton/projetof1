@@ -25,6 +25,7 @@ public class CatracaMB extends BaseMB {
 
 	//FILTROS DA TELA
 	private String descricao;
+	private String nomeBrinquedo;
 	
 	private Long idBrinquedo;
 
@@ -44,6 +45,8 @@ public class CatracaMB extends BaseMB {
 		atributosFiltros.remove("descricao");
 		atributosFiltros.put("descricao",descricao);
 
+		atributosFiltros.remove("nomeBrinquedo");
+		atributosFiltros.put("nomeBrinquedo",nomeBrinquedo);		
 
 		return atributosFiltros;
 	}
@@ -216,6 +219,16 @@ public class CatracaMB extends BaseMB {
 		this.lovBrinquedoMB = lovBrinquedoMB;
 	}
 
-	
+
+	public String getNomeBrinquedo() {
+		return nomeBrinquedo;
+	}
+
+
+	public void setNomeBrinquedo(String nomeBrinquedo) {
+		this.nomeBrinquedo = nomeBrinquedo;
+	}
+
+	 
 	
 }
