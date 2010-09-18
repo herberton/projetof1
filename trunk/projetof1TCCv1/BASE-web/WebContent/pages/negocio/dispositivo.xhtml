@@ -206,16 +206,14 @@
 
 
 				<h:outputLabel value="Status Dispositivo" />
-				<rich:column>
-					<h:inputText
-						value="#{dispositivoMB.dispositivo.statusDispositivo.descricao}"
-						size="15" id="descricao"
-						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
-						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
-						<rich:ajaxValidator event="onblur" />
-					</h:inputText>
-				</rich:column>
-				<rich:message for="descricao" errorStyle="color: darkred;" />
+				<h:selectOneMenu value="#{dispositivoMB.idStatusDispositivoTransient}"
+					id="idStatusDispositivoTransient">
+					<f:selectItems
+						value="#{listaStatusDispositivo.selectItemsStatusDispositivo}" />
+				</h:selectOneMenu>
+				<rich:message for="idStatusDispositivoTransient" errorStyle="color: darkred;" />
+
+
 
 			</h:panelGrid>
 			<h:panelGrid columns="1">
