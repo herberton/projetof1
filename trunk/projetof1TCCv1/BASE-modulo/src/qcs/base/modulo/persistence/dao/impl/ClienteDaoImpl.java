@@ -43,10 +43,9 @@ implements ClienteDao {
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idCliente"));
 			pList.add(Projections.property("nome"));
-			pList.add(Projections.property("dataNascimento"));
-			pList.add(Projections.property("qtdVisitas"));
 			pList.add(Projections.property("rg"));
 			pList.add(Projections.property("cpf"));
+			pList.add(Projections.property("celular"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){
@@ -57,6 +56,20 @@ implements ClienteDao {
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
+				
+				//filtra clientes pelo CPF
+				String cpf = (String)atributosFiltros.get("CPF");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(cpf != null && !cpf.trim().isEmpty()){				
+					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+				}
+				
+				//filtra clientes pelo RG
+				String rg = (String)atributosFiltros.get("RG");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(rg != null && !rg.trim().isEmpty()){				
+					c.add(Restrictions.ilike("rg", rg, MatchMode.ANYWHERE));
+				}			
 
 			}
 
@@ -90,10 +103,9 @@ implements ClienteDao {
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idCliente"));
 			pList.add(Projections.property("nome"));
-			pList.add(Projections.property("dataNascimento"));
-			pList.add(Projections.property("qtdVisitas"));
 			pList.add(Projections.property("rg"));
 			pList.add(Projections.property("cpf"));
+			pList.add(Projections.property("celular"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){
@@ -103,6 +115,20 @@ implements ClienteDao {
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+				}
+				
+				//filtra clientes pelo CPF
+				String cpf = (String)atributosFiltros.get("CPF");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(cpf != null && !cpf.trim().isEmpty()){				
+					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+				}
+				
+				//filtra clientes pelo RG
+				String rg = (String)atributosFiltros.get("RG");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(rg != null && !rg.trim().isEmpty()){				
+					c.add(Restrictions.ilike("rg", rg, MatchMode.ANYWHERE));
 				}
 
 			}
@@ -149,6 +175,21 @@ implements ClienteDao {
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
+				
+				//filtra clientes pelo CPF
+				String cpf = (String)atributosFiltros.get("CPF");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(cpf != null && !cpf.trim().isEmpty()){				
+					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+				}
+				
+				//filtra clientes pelo RG
+				String rg = (String)atributosFiltros.get("RG");
+				log.debug("\tnome listWithFilterToView: "+nome);
+				if(rg != null && !rg.trim().isEmpty()){				
+					c.add(Restrictions.ilike("rg", rg, MatchMode.ANYWHERE));
+				}				
+				
 			}
 
 

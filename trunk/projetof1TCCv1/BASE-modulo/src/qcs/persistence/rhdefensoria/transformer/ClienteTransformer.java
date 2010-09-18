@@ -1,6 +1,5 @@
 package qcs.persistence.rhdefensoria.transformer;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.transform.ResultTransformer;
@@ -21,10 +20,9 @@ public class ClienteTransformer implements ResultTransformer{
 		ClienteView view = new ClienteView();
 		view.setIdCliente((Long) values[0]);
 		view.setNome((String) values[1]);
-		view.setDataNascimento((Date) values[2]);
-		view.setQtdVisitas((Integer) values[3]);
-		view.setRg((String) values[4]);
-		view.setCpf((String) values[5]);
+		view.setRg((String) values[2]);
+		view.setCpf((String) values[3]);
+		view.setCelular((Integer) values[4]);		
 
 		return view;
 	
