@@ -51,7 +51,7 @@
 				<h:panelGrid columns="9" cellspacing="3"
 					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
 					<h:outputLabel value="#{statusBrinquedoBundle['descricao.label']}" />
-					<h:inputText value="#{statusBrinquedoMB.descricao}" size="8" />
+					<h:inputText value="#{statusBrinquedoMB.descricao}" size="40" />
 
 					<rich:spacer width="20px" />
 
@@ -75,11 +75,23 @@
 			<a4j:region selfRendered="true">
 				<rich:dataTable id="dataTableStatusBrinquedo"
 					value="#{statusBrinquedoDataModel}" var="objeto"
-					rowClasses="row1, row2" rows="19" columnsWidth="0*, 0*, 0*,80"
+					rowClasses="row1, row2" rows="19" columnsWidth="2, 60,2"
 					cellspacing="0" cellpadding="0" border="1"
 					styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					
+					
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Código"
+								reRender="dataTableStatusBrinquedo">
+								<a4j:actionparam name="sortField" value="idStatusBrinquedo" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.idStatusBrinquedo}" />
+					</rich:column>
+										
 					<rich:column>
 						<f:facet name="header">
 							<a4j:commandLink value="#{statusBrinquedoBundle['descricao.label']}"
@@ -138,6 +150,15 @@
 			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
 			<h:panelGrid columns="3" id="panelFormEditBlockStatusBrinquedo"
 				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+				
+				<h:outputLabel value="Código" />
+				<h:inputText value="#{statusBrinquedoMB.statusBrinquedo.idStatusBrinquedo}"
+					size="5" id="id"
+					readonly="#{!statusBrinquedoMB.editarState and !statusBrinquedoMB.adicionarState}"
+					style="#{!statusBrinquedoMB.editarState ? 'color: black;' : ''}" disabled="true">
+				</h:inputText>
+				<rich:spacer />
+ 				
 				<h:outputLabel value="#{statusBrinquedoBundle['descricao.label']}" />
 				<h:inputText value="#{statusBrinquedoMB.statusBrinquedo.descricao}"
 					size="20" id="descricao"
@@ -145,7 +166,7 @@
 					style="#{!statusBrinquedoMB.editarState ? 'color: black;' : ''}">
 					<rich:ajaxValidator event="onblur" />
 				</h:inputText>
-				<rich:message for="descricao" errorStyle="color: darkred;" />
+				<rich:message for="descricao" errorStyle="color: darkred;" />				
 			</h:panelGrid>
 
 			<h:panelGrid columns="1">
@@ -172,8 +193,13 @@
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			
+			<h:outputLabel value="Código" />
+			<h:outputText value="#{statusBrinquedoMB.statusBrinquedo.idStatusBrinquedo}" />				
+			
 			<h:outputLabel value="#{statusBrinquedoBundle['descricao.label']}" />
 			<h:outputText value="#{statusBrinquedoMB.statusBrinquedo.descricao}" />
+					
 		</h:panelGrid>
 	</ui:define>
 </ui:composition>
