@@ -962,6 +962,11 @@
    <property-class>qcs.base.negocio.web.dataprov.DispositivoDataProvider</property-class>
    <value>#{dispositivoDataProvider}</value>
   </managed-property>
+  <managed-property>
+   <property-name>statusDispositivoDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.StatusDispositivoDataProvider</property-class>
+   <value>#{statusDispositivoDataProvider}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>dispositivoDataProvider</managed-bean-name>

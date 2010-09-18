@@ -206,12 +206,25 @@
 
 
 				<h:outputLabel value="Status Dispositivo" />
-				<h:selectOneMenu value="#{dispositivoMB.idStatusDispositivoTransient}"
-					id="idStatusDispositivoTransient">
-					<f:selectItems
-						value="#{listaStatusDispositivo.selectItemsStatusDispositivo}" />
-				</h:selectOneMenu>
-				<rich:message for="idStatusDispositivoTransient" errorStyle="color: darkred;" />
+				<rich:column>
+					<h:selectOneMenu
+						value="#{dispositivoMB.idStatusDispositivoTransient}"
+						id="idStatusDispositivoTransient">
+						<f:selectItems
+							value="#{listaStatusDispositivo.selectItemsStatusDispositivo}" />
+					</h:selectOneMenu>
+				</rich:column>
+				<rich:message for="idStatusDispositivoTransient"
+					errorStyle="color: darkred;" />
+
+				<h:outputLabel value="Data de Cadastro" />				
+				<rich:column>
+					<rich:calendar value="#{dispositivoMB.dispositivo.dataCadastro}"
+						id="dataNasc" required="true"
+						requiredMessage="#{moduloPessoaBundle['dataNascimento.requiredMessage']}" />
+				</rich:column>
+				<rich:message for="dataNasc" errorStyle="color: darkred;" />
+
 
 
 
@@ -265,6 +278,10 @@
 
 			<h:outputLabel value="Cliente que está utilizando" />
 			<h:outputText value="#{dispositivoMB.dispositivo.cliente.nome}" />
+
+			<h:outputLabel value="Data de Cadastro" />
+			<h:outputText value="#{dispositivoMB.dispositivo.dataCadastro}"
+				converter="DateBRConverter" />
 
 		</h:panelGrid>
 
