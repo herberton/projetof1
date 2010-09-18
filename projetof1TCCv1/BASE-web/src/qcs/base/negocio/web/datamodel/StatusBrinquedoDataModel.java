@@ -39,7 +39,7 @@ public class StatusBrinquedoDataModel extends GenericDataModel<StatusBrinquedoVi
 
 	@Override
 	public String getDefaultSortField() {
-		return "descricao";
+		return "idStatusBrinquedo";
 	}
 
 	@Override

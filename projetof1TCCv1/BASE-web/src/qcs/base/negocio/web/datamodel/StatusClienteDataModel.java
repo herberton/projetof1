@@ -39,7 +39,7 @@ public class StatusClienteDataModel extends GenericDataModel<StatusClienteView, 
 
 	@Override
 	public String getDefaultSortField() {
-		return "descricao";
+		return "idStatusCliente";
 	}
 
 	@Override
