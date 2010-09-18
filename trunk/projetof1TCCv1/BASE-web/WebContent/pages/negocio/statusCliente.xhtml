@@ -50,7 +50,7 @@
 				<h:panelGrid columns="9" cellspacing="3"
 					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
 					<h:outputLabel value="#{statusClienteBundle['descricao.label']}" />
-					<h:inputText value="#{statusClienteMB.descricao}" size="8" />
+					<h:inputText value="#{statusClienteMB.descricao}" size="40" />
 
 					<rich:spacer width="20px" />
 
@@ -74,10 +74,21 @@
 			<a4j:region selfRendered="true">
 				<rich:dataTable id="dataTableStatusCliente" value="#{statusClienteDataModel}"
 					var="objeto" rowClasses="row1, row2" rows="19"
-					columnsWidth="0*, 0*, 0*,80" cellspacing="0" cellpadding="0"
+					columnsWidth="2, 60, 2" cellspacing="0" cellpadding="0"
 					border="1" styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+					
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Código"
+								reRender="dataTableStatusCliente">
+								<a4j:actionparam name="sortField" value="idStatusCliente" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.idStatusCliente}" />
+					</rich:column>					
+					
 					<rich:column>
 						<f:facet name="header">
 							<a4j:commandLink value="#{statusClienteBundle['descricao.label']}"
@@ -136,6 +147,15 @@
 			style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
 			<h:panelGrid columns="3" id="panelFormEditBlockStatusCliente"
 				columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="5px">
+				
+				<h:outputLabel value="Código" />
+				<h:inputText value="#{statusClienteMB.statusCliente.idStatusCliente}" size="5"
+					id="id"
+					readonly="#{!statusClienteMB.editarState and !statusClienteMB.adicionarState}"
+					style="#{!statusClienteMB.editarState ? 'color: black;' : ''}" disabled="true">
+				</h:inputText>
+				<rich:spacer/>				
+				
 				<h:outputLabel value="#{statusClienteBundle['descricao.label']}" />
 				<h:inputText value="#{statusClienteMB.statusCliente.descricao}" size="20"
 					id="descricao"
@@ -173,6 +193,10 @@
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
+			
+			<h:outputLabel value="Código" />
+			<h:outputText value="#{statusClienteMB.statusCliente.idStatusCliente}" />			
+			
 			<h:outputLabel value="#{statusClienteBundle['descricao.label']}" />
 			<h:outputText value="#{statusClienteMB.statusCliente.descricao}" />
 		</h:panelGrid>
