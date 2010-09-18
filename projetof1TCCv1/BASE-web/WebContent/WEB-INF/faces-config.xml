@@ -1088,14 +1088,14 @@
   <managed-bean-class>qcs.base.negocio.web.mb.ClienteMB</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
   <managed-property>
-   <property-name>catracaDataProvider</property-name>
-   <property-class>qcs.base.negocio.web.dataprov.CatracaDataProvider</property-class>
-   <value>#{catracaDataProvider}</value>
+   <property-name>dataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.ClienteDataProvider</property-class>
+   <value>#{clienteDataProvider}</value>
   </managed-property>
   <managed-property>
-   <property-name>lovDispositivoMB</property-name>
-   <property-class>qcs.base.lov.web.mb.LovDispositivoMB</property-class>
-   <value>#{lovDispositivoMB}</value>
+   <property-name>statusClienteDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.StatusClienteDataProvider</property-class>
+   <value>#{statusClienteDataProvider}</value>
   </managed-property>
  </managed-bean>
  <managed-bean>

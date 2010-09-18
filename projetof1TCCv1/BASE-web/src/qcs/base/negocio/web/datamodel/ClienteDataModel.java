@@ -40,7 +40,7 @@ public class ClienteDataModel extends GenericDataModel<ClienteView, Cliente, Lon
 
 	@Override
 	public String getDefaultSortField() {
-		return "nome";
+		return "idCliente";
 	}
 
 	@Override

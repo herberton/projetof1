@@ -6,9 +6,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import qcs.base.lov.web.mb.LovDispositivoMB;
 import qcs.base.negocio.Cliente;
 import qcs.base.negocio.web.dataprov.ClienteDataProvider;
+import qcs.base.negocio.web.dataprov.StatusClienteDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
 import qcs.persistence.rhdefensoria.view.ClienteView;
@@ -17,18 +17,19 @@ public class ClienteMB extends BaseMB {
 	protected static Log log = LogFactory.getLog(ClienteMB.class);
 	private static final long serialVersionUID = 1L;
 
-	private ClienteDataProvider clienteDataProvider;
 	private Cliente cliente;
 	private ClienteView view;
-	private Map<String, Object> atributosFiltros;
-	private LovDispositivoMB lovDispositivoMB;	
+	private Map<String, Object> atributosFiltros;	
 
 	//FILTROS DA TELA
 	private String nome;
-	
+	private String RG;
+	private String CPF;
+
 	private Long statusCliente;
-	private qcs.base.negocio.web.dataprov.CatracaDataProvider catracaDataProvider;
-	
+	private ClienteDataProvider dataProvider;
+	private StatusClienteDataProvider statusClienteDataProvider;
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -52,7 +53,7 @@ public class ClienteMB extends BaseMB {
 	public void setStatusCliente(Long statusCliente) {
 		this.statusCliente = statusCliente;
 	}
-	
+
 	public Map<String, Object> getAtributosFiltros(){
 		if(atributosFiltros == null)atributosFiltros = new HashMap<String, Object>();
 
@@ -61,25 +62,17 @@ public class ClienteMB extends BaseMB {
 		atributosFiltros.remove("idStatusCliente");
 		atributosFiltros.put("idStatusCliente", statusCliente);
 
+		atributosFiltros.remove("CPF");
+		atributosFiltros.put("CPF", CPF);
+		atributosFiltros.remove("RG");
+		atributosFiltros.put("RG", RG);		
+
 		return atributosFiltros;
 	}
-	
+
 	public void setAtributosFiltros(Map<String, Object> atributosFiltros) {
 		this.atributosFiltros = atributosFiltros;
 	}
-
-	public ClienteDataProvider getClienteDataProvider() {
-		if(clienteDataProvider == null){
-			clienteDataProvider = (ClienteDataProvider) 
-			getElResolver().getValue(getFacescontext().getELContext(), null, "clienteDataProvider");
-		}
-		return clienteDataProvider;
-	}
-
-	public void setClienteDataProvider(ClienteDataProvider clienteDataProvider) {
-		this.clienteDataProvider = clienteDataProvider;
-	}
-
 
 	public ClienteView getView() {
 		return view;
@@ -94,7 +87,7 @@ public class ClienteMB extends BaseMB {
 		try{
 			log.debug("Incluindo Cliente: "+cliente.getIdCliente());
 
-			cliente = getClienteDataProvider().incluir(cliente);
+			cliente = getDataProvider().incluir(cliente);
 			this.pesquisar(); 
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
 		}catch(Exception e){
@@ -105,8 +98,10 @@ public class ClienteMB extends BaseMB {
 	@Override
 	protected void clear() {
 		this.nome = "";
+		this.RG = "";
+		this.CPF = "";
 		this.statusCliente = null;
-		
+
 		if(getCurrentState() == null || getCurrentState().equals(PESQUISAR_STATE)){
 			this.cliente = new Cliente();
 		}else{
@@ -118,7 +113,7 @@ public class ClienteMB extends BaseMB {
 	public void editar() {
 		try{
 			log.debug("Editando Cliente: "+cliente.getIdCliente());
-			getClienteDataProvider().alterar(cliente);
+			getDataProvider().alterar(cliente);
 			this.pesquisar();
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoAlteracaoApartirDe(getTextoDocumento());
 		}catch(Exception e){
@@ -130,7 +125,7 @@ public class ClienteMB extends BaseMB {
 	public void excluir() {
 		try{
 			log.debug("Excluindo Cliente: "+cliente.getIdCliente());
-			getClienteDataProvider().excluir(cliente);
+			getDataProvider().excluir(cliente);
 			this.pesquisar();
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoExclusaoApartirDe(getTextoDocumento());
 		}catch(Exception e){
@@ -160,7 +155,7 @@ public class ClienteMB extends BaseMB {
 	public void carregarVisualizacao(){
 		try{
 			log.debug("Vizualizando Cliente: "+view.getIdCliente());
-			cliente = getClienteDataProvider().consultar(view.getIdCliente());
+			cliente = getDataProvider().consultar(view.getIdCliente());
 			pesquisar();
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
@@ -170,7 +165,7 @@ public class ClienteMB extends BaseMB {
 	public void carregarEdicao(){
 		try{
 			log.debug("Editando Cliente: "+view.getIdCliente());
-			cliente = getClienteDataProvider().consultar(view.getIdCliente());
+			cliente = getDataProvider().consultar(view.getIdCliente());
 			prepareEditar();
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
@@ -180,50 +175,48 @@ public class ClienteMB extends BaseMB {
 	public void carregarExclusao(){
 		try{
 			log.debug("Carregando Excluindo Cliente: "+view.getIdCliente());
-			cliente = getClienteDataProvider().consultar(view.getIdCliente());
+			cliente = getDataProvider().consultar(view.getIdCliente());
 			pesquisar();
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
 		}
 	}
 
-	public qcs.base.negocio.web.dataprov.CatracaDataProvider getCatracaDataProvider() {
-		return catracaDataProvider;
-	}
-
-	public void setCatracaDataProvider(
-			qcs.base.negocio.web.dataprov.CatracaDataProvider catracaDataProvider) {
-		this.catracaDataProvider = catracaDataProvider;
-	}
-	
-	public void atualizarSelecao(){
-		try{			
-			cliente.setDispositivo(
-					getLovDispositivoMB().getDispositivoById());
-						
-			log.debug("Novo Dispositivo: "+cliente.getNome());
-		}catch(Exception e){
-			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
-		}
-	}
-	public void removerSelecao(){
-		try{
-			cliente.setDispositivo(null);
-			setCurrentState(EDITAR_STATE);
-		}catch(Exception e){
-			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
-		}
-	}
-
-	public LovDispositivoMB getLovDispositivoMB() {
-		return lovDispositivoMB;
-	}
-
-	public void setLovDispositivoMB(LovDispositivoMB lovDispositivoMB) {
-		this.lovDispositivoMB = lovDispositivoMB;
-	}
 
 
-	
-	
+	public qcs.base.negocio.web.dataprov.ClienteDataProvider getDataProvider() {
+		return dataProvider;
+	}
+
+	public void setDataProvider(
+			qcs.base.negocio.web.dataprov.ClienteDataProvider dataProvider) {
+		this.dataProvider = dataProvider;
+	}
+
+	public qcs.base.negocio.web.dataprov.StatusClienteDataProvider getStatusClienteDataProvider() {
+		return statusClienteDataProvider;
+	}
+
+	public void setStatusClienteDataProvider(
+			qcs.base.negocio.web.dataprov.StatusClienteDataProvider statusClienteDataProvider) {
+		this.statusClienteDataProvider = statusClienteDataProvider;
+	}
+
+	public String getRG() {
+		return RG;
+	}
+
+	public void setRG(String rG) {
+		RG = rG;
+	}
+
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
+
+
 }
