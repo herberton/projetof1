@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import qcs.base.negocio.Dispositivo;
 import qcs.base.negocio.web.dataprov.DispositivoDataProvider;
+import qcs.base.negocio.web.dataprov.StatusDispositivoDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
 import qcs.persistence.rhdefensoria.view.DispositivoView;
@@ -19,18 +20,49 @@ public class DispositivoMB extends BaseMB{
 	
 	private Dispositivo dispositivo;
 	private DispositivoDataProvider dataProvider;
+	private StatusDispositivoDataProvider statusDispositivoDataProvider;
 	private DispositivoView view;
+	private Long IdStatusDispositivoTransient;
 	
 	//FILTROS
 	private String ip;
-	private Long idStatusDispositivo;
 	private String utilizados;
 	private Map<String, Object> atributosFiltros;
+	private Long IdStatusDispositivo;
 	
-	//CONSTRUTOR...
+	
 	public DispositivoMB() { super(); }
 	
-	//GET...
+	
+	public StatusDispositivoDataProvider getStatusDispositivoDataProvider() {
+		return statusDispositivoDataProvider;
+	}
+
+	public void setStatusDispositivoDataProvider(
+			StatusDispositivoDataProvider statusDispositivoDataProvider) {
+		this.statusDispositivoDataProvider = statusDispositivoDataProvider;
+	}
+
+	public Long getIdStatusDispositivo() {
+		return IdStatusDispositivo;
+	}
+
+	public void setIdStatusDispositivo(Long idStatusDispositivo) {
+		IdStatusDispositivo = idStatusDispositivo;
+	}
+
+
+
+
+	public Long getIdStatusDispositivoTransient() {
+		if(!isAdicionarState())
+			IdStatusDispositivoTransient = dispositivo.getStatusDispositivo().getIdStatusDispositivo();
+		return IdStatusDispositivoTransient;
+	}
+
+	public void setIdStatusDispositivoTransient(Long IdStatusDispositivoTransient) {
+		this.IdStatusDispositivoTransient = IdStatusDispositivoTransient;
+	}
 	
 	public String getUtilizados() {
 		return utilizados;
@@ -51,9 +83,7 @@ public class DispositivoMB extends BaseMB{
 	public String getIp() {
 		return ip;
 	}
-	public Long getIdStatusDispositivo() {
-		return idStatusDispositivo;
-	}
+
 	public Map<String, Object> getAtributosFiltros() {
 		if(atributosFiltros == null)atributosFiltros = new HashMap<String, Object>();
 		
@@ -63,7 +93,7 @@ public class DispositivoMB extends BaseMB{
 		
 		//STATUS DISPOSITIVO...
 		atributosFiltros.remove("idStatusDispositivo");
-		atributosFiltros.put("idStatusDispositivo", getIdStatusDispositivo());
+		atributosFiltros.put("idStatusDispositivo", IdStatusDispositivo);
 		
 		
 		atributosFiltros.remove("utilizados");
@@ -92,9 +122,7 @@ public class DispositivoMB extends BaseMB{
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public void setIdStatusDispositivo(Long idStatusDispositivo) {
-		this.idStatusDispositivo = idStatusDispositivo;
-	}
+
 	public void setAtributosFiltros(Map<String, Object> atributosFiltros) {
 		this.atributosFiltros = atributosFiltros;
 	}
@@ -106,7 +134,8 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Incluindo Dispositivo: " + getDispositivo().getIdDispositivo());
 			
-			dispositivo = getDataProvider().consultar(view.getIdDispositivo());
+			dispositivo.setStatusDispositivo(statusDispositivoDataProvider.consultar(IdStatusDispositivoTransient));
+			dispositivo = getDataProvider().incluir(dispositivo);
 			this.pesquisar(); 
 			
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -135,6 +164,7 @@ public class DispositivoMB extends BaseMB{
 		try{
 			log.debug("Editando Dispositivo: " + getDispositivo().getIdDispositivo());
 			
+			dispositivo.setStatusDispositivo(statusDispositivoDataProvider.consultar(IdStatusDispositivoTransient));
 			getDataProvider().alterar(dispositivo);
 			this.pesquisar(); 
 			

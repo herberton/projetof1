@@ -39,7 +39,7 @@ public class StatusDispositivoDataModel extends GenericDataModel<StatusDispositi
 
 	@Override
 	public String getDefaultSortField() {
-		return "descricao";
+		return "idStatusDispositivo";
 	}
 
 	@Override
