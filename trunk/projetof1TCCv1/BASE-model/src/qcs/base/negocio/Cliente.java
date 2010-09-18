@@ -48,6 +48,9 @@ public class Cliente implements Serializable {
 	@Column(name="QTD_VISITAS")
 	private Integer qtdVisitas;
 	
+	@Column(name="CELULAR")
+	private Integer celular;	
+	
 	@NotNull
 	@Length(max=9, min=0)
 	private String rg;
@@ -122,5 +125,15 @@ public class Cliente implements Serializable {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
+	public Integer getCelular() {
+		return celular;
+	}
+
+	public void setCelular(Integer celular) {
+		this.celular = celular;
+	}
+	
+	
 
 }

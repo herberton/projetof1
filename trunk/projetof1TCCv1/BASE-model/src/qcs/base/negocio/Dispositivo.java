@@ -51,6 +51,13 @@ public class Dispositivo implements Serializable {
 	@JoinColumn(name="ID_STATUS_DISPOSITIVO")
 	private StatusDispositivo statusDispositivo;
 
+	@Column(name="CELULAR")
+	private Integer celular;
+	
+	@Column(name="ID_RFID")
+	private Integer idRfid;
+    
+    
     public Dispositivo() {
     }
 
@@ -93,5 +100,23 @@ public class Dispositivo implements Serializable {
 	public void setStatusDispositivo(StatusDispositivo statusDispositivo) {
 		this.statusDispositivo = statusDispositivo;
 	}
+
+	public Integer getCelular() {
+		return celular;
+	}
+
+	public void setCelular(Integer celular) {
+		this.celular = celular;
+	}
+
+	public Integer getIdRfid() {
+		return idRfid;
+	}
+
+	public void setIdRfid(Integer idRfid) {
+		this.idRfid = idRfid;
+	}
+	
+	
 	
 }
