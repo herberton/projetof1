@@ -300,11 +300,10 @@
 			<h:inputText value="#{clienteMB.codDispositivo}" size="10"
 				id="dispositivo"
 				style="#{!clienteMB.editarState ? 'color: black;' : ''}">
-				<a4j:support event="onkeyup" reRender="imagemVisto" action="#{clienteMB.validaDispositivo}"/>
+				<a4j:support event="onkeyup" reRender="imagemVisto" />
 			</h:inputText>
-
 			<h:graphicImage id="imagemVisto"
-				rendered="#{clienteMB.validaBoolean}" 
+				rendered="#{clienteMB.validaDispositivo}"
 				value="#{aplicacaoBundle['icone.sim']}" />
 		</h:panelGrid>
 
