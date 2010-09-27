@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a4j:form ajaxSubmit="true">
+	<rich:modalPanel id="modalPanelAssociarDispositivo" minHeight="50"
+		minWidth="400" autosized="true" moveable="true"
+		 label="#{aplicacaoBundle['label.modal.visualizar']} #{entidade} #{nomeEntidade}">
+		<f:facet name="header">
+			<h:outputText value="Associar Dispositivo ao Cliente" />
+		</f:facet>
+		<rich:panel id="panel_modalAssociarDispositivo" rendered="true"
+			bodyClass="panelUpdate"
+			style="text-align:center;width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<h:panelGrid columns="1">
+				<ui:insert name="modalAssociarDispositivo"></ui:insert>
+				<rich:spacer height="10" />
+				<a4j:commandButton id="closeModalAssociarDispositivo"
+					alt="Voltar para tela anterior" type="button" value="#{aplicacaoBundle['botao.modal.fechar']}"
+					onclick="Richfaces.hideModalPanel('modalPanelAssociarDispositivo')" />
+			</h:panelGrid>
+		</rich:panel>
+	</rich:modalPanel>
+</a4j:form>
+</body>
+</html>
+
+
