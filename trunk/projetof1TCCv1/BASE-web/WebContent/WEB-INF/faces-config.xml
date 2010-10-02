@@ -1097,6 +1097,11 @@
    <property-class>qcs.base.negocio.web.dataprov.StatusClienteDataProvider</property-class>
    <value>#{statusClienteDataProvider}</value>
   </managed-property>
+  <managed-property>
+   <property-name>lovAssociaDispositivoMB</property-name>
+   <property-class>qcs.base.lov.web.mb.LovAssociaDispositivoMB</property-class>
+   <value>#{lovAssociaDispositivoMB}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>clienteDataModel</managed-bean-name>
@@ -1152,6 +1157,11 @@
    <property-class>qcs.base.negocio.web.list.ListaStatusDispositivoDataProvider</property-class>
    <value>#{listaStatusDispositivoDataProvider}</value>
   </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>lovAssociaDispositivoMB</managed-bean-name>
+  <managed-bean-class>qcs.base.lov.web.mb.LovAssociaDispositivoMB</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <navigation-rule>
   <display-name>logradouro</display-name>

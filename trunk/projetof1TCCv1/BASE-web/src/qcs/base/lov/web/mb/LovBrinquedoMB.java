@@ -3,6 +3,7 @@ package qcs.base.lov.web.mb;
 import java.util.HashMap;
 import java.util.Map;
 
+import qcs.base.lov.web.dataprov.LovBrinquedoDataProvider;
 import qcs.base.negocio.Brinquedo;
 import qcs.base.negocio.web.dataprov.BrinquedoDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
@@ -20,7 +21,7 @@ public class LovBrinquedoMB extends BaseMB{
 	//Filtros da tela de pesquisa
 	private String nomeBrinquedo;
 
-	private qcs.base.lov.web.dataprov.LovBrinquedoDataProvider lovBrinquedoDataProvider;
+	private LovBrinquedoDataProvider lovBrinquedoDataProvider;
 
 	@Override
 	public void adicionar() {
@@ -114,12 +115,12 @@ public class LovBrinquedoMB extends BaseMB{
 		return null;
 	}
 
-	public qcs.base.lov.web.dataprov.LovBrinquedoDataProvider getLovBrinquedoDataProvider() {
+	public LovBrinquedoDataProvider getLovBrinquedoDataProvider() {
 		return lovBrinquedoDataProvider;
 	}
 
 	public void setLovBrinquedoDataProvider(
-			qcs.base.lov.web.dataprov.LovBrinquedoDataProvider lovBrinquedoDataProvider) {
+			LovBrinquedoDataProvider lovBrinquedoDataProvider) {
 		this.lovBrinquedoDataProvider = lovBrinquedoDataProvider;
 	}
 }

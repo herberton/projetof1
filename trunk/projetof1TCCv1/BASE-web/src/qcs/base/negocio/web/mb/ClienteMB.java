@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import qcs.base.lov.web.mb.LovAssociaDispositivoMB;
 import qcs.base.negocio.Cliente;
 import qcs.base.negocio.web.dataprov.ClienteDataProvider;
 import qcs.base.negocio.web.dataprov.StatusClienteDataProvider;
@@ -29,6 +30,11 @@ public class ClienteMB extends BaseMB {
 	private Long statusCliente;
 	private ClienteDataProvider dataProvider;
 	private StatusClienteDataProvider statusClienteDataProvider;
+
+	//VARIAVEIS
+	private Integer codDispositivo;
+	private boolean validaBoolean= false;
+	private LovAssociaDispositivoMB lovAssociaDispositivoMB;
 
 	public Cliente getCliente() {
 		return cliente;
@@ -182,9 +188,15 @@ public class ClienteMB extends BaseMB {
 		}
 	}
 
+	public void validaDispositivo(){		
+		
+		System.out.println("METODO CHAMADOOOOOOO");
+		validaBoolean = !validaBoolean;
+		System.out.println("validaBoolean=" + validaBoolean);
+	}
 
 
-	public qcs.base.negocio.web.dataprov.ClienteDataProvider getDataProvider() {
+	public ClienteDataProvider getDataProvider() {
 		return dataProvider;
 	}
 
@@ -216,6 +228,32 @@ public class ClienteMB extends BaseMB {
 
 	public void setCPF(String cPF) {
 		CPF = cPF;
+	}
+
+	public Integer getCodDispositivo() {
+		return codDispositivo;
+	}
+
+	public void setCodDispositivo(Integer codDispositivo) {
+		this.codDispositivo = codDispositivo;
+	}
+
+	public Boolean getValidaBoolean() {
+		System.out.println("GET DO ATRIBUTO FOI CHAMADO : " + validaBoolean);
+		return validaBoolean;
+	}
+
+	public void setValidaBoolean(Boolean validaBoolean) {
+		this.validaBoolean = validaBoolean;
+	}
+
+	public LovAssociaDispositivoMB getLovAssociaDispositivoMB() {
+		return lovAssociaDispositivoMB;
+	}
+
+	public void setLovAssociaDispositivoMB(
+			LovAssociaDispositivoMB lovAssociaDispositivoMB) {
+		this.lovAssociaDispositivoMB = lovAssociaDispositivoMB;
 	}
 
 
