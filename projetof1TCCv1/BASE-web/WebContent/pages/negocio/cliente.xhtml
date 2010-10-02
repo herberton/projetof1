@@ -40,9 +40,7 @@
 		</h:outputFormat>
 		<a4j:keepAlive beanName="clienteDataModel" />
 		<a4j:keepAlive beanName="clienteMB" />
-		<a4j:keepAlive beanName="lovDispositivoMB" />
-		<a4j:keepAlive beanName="lovDispositivoDataProvider" />
-		<a4j:keepAlive beanName="lovDispositivoDataModel" />
+		<a4j:keepAlive beanName="lovAssociaDispositivoMB" />
 	</ui:define>
 
 	<ui:define name="searchlistBlock">
@@ -173,13 +171,14 @@
 							</a4j:commandButton>
 							<rich:spacer width="7" />
 							<a4j:commandButton image="#{aplicacaoBundle['icone.ativar']}"
-								oncomplete="Richfaces.showModalPanel('modalPanelAssociarDispositivo');"
-								reRenderAfterComplete="panel_modalAssociarDispositivo"
-								alt="#{aplicacaoBundle['botao.excluir']}"
-								action="#{clienteMB.carregarExclusao}"
-								rendered="#{objeto.idCliente!=null}">
-								<f:setPropertyActionListener value="#{objeto}"
-									target="#{clienteMB.view}" />
+								ajaxRendered="true"
+								oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
+								reRenderAfterComplete="modalPanelModalAssociarDispositivo"
+								rendered="#{objeto.idCliente!=null}"
+								alt="#{aplicacaoBundle['botao.lupa.abrir']}"
+								style=" width : 14px;">
+								<f:setPropertyActionListener
+									target="#{lovAssociaDispositivoMB.exibir}" value="true" />
 							</a4j:commandButton>
 						</a4j:region>
 					</rich:column>
@@ -288,26 +287,7 @@
 	<ui:define name="modalExcluir">
 
 	</ui:define>
-	<ui:define name="modalAssociarDispositivo">
-
-		<h:panelGrid columns="2" id="gridModalAssociarDispositivo"
-			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
-
-			<h:outputLabel value="Aproxime o Dispositivo do Leitor..." />
-			<rich:spacer />
-
-			<h:outputLabel value="Código do Dispositivo" />
-			<h:inputText value="#{clienteMB.codDispositivo}" size="10"
-				id="dispositivo"
-				style="#{!clienteMB.editarState ? 'color: black;' : ''}">
-				<a4j:support event="onkeyup" reRender="imagemVisto" />
-			</h:inputText>
-			<h:graphicImage id="imagemVisto"
-				rendered="#{clienteMB.validaDispositivo}"
-				value="#{aplicacaoBundle['icone.sim']}" />
-		</h:panelGrid>
-
-	</ui:define>
+	
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">
@@ -340,8 +320,11 @@
 	</ui:define>
 
 	<ui:define name="other">
-		<ui:include src="/includes/list_of_values/lov_dispositivo.xhtml" />
+		<ui:include
+			src="/includes/list_of_values/lov_valida_dispositivo.xhtml" />
 	</ui:define>
+
+
 </ui:composition>
 
 </html>
