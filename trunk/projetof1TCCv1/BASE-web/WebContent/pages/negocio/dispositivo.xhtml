@@ -216,16 +216,24 @@
 				</rich:column>
 				<rich:message for="idStatusDispositivoTransient"
 					errorStyle="color: darkred;" />
-
-				<h:outputLabel value="Data de Cadastro" />				
+				
+				<h:outputLabel value="NºRFID" />
+				<rich:column>
+					<h:inputText value="#{dispositivoMB.dispositivo.idRfid}" size="15"
+						id="id_rfid"
+						readonly="#{!dispositivoMB.editarState and !dispositivoMB.adicionarState}"
+						style="#{!dispositivoMB.editarState ? 'color: black;' : ''}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+				</rich:column>
+				<rich:message for="id_rfid" errorStyle="color: darkred;" />
+				
+				<h:outputLabel value="Data de Cadastro" />
 				<rich:column>
 					<rich:calendar value="#{dispositivoMB.dispositivo.dataCadastro}"
-						id="dataNasc" required="true"/>
+						id="dataNasc" required="true" />
 				</rich:column>
 				<rich:message for="dataNasc" errorStyle="color: darkred;" />
-
-
-
 
 			</h:panelGrid>
 			<h:panelGrid columns="1">
@@ -281,6 +289,9 @@
 			<h:outputLabel value="Data de Cadastro" />
 			<h:outputText value="#{dispositivoMB.dispositivo.dataCadastro}"
 				converter="DateBRConverter" />
+
+			<h:outputLabel value="NºRFID" />
+			<h:outputText value="#{dispositivoMB.dispositivo.idRfid}" />
 
 		</h:panelGrid>
 
