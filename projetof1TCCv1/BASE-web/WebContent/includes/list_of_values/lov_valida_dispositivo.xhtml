@@ -31,20 +31,20 @@
 								<h:outputLabel value="Aproxime o Dispositivo do Leitor..." />
 								<rich:spacer height="10px" />
 
-								<h:outputLabel value="Código do Dispositivo" />
 								<h:column>
-									<h:inputText value="#{lovAssociaDispositivoMB.codDispositivo}"
-										size="10" id="dispositivo"
-										style="#{!lovAssociaDispositivoMB.editarState ? 'color: black;' : ''}">
-									<!-- 	<a4j:support event="onkeyup"
-											reRenderAfterComplete="imagemVisto"
-											action="#{lovAssociaDispositivoMB.validaDispositivo}" />	-->									
-									</h:inputText>
-									<rich:hotKey key="enter" reRenderAfterComplete="imagemVisto" />
+									<h:inputText id="codigo"
+										value="#{lovAssociaDispositivoMB.codDispositivo}" />
 									<h:graphicImage id="imagemVisto"
 										rendered="#{lovAssociaDispositivoMB.validaBoolean}"
 										value="#{aplicacaoBundle['icone.sim']}" />
+									<a4j:commandButton
+										action="#{lovAssociaDispositivoMB.validaDispositivo}"
+										value="Validar" reRender="imagemVisto" id="buscar" />
 								</h:column>
+								<rich:hotKey selector="#codigo" key="return"
+									handler="#{rich:element('buscar')}.onclick();return false;" />
+
+
 							</h:panelGrid>/>
 							
 		
