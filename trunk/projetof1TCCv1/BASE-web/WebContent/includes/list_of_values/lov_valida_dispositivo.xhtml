@@ -36,10 +36,11 @@
 									<h:inputText value="#{lovAssociaDispositivoMB.codDispositivo}"
 										size="10" id="dispositivo"
 										style="#{!lovAssociaDispositivoMB.editarState ? 'color: black;' : ''}">
-										<a4j:support event="onkeyup"
+									<!-- 	<a4j:support event="onkeyup"
 											reRenderAfterComplete="imagemVisto"
-											action="#{lovAssociaDispositivoMB.validaDispositivo}" />										
+											action="#{lovAssociaDispositivoMB.validaDispositivo}" />	-->									
 									</h:inputText>
+									<rich:hotKey key="enter" reRenderAfterComplete="imagemVisto" />
 									<h:graphicImage id="imagemVisto"
 										rendered="#{lovAssociaDispositivoMB.validaBoolean}"
 										value="#{aplicacaoBundle['icone.sim']}" />
