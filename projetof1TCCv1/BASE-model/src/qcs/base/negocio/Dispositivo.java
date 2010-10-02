@@ -55,7 +55,7 @@ public class Dispositivo implements Serializable {
 	private Integer celular;
 	
 	@Column(name="ID_RFID")
-	private Integer idRfid;
+	private String idRfid;
     
     
     public Dispositivo() {
@@ -109,11 +109,11 @@ public class Dispositivo implements Serializable {
 		this.celular = celular;
 	}
 
-	public Integer getIdRfid() {
+	public String getIdRfid() {
 		return idRfid;
 	}
 
-	public void setIdRfid(Integer idRfid) {
+	public void setIdRfid(String idRfid) {
 		this.idRfid = idRfid;
 	}
 	
