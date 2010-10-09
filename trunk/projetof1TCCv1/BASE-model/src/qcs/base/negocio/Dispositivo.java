@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +43,7 @@ public class Dispositivo implements Serializable {
 	private String ip;
 
 	//uni-directional many-to-one association to Cliente
-    @ManyToOne
+    @OneToOne
 	@JoinColumn(name="ID_CLIENTE")
 	private Cliente cliente;
 
