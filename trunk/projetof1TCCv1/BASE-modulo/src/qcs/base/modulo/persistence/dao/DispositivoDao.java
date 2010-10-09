@@ -18,4 +18,6 @@ public interface DispositivoDao extends HibernateDao<Dispositivo, Long> {
 	public int getMaxRows(Map<String, Object> atributosFiltros)throws InfrastructureException, Exception;
 	//public Map<Long, String> listOfValues()throws InfrastructureException, Exception;
 
+	
+	public Dispositivo validaDispositivo(String cod_dispositivo);
 }
