@@ -174,12 +174,21 @@
 								ajaxRendered="true"
 								oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
 								reRenderAfterComplete="modalPanelModalAssociarDispositivo"
-								rendered="#{objeto.idCliente!=null}"
-								alt="#{aplicacaoBundle['botao.lupa.abrir']}"
+								rendered="#{objeto.dispositivoAssoc==null and objeto.idCliente != null}"
 								style=" width : 14px;">
 								<f:setPropertyActionListener
 									target="#{lovAssociaDispositivoMB.exibir}" value="true" />
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{clienteMB.view}" />
 							</a4j:commandButton>
+							<rich:spacer width="7" />
+							<a4j:commandButton image="#{aplicacaoBundle['icone.desativar']}"
+								ajaxRendered="true" action="#{clienteMB.removerSelecao}"
+								rendered="#{objeto.dispositivoAssoc!=null}"
+								style=" width : 14px;">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{clienteMB.view}" />
+							</a4j:commandButton>							
 						</a4j:region>
 					</rich:column>
 					<f:facet name="footer">
@@ -287,7 +296,7 @@
 	<ui:define name="modalExcluir">
 
 	</ui:define>
-	
+
 	<ui:define name="modalVisualizar">
 		<h:panelGrid columns="2" id="gridModalVisualizar"
 			columnClasses="panelUpdateRow1, panelUpdateRow2" cellspacing="10px">

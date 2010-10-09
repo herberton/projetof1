@@ -1,25 +1,27 @@
 package qcs.base.lov.web.mb;
 
+import qcs.base.negocio.Dispositivo;
+import qcs.base.negocio.web.dataprov.DispositivoDataProvider;
 import qcs.datamodel.BaseMB;
 
 public class LovAssociaDispositivoMB extends BaseMB{
 	private static final long serialVersionUID = 1L;
 
-	private Long idDispositivoSelecionado;
+	private Dispositivo dispositivoSelecionado = null;
 	private String exibir;
-	private String codDispositivo;
+	private String codDispositivo = null;
 	private boolean validaBoolean= false;
+	private DispositivoDataProvider dispositivoDataProvider;
 
 	
 	public void validaDispositivo(){		
 		
-		
-		System.out.println("METODO CHAMADOOOOOOO");
-		validaBoolean = !validaBoolean;
-		System.out.println("validaBoolean=" + validaBoolean);
+		if(getDispositivoDataProvider().validaDispositivo(codDispositivo) != null){
+			dispositivoSelecionado = getDispositivoDataProvider().validaDispositivo(codDispositivo);			
+			validaBoolean = true;}
+		else
+			validaBoolean = false;
 	}
-	
-	
 	
 	public String getCodDispositivo() {
 		return codDispositivo;
@@ -75,13 +77,18 @@ public class LovAssociaDispositivoMB extends BaseMB{
 	}
 
 
-	public Long getIdDispositivoSelecionado() {
-		return idDispositivoSelecionado;
+
+	public Dispositivo getDispositivoSelecionado() {
+		return dispositivoSelecionado;
 	}
 
-	public void setIdDispositivoSelecionado(Long idDispositivoSelecionado) {
-		this.idDispositivoSelecionado = idDispositivoSelecionado;
+
+
+	public void setDispositivoSelecionado(Dispositivo dispositivoSelecionado) {
+		this.dispositivoSelecionado = dispositivoSelecionado;
 	}
+
+
 
 	public String getExibir() {
 		return exibir;
@@ -91,4 +98,15 @@ public class LovAssociaDispositivoMB extends BaseMB{
 		this.exibir = exibir;
 	}
 
+	public DispositivoDataProvider getDispositivoDataProvider() {
+		return dispositivoDataProvider;
+	}
+
+	public void setDispositivoDataProvider(
+			DispositivoDataProvider dispositivoDataProvider) {
+		this.dispositivoDataProvider = dispositivoDataProvider;
+	}
+
+	
+	
 }

@@ -154,4 +154,10 @@ public class DispositivoDataProvider extends HibernateDataProvider<DispositivoVi
 		return getDispositivoDao().get(idDispositivo);
 	}
 
+	public Dispositivo validaDispositivo(String cod_dispositivo){
+
+			return getDispositivoDao().validaDispositivo(cod_dispositivo);
+
+	}
+
 }

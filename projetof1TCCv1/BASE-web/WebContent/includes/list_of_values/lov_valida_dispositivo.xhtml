@@ -56,7 +56,8 @@
 							target="#{lovAssociaDispositivoMB.exibir}" value="false" />
 					</a4j:commandButton>
 					<rich:spacer width="10px" />
-					<a4j:commandButton value="Confirmar"
+					<a4j:commandButton value="Confirmar" 
+					action="#{superMB.atualizarSelecao}"
 						rendered="#{lovAssociaDispositivoMB.validaBoolean}">
 						<f:setPropertyActionListener
 							target="#{lovAssociaDispositivoMB.exibir}" value="false" />
