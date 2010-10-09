@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,6 +61,12 @@ public class Cliente implements Serializable {
 	@Length(max=1, min=0)
 	private String sexo;
 
+	
+	//uni-directional many-to-one association to Dispositivo
+    @OneToOne
+	@JoinColumn(name="ID_DISPOSITIVO")
+	private Dispositivo dispositivo;	
+	
     public Cliente() {
     }
 
@@ -132,6 +140,14 @@ public class Cliente implements Serializable {
 
 	public void setCelular(Integer celular) {
 		this.celular = celular;
+	}
+
+	public Dispositivo getDispositivo() {
+		return dispositivo;
+	}
+
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
 	}
 	
 	
