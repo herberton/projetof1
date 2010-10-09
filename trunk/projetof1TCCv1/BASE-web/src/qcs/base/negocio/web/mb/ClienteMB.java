@@ -8,7 +8,9 @@ import org.apache.commons.logging.LogFactory;
 
 import qcs.base.lov.web.mb.LovAssociaDispositivoMB;
 import qcs.base.negocio.Cliente;
+import qcs.base.negocio.Dispositivo;
 import qcs.base.negocio.web.dataprov.ClienteDataProvider;
+import qcs.base.negocio.web.dataprov.DispositivoDataProvider;
 import qcs.base.negocio.web.dataprov.StatusClienteDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
@@ -30,11 +32,15 @@ public class ClienteMB extends BaseMB {
 	private Long statusCliente;
 	private ClienteDataProvider dataProvider;
 	private StatusClienteDataProvider statusClienteDataProvider;
+	private LovAssociaDispositivoMB lovAssociaDispositivoMB;	
+	private DispositivoDataProvider dispositivoDataProvider;
+	private Dispositivo dispositivo;
 
 	//VARIAVEIS
 	private Integer codDispositivo;
 	private boolean validaBoolean= false;
-	private LovAssociaDispositivoMB lovAssociaDispositivoMB;
+	private qcs.base.negocio.web.datamodel.DispositivoDataModel dispositivoDataModel;
+
 
 	public Cliente getCliente() {
 		return cliente;
@@ -188,13 +194,6 @@ public class ClienteMB extends BaseMB {
 		}
 	}
 
-	public void validaDispositivo(){		
-		
-		System.out.println("METODO CHAMADOOOOOOO");
-		validaBoolean = !validaBoolean;
-		System.out.println("validaBoolean=" + validaBoolean);
-	}
-
 
 	public ClienteDataProvider getDataProvider() {
 		return dataProvider;
@@ -255,6 +254,51 @@ public class ClienteMB extends BaseMB {
 			LovAssociaDispositivoMB lovAssociaDispositivoMB) {
 		this.lovAssociaDispositivoMB = lovAssociaDispositivoMB;
 	}
+
+	public void atualizarSelecao(){
+		try{			
+			cliente = getDataProvider().consultar(view.getIdCliente());	
+			dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();
+			cliente.setDispositivo(dispositivo);
+			editar();
+			dispositivo.setCliente(cliente);
+			dispositivoDataProvider.alterar(dispositivo);
+			
+
+		}catch(Exception e){
+			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
+		}
+	}
+	public void removerSelecao(){
+		try{
+			cliente = getDataProvider().consultar(view.getIdCliente());	
+			dispositivo = cliente.getDispositivo();
+			dispositivo.setCliente(null);
+			dispositivoDataProvider.alterar(dispositivo);			
+			cliente.setDispositivo(null);
+			editar();
+		}catch(Exception e){
+			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
+		}
+	}
+
+	public DispositivoDataProvider getDispositivoDataProvider() {
+		return dispositivoDataProvider;
+	}
+
+	public void setDispositivoDataProvider(
+			DispositivoDataProvider dispositivoDataProvider) {
+		this.dispositivoDataProvider = dispositivoDataProvider;
+	}
+
+	public qcs.base.negocio.web.datamodel.DispositivoDataModel getDispositivoDataModel() {
+		return dispositivoDataModel;
+	}
+
+	public void setDispositivoDataModel(
+			qcs.base.negocio.web.datamodel.DispositivoDataModel dispositivoDataModel) {
+		this.dispositivoDataModel = dispositivoDataModel;
+	}	
 
 
 }
