@@ -23,6 +23,7 @@ public class ClienteTransformer implements ResultTransformer{
 		view.setRg((String) values[2]);
 		view.setCpf((String) values[3]);
 		view.setCelular((Integer) values[4]);		
+		view.setdispositivoAssoc((Long)values[5]);
 
 		return view;
 	
