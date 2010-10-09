@@ -1,7 +1,6 @@
 package qcs.persistence.rhdefensoria.view;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 public class ClienteView implements Serializable{
@@ -12,6 +11,7 @@ public class ClienteView implements Serializable{
 	private String rg;
 	private String cpf;
 	private Integer celular;
+	private Long dispositivoAssoc;
 	
 	public Long getIdCliente() {
 		return idCliente;
@@ -44,6 +44,12 @@ public class ClienteView implements Serializable{
 	}
 	public void setCelular(Integer celular) {
 		this.celular = celular;
+	}
+	public Long getdispositivoAssoc() {
+		return dispositivoAssoc;
+	}
+	public void setdispositivoAssoc(Long dispositivoAssoc) {
+		this.dispositivoAssoc = dispositivoAssoc;
 	}
 
 	
