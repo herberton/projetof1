@@ -41,7 +41,7 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 			Criteria c = getSession().createCriteria(classeEntidade);
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);			
-			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+			c.createAlias("cliente", "cli", Criteria.LEFT_JOIN);			
 
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idDispositivo"));
@@ -73,9 +73,9 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(utilizados != null && !utilizados.trim().isEmpty()){
 					if("sim".equals(utilizados))
-						c.add(Restrictions.isNotNull("Cliente"));
+						c.add(Restrictions.isNotNull("cli.idCliente"));
 					else
-						c.add(Restrictions.isEmpty("Cliente"));
+						c.add(Restrictions.isNull("cli.idCliente"));
 				}				
 
 			}
@@ -115,7 +115,7 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 		try {
 			Criteria c = getSession().createCriteria(classeEntidade);			
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);
-			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+			c.createAlias("cliente", "cli", Criteria.LEFT_JOIN);				
 
 			if(atributosFiltros != null){
 
@@ -139,9 +139,9 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(utilizados != null && !utilizados.trim().isEmpty()){
 					if("sim".equals(utilizados))
-						c.add(Restrictions.isNotEmpty("Cliente"));
+						c.add(Restrictions.isNotNull("cli.idCliente"));
 					else
-						c.add(Restrictions.isEmpty("Cliente"));
+						c.add(Restrictions.isNull("cli.idCliente"));
 				}					
 
 			}
@@ -170,7 +170,7 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 			Criteria c = getSession().createCriteria(classeEntidade);
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);
-			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+			c.createAlias("cliente", "cli", Criteria.LEFT_JOIN);				
 
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idDispositivo"));
@@ -202,10 +202,10 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(utilizados != null && !utilizados.trim().isEmpty()){
 					if("sim".equals(utilizados))
-						c.add(Restrictions.isNotEmpty("Cliente"));
+						c.add(Restrictions.isNotNull("cli.idCliente"));
 					else
-						c.add(Restrictions.isEmpty("Cliente"));
-				}					
+						c.add(Restrictions.isNull("cli.idCliente"));
+				}				
 
 			}
 
@@ -231,7 +231,9 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 		try{		
 			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("cliente", "cli", Criteria.LEFT_JOIN);
 			c.add(Restrictions.eq("idRfid", cod_dispositivo));
+			c.add(Restrictions.isNull("cli.idCliente"));
 			return (Dispositivo)c.uniqueResult();
 
 		}catch (HibernateException ex) {
