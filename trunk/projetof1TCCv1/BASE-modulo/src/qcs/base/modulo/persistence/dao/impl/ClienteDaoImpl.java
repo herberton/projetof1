@@ -39,6 +39,7 @@ implements ClienteDao {
 		try{	
 			log.debug("Listar "+classeEntidade+" de "+first+" até "+max+".");
 			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("dispositivo", "disp", Criteria.LEFT_JOIN);			
 
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idCliente"));
@@ -46,6 +47,7 @@ implements ClienteDao {
 			pList.add(Projections.property("rg"));
 			pList.add(Projections.property("cpf"));
 			pList.add(Projections.property("celular"));			
+			pList.add(Projections.property("disp.idDispositivo"));
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){
@@ -99,6 +101,7 @@ implements ClienteDao {
 			log.debug("Listar "+classeEntidade+" de "+first+" até "+max+".");
 			
 			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("dispositivo", "disp", Criteria.LEFT_JOIN);			
 			
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idCliente"));
@@ -106,6 +109,7 @@ implements ClienteDao {
 			pList.add(Projections.property("rg"));
 			pList.add(Projections.property("cpf"));
 			pList.add(Projections.property("celular"));			
+			pList.add(Projections.property("disp.idDispositivo"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){

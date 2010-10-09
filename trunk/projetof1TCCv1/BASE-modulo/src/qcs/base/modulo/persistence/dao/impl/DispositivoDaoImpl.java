@@ -24,7 +24,7 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 	private static final long serialVersionUID = 1L;
 	protected static Log log = LogFactory.getLog(FuncionalidadeDaoImpl.class);
-	
+
 	public DispositivoDaoImpl(Session session){
 		super(session);
 	}
@@ -36,38 +36,38 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 			String orderField, boolean descending)
 			throws InfrastructureException, Exception {
 		try {
-			
+
 			log.debug("Listar "+classeEntidade+" de "+first+" até "+max+".");
-			
+
 			Criteria c = getSession().createCriteria(classeEntidade);
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);			
-//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
-			
+			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idDispositivo"));
 			pList.add(Projections.property("ip"));
 			pList.add(Projections.property("sd.descricao"));
-			
+
 			c.setProjection(pList);
-			
-			
+
+
 			if(atributosFiltros != null){
-				
-				
+
+
 				//IP...
 				String ip = (String)atributosFiltros.get("ip");
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(ip != null && !ip.trim().isEmpty()){
 					c.add(Restrictions.eq("ip", ip));
 				}
-				
+
 				//STATUS DISPOSITIVO...
 				Long idStatusDispositivo = (Long)atributosFiltros.get("idStatusDispositivo");
 				log.debug("\tidStatusDispositivo listWithFilterToView: " + idStatusDispositivo);
 				if(idStatusDispositivo != null && idStatusDispositivo != 0){
 					c.add(Restrictions.eq("sd.idStatusDispositivo", idStatusDispositivo));
 				}	
-				
+
 				//Dispositivos Utilizados
 				String utilizados = (String)atributosFiltros.get("utilizados");
 				log.debug("\tip listWithFilterToView: " + ip);
@@ -77,18 +77,18 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 					else
 						c.add(Restrictions.isEmpty("Cliente"));
 				}				
-							
+
 			}
-			
+
 			c.setFirstResult(first);
 			c.setMaxResults(max);
 
 			if(orderField != null){
 				c.addOrder(descending ? Order.desc(orderField) : Order.asc(orderField));
 			}
-			
+
 			return (Collection<Dispositivo>)c.list();
-			
+
 		}catch (HibernateException ex) {
 			throw new InfrastructureException(ex);
 		}catch(Exception e){
@@ -98,7 +98,7 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 	@Override
 	public Dispositivo update(Dispositivo objeto)
-			throws InfrastructureException, Exception {
+	throws InfrastructureException, Exception {
 		try{
 			return (Dispositivo) getSession().merge(objeto);
 		}catch (HibernateException ex) {
@@ -110,30 +110,30 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 
 	@Override
 	public int getMaxRows(Map<String, Object> atributosFiltros)
-			throws InfrastructureException, Exception {
-		
+	throws InfrastructureException, Exception {
+
 		try {
 			Criteria c = getSession().createCriteria(classeEntidade);			
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);
-//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
-			
+			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+
 			if(atributosFiltros != null){
-				
-				
+
+
 				//IP...
 				String ip = (String)atributosFiltros.get("ip");
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(ip != null && !ip.trim().isEmpty()){
 					c.add(Restrictions.eq("ip", ip));
 				}
-				
+
 				//STATUS DISPOSITIVO...
 				Long idStatusDispositivo = (Long)atributosFiltros.get("idStatusDispositivo");
 				log.debug("\tidStatusDispositivo listWithFilterToView: " + idStatusDispositivo);
 				if(idStatusDispositivo != null && idStatusDispositivo != 0){
 					c.add(Restrictions.eq("sd.idStatusDispositivo", idStatusDispositivo));
 				}		
-				
+
 				//Dispositivos Utilizados
 				String utilizados = (String)atributosFiltros.get("utilizados");
 				log.debug("\tip listWithFilterToView: " + ip);
@@ -143,13 +143,13 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 					else
 						c.add(Restrictions.isEmpty("Cliente"));
 				}					
-							
+
 			}
-			
+
 			c.setProjection(Projections.rowCount());
-			
+
 			return (Integer)c.uniqueResult();
-			
+
 		}catch (HibernateException ex) {
 			throw new InfrastructureException(ex);
 		}catch(Exception e){
@@ -163,40 +163,40 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 			Map<String, Object> atributosFiltros, int first, int max,
 			String orderField, boolean descending)
 			throws InfrastructureException, Exception {
-		
+
 		try {
-			
+
 			log.debug("Listar "+classeEntidade+" de "+first+" até "+max+".");
-			
+
 			Criteria c = getSession().createCriteria(classeEntidade);
 			c.createAlias("statusDispositivo", "sd", Criteria.LEFT_JOIN);
-//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
-			
+			//			c.createAlias("cliente", "cliente", Criteria.LEFT_JOIN);			
+
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idDispositivo"));
 			pList.add(Projections.property("ip"));
 			pList.add(Projections.property("sd.descricao"));
-			
+
 			c.setProjection(pList);
-			
-			
+
+
 			if(atributosFiltros != null){
-				
-				
+
+
 				//IP...
 				String ip = (String)atributosFiltros.get("ip");
 				log.debug("\tip listWithFilterToView: " + ip);
 				if(ip != null && !ip.trim().isEmpty()){
 					c.add(Restrictions.eq("ip", ip));
 				}
-				
+
 				//STATUS DISPOSITIVO...
 				Long idStatusDispositivo = (Long)atributosFiltros.get("idStatusDispositivo");
 				log.debug("\tidStatusDispositivo listWithFilterToView: " + idStatusDispositivo);
 				if(idStatusDispositivo != null && idStatusDispositivo != 0){
 					c.add(Restrictions.eq("sd.idStatusDispositivo", idStatusDispositivo));
 				}
-				
+
 				//Dispositivos Utilizados
 				String utilizados = (String)atributosFiltros.get("utilizados");
 				log.debug("\tip listWithFilterToView: " + ip);
@@ -206,26 +206,36 @@ public class DispositivoDaoImpl extends HibernateDaoImpl<Dispositivo, Long> impl
 					else
 						c.add(Restrictions.isEmpty("Cliente"));
 				}					
-							
+
 			}
-			
+
 			c.setFirstResult(first);
 			c.setMaxResults(max);
 
 			if(orderField != null){
 				c.addOrder(descending ? Order.desc(orderField) : Order.asc(orderField));
 			}
-			
+
 			c.setResultTransformer(new DispositivoTransformer());
-			
+
 			return (Collection<DispositivoView>)c.list();
-			
+
 		}catch (HibernateException ex) {
 			throw new InfrastructureException(ex);
 		}catch(Exception e){
 			throw e;
 		}
 	}
-	
-	
+
+	public Dispositivo validaDispositivo(String cod_dispositivo){
+
+		try{		
+			Criteria c = getSession().createCriteria(classeEntidade);
+			c.add(Restrictions.eq("idRfid", cod_dispositivo));
+			return (Dispositivo)c.uniqueResult();
+
+		}catch (HibernateException ex) {
+			throw new InfrastructureException(ex);
+		}		
+	}
 }
