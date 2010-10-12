@@ -58,14 +58,14 @@ implements ClienteDao {
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo CPF
 				String cpf = (String)atributosFiltros.get("CPF");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(cpf != null && !cpf.trim().isEmpty()){				
 					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo RG
 				String rg = (String)atributosFiltros.get("RG");
 				log.debug("\tnome listWithFilterToView: "+nome);
@@ -99,10 +99,10 @@ implements ClienteDao {
 			String orderField, boolean descending) throws InfrastructureException, Exception {
 		try{	
 			log.debug("Listar "+classeEntidade+" de "+first+" até "+max+".");
-			
+
 			Criteria c = getSession().createCriteria(classeEntidade);
 			c.createAlias("dispositivo", "disp", Criteria.LEFT_JOIN);			
-			
+
 			ProjectionList pList = Projections.projectionList();
 			pList.add(Projections.property("idCliente"));
 			pList.add(Projections.property("nome"));
@@ -120,14 +120,14 @@ implements ClienteDao {
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo CPF
 				String cpf = (String)atributosFiltros.get("CPF");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(cpf != null && !cpf.trim().isEmpty()){				
 					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo RG
 				String rg = (String)atributosFiltros.get("RG");
 				log.debug("\tnome listWithFilterToView: "+nome);
@@ -166,6 +166,19 @@ implements ClienteDao {
 		}
 	}
 
+	public Cliente retornaCliente(String cpf){
+
+		try{		
+			Criteria c = getSession().createCriteria(classeEntidade);
+			c.add(Restrictions.eq("cpf", cpf));
+			return (Cliente)c.uniqueResult();
+
+		}catch (HibernateException ex) {
+			throw new InfrastructureException(ex);
+		}		
+	}	
+	
+	
 	@Override
 	public int getMaxRows(Map<String, Object> atributosFiltros) throws InfrastructureException, Exception {
 		try{	
@@ -179,23 +192,22 @@ implements ClienteDao {
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo CPF
 				String cpf = (String)atributosFiltros.get("CPF");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(cpf != null && !cpf.trim().isEmpty()){				
 					c.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
 				}
-				
+
 				//filtra clientes pelo RG
 				String rg = (String)atributosFiltros.get("RG");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(rg != null && !rg.trim().isEmpty()){				
 					c.add(Restrictions.ilike("rg", rg, MatchMode.ANYWHERE));
 				}				
-				
-			}
 
+			}
 
 			c.setProjection(Projections.rowCount());
 			return (Integer)c.uniqueResult();

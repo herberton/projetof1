@@ -13,5 +13,5 @@ public interface ClienteDao extends HibernateDao<Cliente, Long> {
 
 	public Collection<ClienteView> listWithFilterToView(Map<String, Object> atributosFiltros, int first, int max,	String orderField, boolean descending)throws InfrastructureException, Exception;
 	public int getMaxRows(Map<String, Object> atributosFiltros)throws InfrastructureException, Exception;
-	
+	public Cliente retornaCliente(String cpf);
 }
