@@ -145,6 +145,11 @@ public class ClienteDataProvider extends HibernateDataProvider<ClienteView, Clie
 		return objeto;
 	}
 
+	public Cliente retornaCliente(String cpf){
+		
+		return getClienteDao().retornaCliente(cpf);
+	}
+	
 	public void excluir(Cliente objeto) throws InfrastructureException, Exception{
 		getClienteDao().makeTransient(objeto);
 		session.flush();

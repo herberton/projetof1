@@ -188,7 +188,7 @@
 								style=" width : 14px;">
 								<f:setPropertyActionListener value="#{objeto}"
 									target="#{clienteMB.view}" />
-							</a4j:commandButton>							
+							</a4j:commandButton>
 						</a4j:region>
 					</rich:column>
 					<f:facet name="footer">
@@ -272,6 +272,25 @@
 						<rich:ajaxValidator event="onblur" />
 					</h:inputText>
 					<rich:message for="cpf" errorStyle="color: darkred;" />
+					<h:outputLabel value="Associar Dispositivo" />
+					<a4j:commandButton image="#{aplicacaoBundle['icone.ativar']}"
+						ajaxRendered="true"
+						oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
+						reRenderAfterComplete="modalPanelModalAssociarDispositivo"
+						rendered="#{clienteMB.dispositivo == null}"
+						style=" width : 14px;">
+						<f:setPropertyActionListener
+							target="#{lovAssociaDispositivoMB.exibir}" value="true" />
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{clienteMB.view}" />
+					</a4j:commandButton>
+					<a4j:commandButton image="#{aplicacaoBundle['icone.desativar']}"
+						ajaxRendered="true" action="#{clienteMB.removerSelecao}"
+						rendered="#{clienteMB.dispositivo != null}" style=" width : 14px;">
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{clienteMB.view}" />
+					</a4j:commandButton>
+
 
 				</h:panelGrid>
 

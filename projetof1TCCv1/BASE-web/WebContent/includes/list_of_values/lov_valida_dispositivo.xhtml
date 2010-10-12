@@ -37,6 +37,9 @@
 									<h:graphicImage id="imagemVisto"
 										rendered="#{lovAssociaDispositivoMB.validaBoolean}"
 										value="#{aplicacaoBundle['icone.sim']}" />
+									<h:graphicImage id="imagemVisto2"
+										rendered="#{!lovAssociaDispositivoMB.validaBoolean}"
+										value="#{aplicacaoBundle['icone.nao']}" />										
 									<a4j:commandButton
 										action="#{lovAssociaDispositivoMB.validaDispositivo}"
 										value="Validar" reRender="imagemVisto" id="buscar" />
@@ -56,8 +59,8 @@
 							target="#{lovAssociaDispositivoMB.exibir}" value="false" />
 					</a4j:commandButton>
 					<rich:spacer width="10px" />
-					<a4j:commandButton value="Confirmar" 
-					action="#{superMB.atualizarSelecao}"
+					<a4j:commandButton value="Confirmar"
+						action="#{superMB.atualizarSelecao}"
 						rendered="#{lovAssociaDispositivoMB.validaBoolean}">
 						<f:setPropertyActionListener
 							target="#{lovAssociaDispositivoMB.exibir}" value="false" />
