@@ -39,7 +39,6 @@ public class ClienteMB extends BaseMB {
 	//VARIAVEIS
 	private Integer codDispositivo;
 	private boolean validaBoolean= false;
-	private qcs.base.negocio.web.datamodel.DispositivoDataModel dispositivoDataModel;
 
 
 	public Cliente getCliente() {
@@ -95,24 +94,12 @@ public class ClienteMB extends BaseMB {
 	}
 
 	@Override
-	public void adicionar() {
-		try{
-			log.debug("Incluindo Cliente: "+cliente.getIdCliente());
-
-			cliente = getDataProvider().incluir(cliente);
-			this.pesquisar(); 
-			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
-		}catch(Exception e){
-			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
-		}
-	}
-
-	@Override
 	protected void clear() {
 		this.nome = "";
 		this.RG = "";
 		this.CPF = "";
 		this.statusCliente = null;
+		this.dispositivo = null;
 
 		if(getCurrentState() == null || getCurrentState().equals(PESQUISAR_STATE)){
 			this.cliente = new Cliente();
@@ -254,16 +241,38 @@ public class ClienteMB extends BaseMB {
 			LovAssociaDispositivoMB lovAssociaDispositivoMB) {
 		this.lovAssociaDispositivoMB = lovAssociaDispositivoMB;
 	}
-
-	public void atualizarSelecao(){
-		try{			
-			cliente = getDataProvider().consultar(view.getIdCliente());	
-			dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();
-			cliente.setDispositivo(dispositivo);
-			editar();
+	@Override
+	public void adicionar() {
+		try{
+			log.debug("Incluindo Cliente: "+cliente.getIdCliente());
+			cliente = getDataProvider().incluir(cliente);
+			cliente = dataProvider.retornaCliente(cliente.getCpf());
 			dispositivo.setCliente(cliente);
 			dispositivoDataProvider.alterar(dispositivo);
 			
+			this.pesquisar(); 
+			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
+		}catch(Exception e){
+			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
+		}
+	}	
+
+	public void atualizarSelecao(){
+		try{			
+
+			if(!isAdicionarState()){
+				cliente = getDataProvider().consultar(view.getIdCliente());
+				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();
+				cliente.setDispositivo(dispositivo);				
+				editar();
+				dispositivo.setCliente(cliente);
+				dispositivoDataProvider.alterar(dispositivo);				
+			}else{
+				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();	
+				cliente.setDispositivo(dispositivo);
+				//dispositivo.setCliente(cliente);
+			}
+
 
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
@@ -271,12 +280,21 @@ public class ClienteMB extends BaseMB {
 	}
 	public void removerSelecao(){
 		try{
-			cliente = getDataProvider().consultar(view.getIdCliente());	
-			dispositivo = cliente.getDispositivo();
-			dispositivo.setCliente(null);
-			dispositivoDataProvider.alterar(dispositivo);			
-			cliente.setDispositivo(null);
-			editar();
+
+			if(!isAdicionarState()){
+				cliente = getDataProvider().consultar(view.getIdCliente());	
+				dispositivo = cliente.getDispositivo();
+				dispositivo.setCliente(null);
+				dispositivoDataProvider.alterar(dispositivo);			
+				cliente.setDispositivo(null);
+				editar();
+			}else{
+				dispositivo = cliente.getDispositivo();
+				dispositivo.setCliente(null);
+				cliente.setDispositivo(null);
+			}
+
+
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
 		}
@@ -291,14 +309,15 @@ public class ClienteMB extends BaseMB {
 		this.dispositivoDataProvider = dispositivoDataProvider;
 	}
 
-	public qcs.base.negocio.web.datamodel.DispositivoDataModel getDispositivoDataModel() {
-		return dispositivoDataModel;
+	public Dispositivo getDispositivo() {
+		return dispositivo;
 	}
 
-	public void setDispositivoDataModel(
-			qcs.base.negocio.web.datamodel.DispositivoDataModel dispositivoDataModel) {
-		this.dispositivoDataModel = dispositivoDataModel;
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
 	}	
+
+
 
 
 }
