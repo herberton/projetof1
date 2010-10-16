@@ -1173,6 +1173,41 @@
    <value>#{dispositivoDataProvider}</value>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>historicoClienteDataProvider</managed-bean-name>
+  <managed-bean-class>qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>org.hibernate.Session</property-class>
+   <value>#{requestScope.hibernateSession}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>historicoClienteMB</managed-bean-name>
+  <managed-bean-class>qcs.base.negocio.web.mb.HistoricoClienteMB</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>historicoClienteDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider</property-class>
+   <value>#{historicoClienteDataProvider}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>historicoClienteDataModel</managed-bean-name>
+  <managed-bean-class>qcs.base.negocio.web.datamodel.HistoricoClienteDataModel</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>dataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider</property-class>
+   <value>#{historicoClienteDataProvider}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>historicoClienteMB</property-name>
+   <property-class>qcs.base.negocio.web.mb.HistoricoClienteMB</property-class>
+   <value>#{historicoClienteMB}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <display-name>logradouro</display-name>
   <from-view-id>/pages/enderecamento/logradouro.xhtml</from-view-id>

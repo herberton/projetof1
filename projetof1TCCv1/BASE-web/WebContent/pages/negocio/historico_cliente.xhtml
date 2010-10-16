@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition
+	template="/default/templates/estados_esq_menu_template.xhtml">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<ui:param name="nomeEntidade"
+		value="#{historicoClienteMB.historicoCliente.cliente.nome}" />
+	<ui:param name="defaultBean" value="#{historicoClienteMB}" />
+	<ui:param name="defaultModel" value="#{historicoClienteDataModel}" />
+	<ui:param name="entidade" value="#{historicoClienteBundle['entidade']}" />
+	<ui:param name="mensagemIcone"
+		value="#{moduloSistemaMB.mensagem.icone}" />
+	<ui:param name="mensagemMensagem"
+		value="#{moduloSistemaMB.mensagem.mensagem}" />
+	<ui:param name="mensagemTitulo"
+		value="#{moduloSistemaMB.mensagem.titulo}" />
+	<ui:param name="mensagemExibirMsg"
+		value="#{moduloSistemaMB.mensagem.exibirMsg}" />
+	<ui:param name="superMB" value="#{historicoClienteMB}" />
+
+	<ui:define name="buttonExcluirSim">
+		<a4j:commandButton id="excluirModalExcluir"
+			alt="#{aplicacaoBundle['botao.excluir']}" type="button"
+			value="#{aplicacaoBundle['botao.sim']}"
+			reRenderAfterComplete="searchlistBlock"
+			onclick="Richfaces.hideModalPanel('modalPanelExcluir')"
+			action="#{historicoClienteMB.excluir}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputFormat value="#{aplicacaoBundle['titulo.tela']}">
+			<f:param value="#{historicoClienteBundle['titulo.pagina']}" />
+		</h:outputFormat>
+		<a4j:keepAlive beanName="historicoClienteDataModel" />
+		<a4j:keepAlive beanName="historicoClienteMB" />
+	</ui:define>
+
+	<ui:define name="searchlistBlock">
+		<rich:panel id="panel_search" rendered="true"
+			bodyClass="panelHeaderFooterClass"
+			style="border:none;margin:0;padding:0;width:100%;">
+			<a4j:region selfRendered="true">
+				<h:panelGrid columns="1" cellspacing="3"
+					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
+
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome Cliente" />
+						<h:inputText value="#{historicoClienteMB.nome}" size="40" />
+					</h:panelGrid>
+					<h:panelGrid columns="9">
+						<h:outputLabel value="Data Entrada Parque" />
+						<rich:calendar value="#{historicoClienteMB.dataEntrada}"
+							id="paramDataEntra" required="true" />
+						<rich:spacer width="25" />
+						<h:outputLabel value="à" />
+						<rich:spacer width="25" />
+						<h:outputLabel value="Data Saída Parque" />
+						<rich:calendar value="#{historicoClienteMB.dataSaida}"
+							id="paramDataSai" required="true" />
+						<rich:spacer width="50" />
+						<a4j:commandButton id="buttonPesquisar"
+							alt="#{aplicacaoBundle['botao.pesquisar']} #{historicoClienteBundle['entidade']}"
+							type="submit"
+							reRenderAfterComplete="simpleTogglePanelBody, searchlistBlock"
+							value="#{aplicacaoBundle['botao.pesquisar']}" />
+
+					</h:panelGrid>
+
+
+
+
+				</h:panelGrid>
+			</a4j:region>
+		</rich:panel>
+		<rich:panel id="panelDataTableHistoricoCliente"
+			style="width:100%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+			<a4j:region selfRendered="true">
+				<rich:dataTable id="dataTableHistoricoCliente"
+					value="#{historicoClienteDataModel}" var="objeto"
+					rowClasses="row1, row2" rows="19" columnsWidth="2, 50, 20,20,50"
+					cellspacing="0" cellpadding="0" border="1"
+					styleClass="dataTableBody"
+					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
+					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Código"
+								reRender="dataTableHistoricoCliente">
+								<a4j:actionparam name="sortField" value="idHistoricoCliente" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.id_historico_cliente}" />
+					</rich:column>
+
+
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Cliente"
+								reRender="dataTableHistoricoCliente">
+								<a4j:actionparam name="sortField" value="client.nome" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.nomeCliente}" />
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Data Entrada Parque"
+								reRender="dataTableHistoricoCliente">
+								<a4j:actionparam name="sortField" value="dataHoraEntradaParque" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.data_hora_entrada_parque}" />
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Data Saída Parque"
+								reRender="dataTableHistoricoCliente">
+								<a4j:actionparam name="sortField" value="dataHoraSaidaParque" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.data_hora_saida_parque}" />
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink value="Observação"
+								reRender="dataTableHistoricoCliente">
+								<a4j:actionparam name="sortField" value="observacao" />
+							</a4j:commandLink>
+						</f:facet>
+						<h:outputText value="#{objeto.observacao}" />
+					</rich:column>
+
+					<f:facet name="footer">
+						<rich:datascroller />
+					</f:facet>
+				</rich:dataTable>
+			</a4j:region>
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="addUpdateBlock">
+	</ui:define>
+	<ui:define name="modalExcluir">
+
+	</ui:define>
+	<ui:define name="modalVisualizar">
+	</ui:define>
+
+
+</ui:composition>
+
+</html>
