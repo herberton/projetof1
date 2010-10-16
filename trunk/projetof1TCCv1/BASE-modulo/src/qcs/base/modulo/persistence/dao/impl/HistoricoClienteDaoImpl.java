@@ -51,6 +51,7 @@ implements HistoricoClienteDao {
 			pList.add(Projections.property("disp.idDispositivo"));
 			pList.add(Projections.property("statusDisp.idStatusDispositivo"));
 			pList.add(Projections.property("client.idCliente"));
+			pList.add(Projections.property("client.nome"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){
@@ -107,6 +108,7 @@ implements HistoricoClienteDao {
 			pList.add(Projections.property("disp.idDispositivo"));
 			pList.add(Projections.property("statusDisp.idStatusDispositivo"));
 			pList.add(Projections.property("client.idCliente"));
+			pList.add(Projections.property("client.nome"));			
 			c.setProjection(pList);
 
 			if(atributosFiltros != null){
