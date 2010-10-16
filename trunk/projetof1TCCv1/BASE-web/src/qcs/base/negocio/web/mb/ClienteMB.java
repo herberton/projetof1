@@ -246,10 +246,12 @@ public class ClienteMB extends BaseMB {
 		try{
 			log.debug("Incluindo Cliente: "+cliente.getIdCliente());
 			cliente = getDataProvider().incluir(cliente);
-			cliente = dataProvider.retornaCliente(cliente.getCpf());
-			dispositivo.setCliente(cliente);
-			dispositivoDataProvider.alterar(dispositivo);
 			
+			if(cliente.getDispositivo() != null){
+				cliente = dataProvider.retornaCliente(cliente.getCpf());
+				dispositivo.setCliente(cliente);
+				dispositivoDataProvider.alterar(dispositivo);}
+
 			this.pesquisar(); 
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
 		}catch(Exception e){
@@ -270,7 +272,6 @@ public class ClienteMB extends BaseMB {
 			}else{
 				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();	
 				cliente.setDispositivo(dispositivo);
-				//dispositivo.setCliente(cliente);
 			}
 
 
@@ -289,9 +290,8 @@ public class ClienteMB extends BaseMB {
 				cliente.setDispositivo(null);
 				editar();
 			}else{
-				dispositivo = cliente.getDispositivo();
-				dispositivo.setCliente(null);
 				cliente.setDispositivo(null);
+				dispositivo = null;
 			}
 
 
