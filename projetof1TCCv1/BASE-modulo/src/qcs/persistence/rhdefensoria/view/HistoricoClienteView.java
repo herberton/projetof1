@@ -14,6 +14,7 @@ public class HistoricoClienteView implements Serializable{
 	private Long idDispositivo;
 	private Long idStatusDispositivo;
 	private Long idCliente;
+	private String nomeCliente;
 	
 	public Long getId_historico_cliente() {
 		return id_historico_cliente;
@@ -57,5 +58,12 @@ public class HistoricoClienteView implements Serializable{
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+	
 
 }

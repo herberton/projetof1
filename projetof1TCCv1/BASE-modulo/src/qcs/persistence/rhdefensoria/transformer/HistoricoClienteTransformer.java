@@ -26,6 +26,7 @@ public class HistoricoClienteTransformer implements ResultTransformer{
 		view.setIdDispositivo((Long) values[4]);
 		view.setIdStatusDispositivo((Long) values[5]);
 		view.setIdCliente((Long) values[6]);		
+		view.setNomeCliente((String) values[7]);
 
 		return view;
 	}
