@@ -32,8 +32,8 @@ public class HistoricoCliente implements Serializable {
 	@NotNull
 	@SequenceGenerator(name="HISTORICO_CLIENTE_IDHISTORICOCLINTE_GENERATOR", sequenceName="SEQ_HISTORICO_CLIENTE ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HISTORICO_CLIENTE_IDHISTORICOCLINTE_GENERATOR")
-	@Column(name="ID_HISTORICO_CLINTE")
-	private Long idHistoricoClinte;
+	@Column(name="ID_HISTORICO_CLIENTE")
+	private Long idHistoricoCliente;
 
 	@NotNull
     @Temporal( TemporalType.DATE)
@@ -65,12 +65,12 @@ public class HistoricoCliente implements Serializable {
     public HistoricoCliente() {
     }
 
-	public Long getIdHistoricoClinte() {
-		return this.idHistoricoClinte;
+	public Long getIdHistoricoCliente() {
+		return this.idHistoricoCliente;
 	}
 
-	public void setIdHistoricoClinte(Long idHistoricoClinte) {
-		this.idHistoricoClinte = idHistoricoClinte;
+	public void setIdHistoricoCliente(Long idHistoricoCliente) {
+		this.idHistoricoCliente = idHistoricoCliente;
 	}
 
 	public Date getDataHoraEntradaParque() {
