@@ -1,6 +1,7 @@
 package qcs.base.modulo.persistence.dao.impl;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -15,6 +16,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import qcs.base.modulo.persistence.dao.HistoricoClienteDao;
+import qcs.base.negocio.Cliente;
 import qcs.base.negocio.HistoricoCliente;
 import qcs.persistence.hibernate.exception.InfrastructureException;
 import qcs.persistence.rhdefensoria.transformer.HistoricoClienteTransformer;
@@ -56,19 +58,29 @@ implements HistoricoClienteDao {
 
 			if(atributosFiltros != null){
 
-				//filtra brinquedos pelo nome do brinquedos
+				//filtra HistoricoCliente pelo nome do cliente
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
 
-				//filtra brinquedos pelo status do brinquedos
-				Long status = (Long)atributosFiltros.get("idStatusHistoricoCliente");
-				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+status);
-				if(status != null){				
-					c.add(Restrictions.eq("statusBrinq.idStatusHistoricoCliente", status));
+				//filtra HistoricoCliente pela data de entrada
+				Date dataEntrada = (Date)atributosFiltros.get("dataEntrada");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataEntrada);
+				if(dataEntrada != null){				
+					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
 				}	
+				
+				//filtra HistoricoCliente pela data de saida
+				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
+				if(dataSaida != null){				
+					c.add(Restrictions.eq("dataHoraSaidaParque", dataSaida));
+				}				
+				
+				
+				
 			}
 
 			//informa qual a primeira posição para retorno
@@ -113,19 +125,26 @@ implements HistoricoClienteDao {
 
 			if(atributosFiltros != null){
 
-				//filtra brinquedos pelo nome do brinquedos
+				//filtra HistoricoCliente pelo nome do cliente
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
 
-				//filtra brinquedos pelo status do brinquedos
-				Long status = (Long)atributosFiltros.get("idStatusHistoricoCliente");
-				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+status);
-				if(status != null && status != 0){				
-					c.add(Restrictions.eq("statusBrinq.idStatusHistoricoCliente", status));
+				//filtra HistoricoCliente pela data de entrada
+				Date dataEntrada = (Date)atributosFiltros.get("dataEntrada");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataEntrada);
+				if(dataEntrada != null){				
+					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
 				}	
+				
+				//filtra HistoricoCliente pela data de saida
+				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
+				if(dataSaida != null){				
+					c.add(Restrictions.eq("dataHoraSaidaParque", dataSaida));
+				}		
 			}
 
 			//informa qual a primeira posição para retorno
@@ -165,19 +184,26 @@ implements HistoricoClienteDao {
 
 			if(atributosFiltros != null){
 
-				//filtra brinquedos pelo nome do brinquedos
+				//filtra HistoricoCliente pelo nome do cliente
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
 					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
 				}
 
-				//filtra brinquedos pelo status do brinquedos
-				Long status = (Long)atributosFiltros.get("idStatusHistoricoCliente");
-				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+status);
-				if(status != null){				
-					c.add(Restrictions.eq("statusBrinq.idStatusHistoricoCliente", status));
+				//filtra HistoricoCliente pela data de entrada
+				Date dataEntrada = (Date)atributosFiltros.get("dataEntrada");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataEntrada);
+				if(dataEntrada != null){				
+					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
 				}	
+				
+				//filtra HistoricoCliente pela data de saida
+				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
+				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
+				if(dataSaida != null){				
+					c.add(Restrictions.eq("dataHoraSaidaParque", dataSaida));
+				}		
 			}
 
 
@@ -190,5 +216,19 @@ implements HistoricoClienteDao {
 		}
 	}
 
+	public HistoricoCliente retornaHistoricoCliente(Long idCliente){
+
+		try{		
+			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("cliente", "client", Criteria.LEFT_JOIN);
+			c.add(Restrictions.eq("client.idCliente",idCliente));
+			c.add(Restrictions.eq("dataHoraEntradaParque", new Date()));
+			return (HistoricoCliente)c.uniqueResult();
+
+		}catch (HibernateException ex) {
+			throw new InfrastructureException(ex);
+		}		
+	}
+	
 		
 }
