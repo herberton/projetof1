@@ -66,8 +66,15 @@ public class HistoricoClienteMB extends BaseMB {
 	public Map<String, Object> getAtributosFiltros(){
 		if(atributosFiltros == null)atributosFiltros = new HashMap<String, Object>();
 
-		//atributosFiltros.remove("nome");
-		//atributosFiltros.put("nome",nome);
+		atributosFiltros.remove("nome");
+		atributosFiltros.put("nome",nome);
+		
+		atributosFiltros.remove("dataEntrada");
+		atributosFiltros.put("dataEntrada",dataEntrada);
+		
+		atributosFiltros.remove("dataSaida");
+		atributosFiltros.put("dataSaida",dataSaida);		
+		
 
 
 		return atributosFiltros;
@@ -112,7 +119,9 @@ public class HistoricoClienteMB extends BaseMB {
 
 	@Override
 	protected void clear() {
-		//this.nome = "";
+		this.nome = "";
+		this.dataEntrada = null;
+		this.dataSaida = null;		
 
 		if(getCurrentState() == null || getCurrentState().equals(PESQUISAR_STATE)){
 			this.historicoCliente = new HistoricoCliente();
@@ -193,7 +202,6 @@ public class HistoricoClienteMB extends BaseMB {
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
 		}
 	}
-
 
 
 }

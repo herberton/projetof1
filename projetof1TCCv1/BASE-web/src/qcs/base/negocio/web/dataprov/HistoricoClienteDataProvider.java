@@ -1,5 +1,6 @@
 package qcs.base.negocio.web.dataprov;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,10 @@ import javax.faces.context.FacesContext;
 
 import qcs.base.modulo.persistence.dao.HistoricoClienteDao;
 import qcs.base.modulo.persistence.dao.impl.HistoricoClienteDaoImpl;
+import qcs.base.negocio.Cliente;
+import qcs.base.negocio.Dispositivo;
 import qcs.base.negocio.HistoricoCliente;
+import qcs.base.negocio.StatusDispositivo;
 import qcs.datamodel.HibernateDataProvider;
 import qcs.persistence.hibernate.exception.InfrastructureException;
 import qcs.persistence.rhdefensoria.view.HistoricoClienteView;
@@ -152,6 +156,35 @@ public class HistoricoClienteDataProvider extends HibernateDataProvider<Historic
 
 	public HistoricoCliente consultar(Long idHistoricoCliente) throws InfrastructureException, Exception{
 		return getHistoricoClienteDao().get(idHistoricoCliente);
+	}
+
+	public void insereHistoricoClienteEntradaParque(Cliente cliente,Dispositivo dispositivo,StatusDispositivo statusDispositivo){
+
+		HistoricoCliente historicoCliente = new HistoricoCliente();
+		historicoCliente.setCliente(cliente);
+		historicoCliente.setDispositivo(dispositivo);
+		historicoCliente.setStatusDispositivo(statusDispositivo);
+		historicoCliente.setDataHoraEntradaParque(new Date());
+
+		try {
+			incluir(historicoCliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void insereHistoricoClienteSaidaParque(Cliente cliente){
+		
+		HistoricoCliente historicoCliente = getHistoricoClienteDao().retornaHistoricoCliente(cliente.getIdCliente());
+		
+		historicoCliente.setDataHoraSaidaParque(new Date());
+		
+		try {
+			alterar(historicoCliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
