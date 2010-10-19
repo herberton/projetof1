@@ -9,8 +9,10 @@ import org.apache.commons.logging.LogFactory;
 import qcs.base.lov.web.mb.LovAssociaDispositivoMB;
 import qcs.base.negocio.Cliente;
 import qcs.base.negocio.Dispositivo;
+import qcs.base.negocio.HistoricoCliente;
 import qcs.base.negocio.web.dataprov.ClienteDataProvider;
 import qcs.base.negocio.web.dataprov.DispositivoDataProvider;
+import qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider;
 import qcs.base.negocio.web.dataprov.StatusClienteDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
@@ -35,6 +37,7 @@ public class ClienteMB extends BaseMB {
 	private LovAssociaDispositivoMB lovAssociaDispositivoMB;	
 	private DispositivoDataProvider dispositivoDataProvider;
 	private Dispositivo dispositivo;
+	private HistoricoClienteDataProvider historicoClienteDataProvider;
 
 	//VARIAVEIS
 	private Integer codDispositivo;
@@ -250,7 +253,9 @@ public class ClienteMB extends BaseMB {
 			if(cliente.getDispositivo() != null){
 				cliente = dataProvider.retornaCliente(cliente.getCpf());
 				dispositivo.setCliente(cliente);
-				dispositivoDataProvider.alterar(dispositivo);}
+				dispositivoDataProvider.alterar(dispositivo);
+				historicoClienteDataProvider.insereHistoricoClienteEntradaParque(cliente, dispositivo, dispositivo.getStatusDispositivo());				
+			}
 
 			this.pesquisar(); 
 			mensagem = GeneralMessagesUtil.criarMensagemSucessoInclusaoApartirDe(getTextoDocumento());
@@ -268,7 +273,8 @@ public class ClienteMB extends BaseMB {
 				cliente.setDispositivo(dispositivo);				
 				editar();
 				dispositivo.setCliente(cliente);
-				dispositivoDataProvider.alterar(dispositivo);				
+				dispositivoDataProvider.alterar(dispositivo);	
+				historicoClienteDataProvider.insereHistoricoClienteEntradaParque(cliente, dispositivo, dispositivo.getStatusDispositivo());
 			}else{
 				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();	
 				cliente.setDispositivo(dispositivo);
@@ -289,6 +295,7 @@ public class ClienteMB extends BaseMB {
 				dispositivoDataProvider.alterar(dispositivo);			
 				cliente.setDispositivo(null);
 				editar();
+				historicoClienteDataProvider.insereHistoricoClienteSaidaParque(cliente);
 			}else{
 				cliente.setDispositivo(null);
 				dispositivo = null;
@@ -315,9 +322,16 @@ public class ClienteMB extends BaseMB {
 
 	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
+	}
+
+	public HistoricoClienteDataProvider getHistoricoClienteDataProvider() {
+		return historicoClienteDataProvider;
+	}
+
+	public void setHistoricoClienteDataProvider(
+			HistoricoClienteDataProvider historicoClienteDataProvider) {
+		this.historicoClienteDataProvider = historicoClienteDataProvider;
 	}	
-
-
 
 
 }

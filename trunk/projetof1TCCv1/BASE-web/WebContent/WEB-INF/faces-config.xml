@@ -1107,6 +1107,11 @@
    <property-class>qcs.base.negocio.web.dataprov.DispositivoDataProvider</property-class>
    <value>#{dispositivoDataProvider}</value>
   </managed-property>
+  <managed-property>
+   <property-name>historicoClienteDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider</property-class>
+   <value>#{historicoClienteDataProvider}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>clienteDataModel</managed-bean-name>
