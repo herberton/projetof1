@@ -1034,46 +1034,6 @@
   </managed-property>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>lovDispositivoDataProvider</managed-bean-name>
-  <managed-bean-class>qcs.base.lov.web.dataprov.LovDispositivoDataProvider</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
-  <managed-property>
-   <property-name>session</property-name>
-   <property-class>org.hibernate.Session</property-class>
-   <value>#{requestScope.hibernateSession}</value>
-  </managed-property>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>lovDispositivoMB</managed-bean-name>
-  <managed-bean-class>qcs.base.lov.web.mb.LovDispositivoMB</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
-  <managed-property>
-   <property-name>lovDispositivoDataProvider</property-name>
-   <property-class>qcs.base.lov.web.dataprov.LovDispositivoDataProvider</property-class>
-   <value>#{lovDispositivoDataProvider}</value>
-  </managed-property>
-  <managed-property>
-   <property-name>dataProvider</property-name>
-   <property-class>qcs.base.negocio.web.dataprov.DispositivoDataProvider</property-class>
-   <value>#{dispositivoDataProvider}</value>
-  </managed-property>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>lovDispositivoDataModel</managed-bean-name>
-  <managed-bean-class>qcs.base.lov.web.datamodel.LovDispositivoDataModel</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
-  <managed-property>
-   <property-name>lovDispositivoMB</property-name>
-   <property-class>qcs.base.lov.web.mb.LovDispositivoMB</property-class>
-   <value>#{lovDispositivoMB}</value>
-  </managed-property>
-  <managed-property>
-   <property-name>dataProvider</property-name>
-   <property-class>qcs.base.lov.web.dataprov.LovDispositivoDataProvider</property-class>
-   <value>#{lovDispositivoDataProvider}</value>
-  </managed-property>
- </managed-bean>
- <managed-bean>
   <managed-bean-name>clienteDataProvider</managed-bean-name>
   <managed-bean-class>qcs.base.negocio.web.dataprov.ClienteDataProvider</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
