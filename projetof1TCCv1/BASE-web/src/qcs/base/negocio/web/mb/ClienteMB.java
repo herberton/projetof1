@@ -3,6 +3,8 @@ package qcs.base.negocio.web.mb;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -332,6 +334,14 @@ public class ClienteMB extends BaseMB {
 			HistoricoClienteDataProvider historicoClienteDataProvider) {
 		this.historicoClienteDataProvider = historicoClienteDataProvider;
 	}	
+	
+	public String carregarHistoricoCliente(){
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("clienteView", view);
+		
+		return "historico_cliente";
+	}	
 
+	
 
 }

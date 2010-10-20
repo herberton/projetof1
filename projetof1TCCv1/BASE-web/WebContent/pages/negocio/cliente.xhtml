@@ -170,6 +170,14 @@
 									target="#{clienteMB.view}" />
 							</a4j:commandButton>
 							<rich:spacer width="7" />
+							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
+								alt="Histórico Cliente"
+								action="#{clienteMB.carregarHistoricoCliente}"
+								rendered="#{objeto.idCliente != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{clienteMB.view}" />
+							</a4j:commandButton>
+							<rich:spacer width="7" />
 							<a4j:commandButton image="#{aplicacaoBundle['icone.ativar']}"
 								ajaxRendered="true"
 								oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
@@ -277,8 +285,7 @@
 						ajaxRendered="true"
 						oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
 						reRenderAfterComplete="modalPanelModalAssociarDispositivo"
-						rendered="#{clienteMB.dispositivo == null}"
-						style=" width : 14px;">
+						rendered="#{clienteMB.dispositivo == null}" style=" width : 14px;">
 						<f:setPropertyActionListener
 							target="#{lovAssociaDispositivoMB.exibir}" value="true" />
 						<f:setPropertyActionListener value="#{objeto}"

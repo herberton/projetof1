@@ -34,6 +34,9 @@
     NAME="output6" PATH="/pages/configuracao/modulo_sistema.xhtml"
     TARGET="rules:#pages#configuracao#modulo_sistema.xhtml"
     TITLE="modulo_sistema" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="cliente::#pages#negocio#cliente.xhtml"
+    NAME="output7" PATH="/pages/negocio/cliente.xhtml"
+    TARGET="rules:#pages#negocio#cliente.xhtml" TITLE="cliente" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#enderecamento#cidade.xhtml"
@@ -77,4 +80,18 @@
   PATH="/pages/configuracao/modulo_sistema.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#pessoa#pessoa.xhtml"
   PATH="/pages/pessoa/pessoa.xhtml" SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#cliente.xhtml"
+  PATH="/pages/negocio/cliente.xhtml" SHAPE="63,229,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#negocio#cliente.xhtml:0" NAME="item"
+   PATH="/pages/negocio/cliente.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="historico_cliente::#pages#negocio#historico_cliente.xhtml"
+    NAME="output" PATH="/pages/negocio/historico_cliente.xhtml"
+    TARGET="rules:#pages#negocio#historico_cliente.xhtml"
+    TITLE="historico_cliente" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#historico_cliente.xhtml"
+  PATH="/pages/negocio/historico_cliente.xhtml" SHAPE="61,305,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
