@@ -62,7 +62,7 @@ implements HistoricoClienteDao {
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
-					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+					c.add(Restrictions.ilike("client.nome", nome, MatchMode.ANYWHERE));
 				}
 
 				//filtra HistoricoCliente pela data de entrada
@@ -129,7 +129,7 @@ implements HistoricoClienteDao {
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
-					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+					c.add(Restrictions.ilike("client.nome", nome, MatchMode.ANYWHERE));
 				}
 
 				//filtra HistoricoCliente pela data de entrada
@@ -181,6 +181,9 @@ implements HistoricoClienteDao {
 	public int getMaxRows(Map<String, Object> atributosFiltros) throws InfrastructureException, Exception {
 		try{	
 			Criteria c = getSession().createCriteria(classeEntidade);
+			c.createAlias("dispositivo", "disp", Criteria.LEFT_JOIN);	
+			c.createAlias("statusDispositivo", "statusDisp", Criteria.LEFT_JOIN);			
+			c.createAlias("cliente", "client", Criteria.LEFT_JOIN);				
 
 			if(atributosFiltros != null){
 
@@ -188,21 +191,21 @@ implements HistoricoClienteDao {
 				String nome = (String)atributosFiltros.get("nome");
 				log.debug("\tnome listWithFilterToView: "+nome);
 				if(nome != null && !nome.trim().isEmpty()){				
-					c.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+					c.add(Restrictions.ilike("client.nome", nome, MatchMode.ANYWHERE));
 				}
 
 				//filtra HistoricoCliente pela data de entrada
 				Date dataEntrada = (Date)atributosFiltros.get("dataEntrada");
 				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataEntrada);
 				if(dataEntrada != null){				
-					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
+					c.add(Restrictions.ge("dataHoraEntradaParque", dataEntrada));
 				}	
 				
 				//filtra HistoricoCliente pela data de saida
 				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
 				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
 				if(dataSaida != null){				
-					c.add(Restrictions.eq("dataHoraSaidaParque", dataSaida));
+					c.add(Restrictions.le("dataHoraEntradaParque", dataSaida));
 				}		
 			}
 
