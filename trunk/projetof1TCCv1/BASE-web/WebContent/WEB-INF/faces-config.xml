@@ -1247,6 +1247,10 @@
    <from-outcome>modulo_sistema</from-outcome>
    <to-view-id>/pages/configuracao/modulo_sistema.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>cliente</from-outcome>
+   <to-view-id>/pages/negocio/cliente.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/pages/enderecamento/cidade.xhtml</from-view-id>
@@ -1260,6 +1264,13 @@
   <navigation-case>
    <from-outcome>valor_tabela_auxiliar</from-outcome>
    <to-view-id>/pages/tabelaauxiliar/valor_tabela_auxiliar.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/pages/negocio/cliente.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>historico_cliente</from-outcome>
+   <to-view-id>/pages/negocio/historico_cliente.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>

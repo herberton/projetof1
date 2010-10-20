@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -11,6 +13,7 @@ import qcs.base.negocio.HistoricoCliente;
 import qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider;
 import qcs.base.web.message.GeneralMessagesUtil;
 import qcs.datamodel.BaseMB;
+import qcs.persistence.rhdefensoria.view.ClienteView;
 import qcs.persistence.rhdefensoria.view.HistoricoClienteView;
 
 public class HistoricoClienteMB extends BaseMB {
@@ -46,6 +49,10 @@ public class HistoricoClienteMB extends BaseMB {
 	}
 
 	public String getNome() {
+		
+		if (getClienteView() != null)
+			nome = getClienteView().getNome();
+		
 		return nome;
 	}
 
@@ -201,6 +208,9 @@ public class HistoricoClienteMB extends BaseMB {
 		}catch(Exception e){
 			mensagem = GeneralMessagesUtil.criarMensagemErroApartirDe(e, getTextoDocumento());
 		}
+	}
+	public ClienteView getClienteView(){	
+		return (ClienteView) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("clienteView");
 	}
 
 
