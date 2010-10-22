@@ -81,7 +81,7 @@
  <PROCESS-ITEM NAME="rules:#pages#pessoa#pessoa.xhtml"
   PATH="/pages/pessoa/pessoa.xhtml" SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#negocio#cliente.xhtml"
-  PATH="/pages/negocio/cliente.xhtml" SHAPE="63,229,0,0" model-entity="JSFProcessGroup">
+  PATH="/pages/negocio/cliente.xhtml" SHAPE="40,232,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#pages#negocio#cliente.xhtml:0" NAME="item"
    PATH="/pages/negocio/cliente.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -92,6 +92,12 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#negocio#historico_cliente.xhtml"
-  PATH="/pages/negocio/historico_cliente.xhtml" SHAPE="61,305,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
+  PATH="/pages/negocio/historico_cliente.xhtml" SHAPE="72,368,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#negocio#historico_cliente.xhtml:0"
+   NAME="item" PATH="/pages/negocio/historico_cliente.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cliente::#pages#negocio#cliente.xhtml"
+    NAME="output" PATH="/pages/negocio/cliente.xhtml"
+    TARGET="rules:#pages#negocio#cliente.xhtml" TITLE="cliente" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

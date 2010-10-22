@@ -83,7 +83,7 @@
 			<a4j:region selfRendered="true">
 				<rich:dataTable id="dataTableCliente" value="#{clienteDataModel}"
 					var="objeto" rowClasses="row1, row2" rows="19"
-					columnsWidth="2,150,50,50,50,80" cellspacing="0" cellpadding="0"
+					columnsWidth="2,150,50,50,50,100" cellspacing="0" cellpadding="0"
 					border="1" styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
 					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
@@ -188,6 +188,9 @@
 									target="#{lovAssociaDispositivoMB.exibir}" value="true" />
 								<f:setPropertyActionListener value="#{objeto}"
 									target="#{clienteMB.view}" />
+								<f:setPropertyActionListener value=""
+									target="#{lovAssociaDispositivoMB.codDispositivo}" />
+								<f:setPropertyActionListener value="false" target="#{lovAssociaDispositivoMB.validaBoolean}" />
 							</a4j:commandButton>
 							<rich:spacer width="7" />
 							<a4j:commandButton image="#{aplicacaoBundle['icone.desativar']}"
