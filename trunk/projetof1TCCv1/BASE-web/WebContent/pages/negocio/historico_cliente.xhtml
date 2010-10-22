@@ -51,20 +51,25 @@
 				<h:panelGrid columns="1" cellspacing="3"
 					columnClasses="panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2,panelUpdateRow1, panelUpdateRow2">
 
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="4">
 						<h:outputLabel value="Nome Cliente" />
 						<h:inputText value="#{historicoClienteMB.nome}" size="40" />
+						<rich:spacer width="10" />
+						<a4j:commandButton id="buttonVoltar"
+							alt="#{aplicacaoBundle['botao.pesquisar']} #{historicoClienteBundle['entidade']}"
+							type="submit"
+							value="Voltar à Clente" action="cliente" />
 					</h:panelGrid>
 					<h:panelGrid columns="9">
 						<h:outputLabel value="Data Entrada Parque" />
 						<rich:calendar value="#{historicoClienteMB.dataEntrada}"
-							id="paramDataEntra" required="true" converter="DateBRConverter"/>
+							id="paramDataEntra" required="true" converter="DateBRConverter" />
 						<rich:spacer width="25" />
 						<h:outputLabel value="à" />
 						<rich:spacer width="25" />
 						<h:outputLabel value="Data Saída Parque" />
 						<rich:calendar value="#{historicoClienteMB.dataSaida}"
-							id="paramDataSai" required="true" converter="DateBRConverter"/>
+							id="paramDataSai" required="true" converter="DateBRConverter" />
 						<rich:spacer width="50" />
 						<a4j:commandButton id="buttonPesquisar"
 							alt="#{aplicacaoBundle['botao.pesquisar']} #{historicoClienteBundle['entidade']}"

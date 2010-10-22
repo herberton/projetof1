@@ -1233,6 +1233,13 @@
    <to-view-id>/pages/negocio/historico_cliente.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/pages/negocio/historico_cliente.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>cliente</from-outcome>
+   <to-view-id>/pages/negocio/cliente.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
  <application>
   <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
   <resource-bundle>
