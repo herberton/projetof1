@@ -1,0 +1,31 @@
+@CHARSET "ISO-8859-1";
+.maindiv {
+	text-align:center;
+	background-color: #CCCCCC;
+	margin: 1px;
+	height: 300px;
+	width: 350px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #666666;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+	display: table;
+}
+.secondarydiv {
+	background-color: #999999;
+	margin: 0 auto;
+	height: 100px;
+	width: 300px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #666666;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+}
