@@ -1,87 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#pages#enderecamento#logradouro.xhtml"
-  PATH="/pages/enderecamento/logradouro.xhtml" SHAPE="480,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#enderecamento#logradouro.xhtml:0"
-   NAME="item" PATH="/pages/enderecamento/logradouro.xhtml" model-entity="JSFProcessItem"/>
- </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="cidade::#pages#enderecamento#cidade.xhtml"
-    NAME="output1" PATH="/pages/enderecamento/cidade.xhtml"
-    TARGET="rules:#pages#enderecamento#cidade.xhtml" TITLE="cidade" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="perfil::#pages#seguranca#perfil.xhtml"
-    NAME="output2" PATH="/pages/seguranca/perfil.xhtml"
-    TARGET="rules:#pages#seguranca#perfil.xhtml" TITLE="perfil" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="usuario::#pages#seguranca#usuario.xhtml"
-    NAME="output3" PATH="/pages/seguranca/usuario.xhtml"
-    TARGET="rules:#pages#seguranca#usuario.xhtml" TITLE="usuario" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="tabela_auxiliar::#pages#tabelaauxiliar#tabela_auxiliar.xhtml"
-    NAME="output4" PATH="/pages/tabelaauxiliar/tabela_auxiliar.xhtml"
-    TARGET="rules:#pages#tabelaauxiliar#tabela_auxiliar.xhtml"
-    TITLE="tabela_auxiliar" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="pessoa::#pages#pessoa#pessoa.xhtml"
-    NAME="output" PATH="/pages/pessoa/pessoa.xhtml"
-    TARGET="rules:#pages#pessoa#pessoa.xhtml" TITLE="pessoa" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="perfil_funcionalidades::#pages#seguranca#perfil_funcionalidades.xhtml"
-    NAME="output5" PATH="/pages/seguranca/perfil_funcionalidades.xhtml"
-    TARGET="rules:#pages#seguranca#perfil_funcionalidades.xhtml"
-    TITLE="perfil_funcionalidades" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="modulo_sistema::#pages#configuracao#modulo_sistema.xhtml"
-    NAME="output6" PATH="/pages/configuracao/modulo_sistema.xhtml"
-    TARGET="rules:#pages#configuracao#modulo_sistema.xhtml"
-    TITLE="modulo_sistema" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="cliente::#pages#negocio#cliente.xhtml"
     NAME="output7" PATH="/pages/negocio/cliente.xhtml"
     TARGET="rules:#pages#negocio#cliente.xhtml" TITLE="cliente" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#enderecamento#cidade.xhtml"
-  PATH="/pages/enderecamento/cidade.xhtml" SHAPE="256,33,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#enderecamento#cidade.xhtml:0"
-   NAME="item" PATH="/pages/enderecamento/cidade.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="catraca::#pages#negocio#catraca.xhtml"
+    NAME="output" PATH="/pages/negocio/catraca.xhtml"
+    TARGET="rules:#pages#negocio#catraca.xhtml" TITLE="catraca" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="brinquedo::#pages#negocio#brinquedo.xhtml"
+    NAME="output1" PATH="/pages/negocio/brinquedo.xhtml"
+    TARGET="rules:#pages#negocio#brinquedo.xhtml" TITLE="brinquedo" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="logradouro::#pages#enderecamento#logradouro.xhtml" NAME="output"
-    PATH="/pages/enderecamento/logradouro.xhtml"
-    TARGET="rules:#pages#enderecamento#logradouro.xhtml"
-    TITLE="logradouro" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#tabelaauxiliar#tabela_auxiliar.xhtml"
-  PATH="/pages/tabelaauxiliar/tabela_auxiliar.xhtml" SHAPE="304,273,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#tabelaauxiliar#tabela_auxiliar.xhtml:0"
-   NAME="item" PATH="/pages/tabelaauxiliar/tabela_auxiliar.xhtml" model-entity="JSFProcessItem">
+    ID="dispositivo::#pages#negocio#dispositivo.xhtml" NAME="output2"
+    PATH="/pages/negocio/dispositivo.xhtml"
+    TARGET="rules:#pages#negocio#dispositivo.xhtml" TITLE="dispositivo" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="valor_tabela_auxiliar::#pages#tabelaauxiliar#valor_tabela_auxiliar.xhtml"
-    NAME="output"
-    PATH="/pages/tabelaauxiliar/valor_tabela_auxiliar.xhtml"
-    TARGET="rules:#pages#tabelaauxiliar#valor_tabela_auxiliar.xhtml"
-    TITLE="valor_tabela_auxiliar" model-entity="JSFProcessItemOutput"/>
+    ID="terminalConsulta::#pages#negocio#terminalConsulta.xhtml"
+    NAME="output3" PATH="/pages/negocio/terminalConsulta.xhtml"
+    TARGET="rules:#pages#negocio#terminalConsulta.xhtml"
+    TITLE="terminalConsulta" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="statusCliente::#pages#negocio#statusCliente.xhtml"
+    NAME="output4" PATH="/pages/negocio/statusCliente.xhtml"
+    TARGET="rules:#pages#negocio#statusCliente.xhtml"
+    TITLE="statusCliente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="statusDispositivo::#pages#negocio#statusDispositivo.xhtml"
+    NAME="output5" PATH="/pages/negocio/statusDispositivo.xhtml"
+    TARGET="rules:#pages#negocio#statusDispositivo.xhtml"
+    TITLE="statusDispositivo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="statusBrinquedo::#pages#negocio#statusBrinquedo.xhtml"
+    NAME="output6" PATH="/pages/negocio/statusBrinquedo.xhtml"
+    TARGET="rules:#pages#negocio#statusBrinquedo.xhtml"
+    TITLE="statusBrinquedo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM
-  NAME="rules:#pages#tabelaauxiliar#valor_tabela_auxiliar.xhtml"
-  PATH="/pages/tabelaauxiliar/valor_tabela_auxiliar.xhtml"
-  SHAPE="528,257,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#seguranca#usuario.xhtml"
-  PATH="/pages/seguranca/usuario.xhtml" SHAPE="242,250,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#pages#seguranca#perfil.xhtml"
-  PATH="/pages/seguranca/perfil.xhtml" SHAPE="181,168,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM
-  NAME="rules:#pages#seguranca#perfil_funcionalidades.xhtml"
-  PATH="/pages/seguranca/perfil_funcionalidades.xhtml"
-  SHAPE="304,561,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#configuracao#modulo_sistema.xhtml"
-  PATH="/pages/configuracao/modulo_sistema.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#pessoa#pessoa.xhtml"
-  PATH="/pages/pessoa/pessoa.xhtml" SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#negocio#cliente.xhtml"
-  PATH="/pages/negocio/cliente.xhtml" SHAPE="40,232,50,41" model-entity="JSFProcessGroup">
+  PATH="/pages/negocio/cliente.xhtml" SHAPE="264,32,50,25" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#pages#negocio#cliente.xhtml:0" NAME="item"
    PATH="/pages/negocio/cliente.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -92,12 +49,27 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#negocio#historico_cliente.xhtml"
-  PATH="/pages/negocio/historico_cliente.xhtml" SHAPE="72,368,50,25" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#negocio#historico_cliente.xhtml:0"
-   NAME="item" PATH="/pages/negocio/historico_cliente.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="cliente::#pages#negocio#cliente.xhtml"
-    NAME="output" PATH="/pages/negocio/cliente.xhtml"
-    TARGET="rules:#pages#negocio#cliente.xhtml" TITLE="cliente" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
+  PATH="/pages/negocio/historico_cliente.xhtml" SHAPE="464,32,50,41"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#catraca.xhtml"
+  PATH="/pages/negocio/catraca.xhtml" SHAPE="400,208,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#brinquedo.xhtml"
+  PATH="/pages/negocio/brinquedo.xhtml" SHAPE="79,274,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#dispositivo.xhtml"
+  PATH="/pages/negocio/dispositivo.xhtml" SHAPE="306,320,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#terminalConsulta.xhtml"
+  PATH="/pages/negocio/terminalConsulta.xhtml" SHAPE="280,160,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#statusCliente.xhtml"
+  PATH="/pages/negocio/statusCliente.xhtml" SHAPE="116,359,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#statusDispositivo.xhtml"
+  PATH="/pages/negocio/statusDispositivo.xhtml" SHAPE="520,256,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#negocio#statusBrinquedo.xhtml"
+  PATH="/pages/negocio/statusBrinquedo.xhtml" SHAPE="511,353,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
