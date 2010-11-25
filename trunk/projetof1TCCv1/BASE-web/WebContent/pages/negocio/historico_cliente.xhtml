@@ -63,13 +63,13 @@
 					<h:panelGrid columns="9">
 						<h:outputLabel value="Data Entrada Parque" />
 						<rich:calendar value="#{historicoClienteMB.dataEntrada}"
-							id="paramDataEntra" required="true" converter="DateBRConverter" />
+							id="paramDataEntra" converter="DateBRConverter" />
 						<rich:spacer width="25" />
 						<h:outputLabel value="à" />
 						<rich:spacer width="25" />
 						<h:outputLabel value="Data Saída Parque" />
 						<rich:calendar value="#{historicoClienteMB.dataSaida}"
-							id="paramDataSai" required="true" converter="DateBRConverter" />
+							id="paramDataSai" converter="DateBRConverter" />
 						<rich:spacer width="50" />
 						<a4j:commandButton id="buttonPesquisar"
 							alt="#{aplicacaoBundle['botao.pesquisar']} #{historicoClienteBundle['entidade']}"

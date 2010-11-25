@@ -1174,56 +1174,38 @@
   </managed-property>
  </managed-bean>
  <navigation-rule>
-  <display-name>logradouro</display-name>
-  <from-view-id>/pages/enderecamento/logradouro.xhtml</from-view-id>
- </navigation-rule>
- <navigation-rule>
   <from-view-id>*</from-view-id>
-  <navigation-case>
-   <from-outcome>cidade</from-outcome>
-   <to-view-id>/pages/enderecamento/cidade.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>perfil</from-outcome>
-   <to-view-id>/pages/seguranca/perfil.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>usuario</from-outcome>
-   <to-view-id>/pages/seguranca/usuario.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>tabela_auxiliar</from-outcome>
-   <to-view-id>/pages/tabelaauxiliar/tabela_auxiliar.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>pessoa</from-outcome>
-   <to-view-id>/pages/pessoa/pessoa.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>perfil_funcionalidades</from-outcome>
-   <to-view-id>/pages/seguranca/perfil_funcionalidades.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>modulo_sistema</from-outcome>
-   <to-view-id>/pages/configuracao/modulo_sistema.xhtml</to-view-id>
-  </navigation-case>
   <navigation-case>
    <from-outcome>cliente</from-outcome>
    <to-view-id>/pages/negocio/cliente.xhtml</to-view-id>
   </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/pages/enderecamento/cidade.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>logradouro</from-outcome>
-   <to-view-id>/pages/enderecamento/logradouro.xhtml</to-view-id>
+   <from-outcome>catraca</from-outcome>
+   <to-view-id>/pages/negocio/catraca.xhtml</to-view-id>
   </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/pages/tabelaauxiliar/tabela_auxiliar.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>valor_tabela_auxiliar</from-outcome>
-   <to-view-id>/pages/tabelaauxiliar/valor_tabela_auxiliar.xhtml</to-view-id>
+   <from-outcome>brinquedo</from-outcome>
+   <to-view-id>/pages/negocio/brinquedo.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>dispositivo</from-outcome>
+   <to-view-id>/pages/negocio/dispositivo.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>terminalConsulta</from-outcome>
+   <to-view-id>/pages/negocio/terminalConsulta.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>statusCliente</from-outcome>
+   <to-view-id>/pages/negocio/statusCliente.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>statusDispositivo</from-outcome>
+   <to-view-id>/pages/negocio/statusDispositivo.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>statusBrinquedo</from-outcome>
+   <to-view-id>/pages/negocio/statusBrinquedo.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
@@ -1231,13 +1213,6 @@
   <navigation-case>
    <from-outcome>historico_cliente</from-outcome>
    <to-view-id>/pages/negocio/historico_cliente.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/pages/negocio/historico_cliente.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>cliente</from-outcome>
-   <to-view-id>/pages/negocio/cliente.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>

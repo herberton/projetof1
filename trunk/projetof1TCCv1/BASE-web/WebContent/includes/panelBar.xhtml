@@ -9,16 +9,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <rich:panelBar binding="#{dynamicMenuMB.dynamicPanelBarCadastrosBasicos}"
-    			   rendered="#{dynamicMenuMB.menuAtual == menuConf.nome_modulo_cad_basico}"
-    			   width="135"
-    			   headerStyle="height:17px"
-    			   style="margin:0;padding:0;border:none;background-color: #{a4jSkin.tableBackgroundColor}" />
-        
-    <rich:panelBar binding="#{dynamicMenuMB.dynamicPanelBarSeguranca}"
-    			   rendered="#{dynamicMenuMB.menuAtual == menuConf.nome_modulo_seguranca}"
-    			   width="135"
-    			   headerStyle="height:17px"
-    			   style="margin:0;padding:0;border:none;background-color: #{a4jSkin.tableBackgroundColor}" />
+		   
+     <rich:panelBar binding="#{dynamicMenuMB.dynamicPanelBarPortaria}"
+ 			   rendered="#{dynamicMenuMB.menuAtual == menuConf.nome_modulo_portaria}"
+ 			   width="135"
+ 			   headerStyle="height:17px"
+ 			   style="margin:0;padding:0;border:none;background-color: #{a4jSkin.tableBackgroundColor}" />
+ 			   
+     <rich:panelBar binding="#{dynamicMenuMB.dynamicPanelBarCadastro}"
+ 			   rendered="#{dynamicMenuMB.menuAtual == menuConf.nome_modulo_cadastro}"
+ 			   width="135"
+ 			   headerStyle="height:17px"
+ 			   style="margin:0;padding:0;border:none;background-color: #{a4jSkin.tableBackgroundColor}" /> 			    			   
 </body>
 </html>
