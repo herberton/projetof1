@@ -1,0 +1,20 @@
+
+
+***********************************************************************
+Fatal NI connect error 12528, connecting to:
+ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(COMMUNITY=tcp.world)(PROTOCOL=TCP)(Host=RICA-ORACLE)(Port=1521)))(CONNECT_DATA=(SID=ORCL)(CID=(PROGRAM=C:\OraNT\DEV6\BIN\ifrun60.EXE)(HOST=RICA-ORACLE)(USER=RicardoOracle))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 8.0.6.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 8.0.6.3.0 - Production
+  Time: 27-NOV-2010 15:12:47
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 12203
+    TNS-12203: TNS:unable to connect to destination
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
