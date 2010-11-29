@@ -10,9 +10,9 @@ import javax.sql.DataSource;
 public class JDBCUtil implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private static final String url = "jdbc:oracle:thin:@10.25.0.6:1521:qcsdes01";
-	private static final String username = "rh_defensoria_novo";
-	private static final String password = "rh_defensoria_novo";
+	private static final String url = "jdbc:oracle:thin:@192.168.216.128:1521:orcl";
+	private static final String username = "system";
+	private static final String password = "qazwsx";
 
 	public static Connection getOracleJDBCConnection(){
 
