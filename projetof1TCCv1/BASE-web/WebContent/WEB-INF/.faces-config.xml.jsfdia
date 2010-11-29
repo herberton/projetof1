@@ -16,11 +16,6 @@
     PATH="/pages/negocio/dispositivo.xhtml"
     TARGET="rules:#pages#negocio#dispositivo.xhtml" TITLE="dispositivo" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="terminalConsulta::#pages#negocio#terminalConsulta.xhtml"
-    NAME="output3" PATH="/pages/negocio/terminalConsulta.xhtml"
-    TARGET="rules:#pages#negocio#terminalConsulta.xhtml"
-    TITLE="terminalConsulta" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
     ID="statusCliente::#pages#negocio#statusCliente.xhtml"
     NAME="output4" PATH="/pages/negocio/statusCliente.xhtml"
     TARGET="rules:#pages#negocio#statusCliente.xhtml"
@@ -59,9 +54,6 @@
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#pages#negocio#dispositivo.xhtml"
   PATH="/pages/negocio/dispositivo.xhtml" SHAPE="306,320,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#pages#negocio#terminalConsulta.xhtml"
-  PATH="/pages/negocio/terminalConsulta.xhtml" SHAPE="280,160,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#pages#negocio#statusCliente.xhtml"
   PATH="/pages/negocio/statusCliente.xhtml" SHAPE="116,359,0,0"

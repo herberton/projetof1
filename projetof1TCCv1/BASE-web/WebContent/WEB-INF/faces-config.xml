@@ -1192,10 +1192,6 @@
    <to-view-id>/pages/negocio/dispositivo.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>terminalConsulta</from-outcome>
-   <to-view-id>/pages/negocio/terminalConsulta.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
    <from-outcome>statusCliente</from-outcome>
    <to-view-id>/pages/negocio/statusCliente.xhtml</to-view-id>
   </navigation-case>

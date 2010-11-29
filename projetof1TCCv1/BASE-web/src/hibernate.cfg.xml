@@ -19,6 +19,8 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.connection.autocommit">false</property>
   <property name="hibernate.format_sql">true</property>
+  <property	name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property> 
+  
   <!--
 	exemplo de conexão com dataSource
   -->
