@@ -281,7 +281,6 @@ public class ClienteMB extends BaseMB {
 				dispositivoDataProvider.alterar(dispositivo);
 				historicoClienteDataProvider.insereHistoricoClienteEntradaParque(cliente, dispositivo, dispositivo.getStatusDispositivo());
 			}else{
-				System.out.println("AAAAAAAAAAAAAAAAAAAAA");
 				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();	
 				cliente.setDispositivo(dispositivo);
 			}
