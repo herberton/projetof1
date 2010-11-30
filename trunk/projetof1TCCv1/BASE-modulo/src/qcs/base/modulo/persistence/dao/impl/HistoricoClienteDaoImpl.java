@@ -226,6 +226,7 @@ implements HistoricoClienteDao {
 			c.createAlias("cliente", "client", Criteria.LEFT_JOIN);
 			c.add(Restrictions.eq("client.idCliente",idCliente));
 			c.add(Restrictions.eq("dataHoraEntradaParque", new Date()));
+			c.add(Restrictions.isNull("dataHoraSaidaParque"));
 			return (HistoricoCliente)c.uniqueResult();
 
 		}catch (HibernateException ex) {
