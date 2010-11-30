@@ -149,17 +149,7 @@
 								style="FONT-SIZE: x-large;">
 								<f:setPropertyActionListener value="#{objeto}"
 									target="#{dispositivoMB.view}" />
-							</a4j:commandButton>
-							<rich:spacer width="7" />
-							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
-								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
-								reRenderAfterComplete="panel_modalExcluir"
-								alt="#{aplicacaoBundle['botao.excluir']}"
-								action="#{dispositivoMB.carregarExclusao}"
-								rendered="#{objeto.idDispositivo != null}">
-								<f:setPropertyActionListener value="#{objeto}"
-									target="#{dispositivoMB.view}" />
-							</a4j:commandButton>
+							</a4j:commandButton>							
 						</a4j:region>
 					</h:column>
 

@@ -90,7 +90,7 @@
 			<a4j:region selfRendered="true">
 				<rich:dataTable id="dataTableHistoricoCliente"
 					value="#{historicoClienteDataModel}" var="objeto"
-					rowClasses="row1, row2" rows="19" columnsWidth="2, 50, 20,20,50"
+					rowClasses="row1, row2" rows="19" columnsWidth="2, 50, 20,20,50,50"
 					cellspacing="0" cellpadding="0" border="1"
 					styleClass="dataTableBody"
 					onRowMouseOver="this.style.backgroundColor='#{a4jSkin.additionalBackgroundColor}'"
@@ -146,6 +146,23 @@
 						</f:facet>
 						<h:outputText value="#{objeto.observacao}" />
 					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{aplicacaoBundle['acoes.label']}" />
+						</f:facet>
+							<a4j:region selfRendered="true">
+							<a4j:commandButton image="#{a4jSkin.icoImagePageEditPath}"
+								reRenderAfterComplete="addUpdateBlock"
+								alt="Registrar Observação"
+								action="#{historicoClienteMB.carregarEdicao}"
+								rendered="#{objeto.id_historico_cliente != null}">
+								<f:setPropertyActionListener value="#{objeto}"
+									target="#{historicoClienteMB.view}" />
+							</a4j:commandButton>
+							</a4j:region>
+							
+					</rich:column>					
 
 					<f:facet name="footer">
 						<rich:datascroller />
@@ -156,10 +173,35 @@
 	</ui:define>
 
 	<ui:define name="addUpdateBlock">
-	</ui:define>
-	<ui:define name="modalExcluir">
+		<rich:panel id="panel_editHistoricoCliente" rendered="true"
+			bodyClass="panelUpdate" style="width:99%;border:none;padding:0;margin:0;background-color: #{a4jSkin.tableBackgroundColor}">
+					<h:outputLabel value="Observação" />					
+					<h:inputTextarea id="observacao" cols="50" rows="3"
+						value="#{historicoClienteMB.historicoCliente.observacao}">
+					</h:inputTextarea>			
+				<rich:spacer height="10" />
+				<h:panelGrid columns="1">
+					<rich:spacer height="10" />
+					<rich:column>
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{historicoClienteMB.editarState}" alt="Salvar" type="button"
+							value="Salvar" action="#{historicoClienteMB.editar}" />
+						<a4j:commandButton reRenderAfterComplete="searchlistBlock"
+							rendered="#{historicoClienteMB.adicionarState}" alt="Incluir"
+							type="button" value="Incluir" action="#{historicoClienteMB.adicionar}" />
+						<rich:spacer width="10" />
+						<a4j:commandButton reRender="searchlistBlock" alt="Voltar"
+							immediate="true" type="button" value="Voltar"
+							action="#{historicoClienteMB.voltar}" />
+					</rich:column>
+				</h:panelGrid>			
+			
+		</rich:panel>
+	</ui:define>			
 
+	<ui:define name="modalExcluir">
 	</ui:define>
+	
 	<ui:define name="modalVisualizar">
 	</ui:define>
 

@@ -159,16 +159,7 @@
 								<f:setPropertyActionListener value="#{objeto}"
 									target="#{clienteMB.view}" />
 							</a4j:commandButton>
-							<rich:spacer width="7" />
-							<a4j:commandButton image="#{a4jSkin.icoImagePageDeletePath}"
-								oncomplete="Richfaces.showModalPanel('modalPanelExcluir');"
-								reRenderAfterComplete="panel_modalExcluir"
-								alt="#{aplicacaoBundle['botao.excluir']}"
-								action="#{clienteMB.carregarExclusao}"
-								rendered="#{objeto.idCliente!=null}">
-								<f:setPropertyActionListener value="#{objeto}"
-									target="#{clienteMB.view}" />
-							</a4j:commandButton>
+																				
 							<rich:spacer width="7" />
 							<a4j:commandButton image="#{a4jSkin.icoImagePagePath}"
 								alt="Histórico Cliente"
@@ -259,14 +250,14 @@
 					</h:selectOneMenu>
 					<rich:message for="sexo" errorStyle="color: darkred;" />
 
-					<h:outputLabel value="Qtd Visitas" />
-					<h:inputText value="#{clienteMB.cliente.qtdVisitas}" size="3"
-						id="qtdVisitas"
+					<h:outputLabel value="Celular" />
+					<h:inputText value="#{clienteMB.cliente.celular}" size="10"
+						id="celular"
 						readonly="#{!clienteMB.editarState and !clienteMB.adicionarState}"
 						style="#{!clienteMB.editarState ? 'color: black;' : ''}">
 						<rich:ajaxValidator event="onblur" />
 					</h:inputText>
-					<rich:message for="qtdVisitas" errorStyle="color: darkred;" />
+					<rich:message for="celular" errorStyle="color: darkred;" />
 
 					<h:outputLabel value="Rg" />
 					<h:inputText value="#{clienteMB.cliente.rg}" size="9" id="rg"
@@ -288,15 +279,17 @@
 						ajaxRendered="true"
 						oncomplete="Richfaces.showModalPanel('modalPanelModalAssociarDispositivo');"
 						reRenderAfterComplete="modalPanelModalAssociarDispositivo"
-						rendered="#{clienteMB.dispositivo == null}" style=" width : 14px;">
+						rendered="#{clienteMB.cliente.dispositivo == null}" style=" width : 14px;">
 						<f:setPropertyActionListener
 							target="#{lovAssociaDispositivoMB.exibir}" value="true" />
 						<f:setPropertyActionListener value="#{objeto}"
 							target="#{clienteMB.view}" />
+						<f:setPropertyActionListener value=""
+							target="#{lovAssociaDispositivoMB.codDispositivo}" />							
 					</a4j:commandButton>
 					<a4j:commandButton image="#{aplicacaoBundle['icone.desativar']}"
 						ajaxRendered="true" action="#{clienteMB.removerSelecao}"
-						rendered="#{clienteMB.dispositivo != null}" style=" width : 14px;">
+						rendered="#{clienteMB.cliente.dispositivo != null}" style=" width : 14px;">
 						<f:setPropertyActionListener value="#{objeto}"
 							target="#{clienteMB.view}" />
 					</a4j:commandButton>
@@ -353,6 +346,9 @@
 
 			<h:outputLabel value="Cpf" />
 			<h:outputText value="#{clienteMB.cliente.cpf}" />
+
+			<h:outputLabel value="Celular" />
+			<h:outputText value="#{clienteMB.cliente.celular}" />
 
 		</h:panelGrid>
 	</ui:define>
