@@ -111,7 +111,11 @@ public class Cliente implements Serializable {
 	}
 
 	public Integer getQtdVisitas() {
-		return this.qtdVisitas;
+		
+		if (this.qtdVisitas != null)
+			return this.qtdVisitas;
+		else
+			return 0;
 	}
 
 	public void setQtdVisitas(Integer qtdVisitas) {
