@@ -1,5 +1,6 @@
 package qcs.base.negocio.web.dataprov;
 
+import java.sql.CallableStatement;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
