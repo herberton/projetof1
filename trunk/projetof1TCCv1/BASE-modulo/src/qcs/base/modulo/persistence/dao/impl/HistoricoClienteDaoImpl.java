@@ -16,12 +16,13 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import qcs.base.modulo.persistence.dao.HistoricoClienteDao;
-import qcs.base.negocio.Cliente;
 import qcs.base.negocio.HistoricoCliente;
 import qcs.persistence.hibernate.exception.InfrastructureException;
 import qcs.persistence.rhdefensoria.transformer.HistoricoClienteTransformer;
 import qcs.persistence.rhdefensoria.view.HistoricoClienteView;
 import qcs.persistence.template.hibernate.impl.HibernateDaoImpl;
+
+import com.mysql.jdbc.PreparedStatement;
 
 public class HistoricoClienteDaoImpl extends HibernateDaoImpl<HistoricoCliente, Long>
 implements HistoricoClienteDao {
@@ -233,6 +234,5 @@ implements HistoricoClienteDao {
 			throw new InfrastructureException(ex);
 		}		
 	}
-	
 		
 }
