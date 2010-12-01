@@ -50,7 +50,7 @@ public class Fila implements Serializable {
 
 	//uni-directional many-to-one association to Brinquedo
     @ManyToOne
-    @NotNull
+    //@NotNull
 	@JoinColumn(name="ID_BRINQUEDO")
 	private Brinquedo brinquedo;
 
@@ -62,6 +62,7 @@ public class Fila implements Serializable {
 
 	//uni-directional many-to-one association to StatusCliente
     @ManyToOne
+    @NotNull
 	@JoinColumn(name="ID_STATUS_CLIENTE")
 	private StatusCliente statusCliente;
 
