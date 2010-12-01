@@ -1147,6 +1147,11 @@
    <property-class>org.hibernate.Session</property-class>
    <value>#{requestScope.hibernateSession}</value>
   </managed-property>
+  <managed-property>
+   <property-name>statusClienteDataProvider</property-name>
+   <property-class>qcs.base.negocio.web.dataprov.StatusClienteDataProvider</property-class>
+   <value>#{statusClienteDataProvider}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>historicoClienteMB</managed-bean-name>

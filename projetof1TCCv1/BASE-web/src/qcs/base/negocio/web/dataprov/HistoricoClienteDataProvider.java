@@ -1,6 +1,5 @@
 package qcs.base.negocio.web.dataprov;
 
-import java.sql.CallableStatement;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ import qcs.base.modulo.persistence.dao.impl.HistoricoClienteDaoImpl;
 import qcs.base.negocio.Cliente;
 import qcs.base.negocio.Dispositivo;
 import qcs.base.negocio.HistoricoCliente;
+import qcs.base.negocio.StatusCliente;
 import qcs.base.negocio.StatusDispositivo;
 import qcs.datamodel.HibernateDataProvider;
 import qcs.persistence.hibernate.exception.InfrastructureException;
@@ -21,6 +21,16 @@ import qcs.persistence.rhdefensoria.view.HistoricoClienteView;
 public class HistoricoClienteDataProvider extends HibernateDataProvider<HistoricoClienteView, HistoricoCliente, Long> {
 	private static final long serialVersionUID = 1L;
 	private HistoricoClienteDao historicoClienteDao;
+	private StatusClienteDataProvider statusClienteDataProvider;		
+
+	public StatusClienteDataProvider getStatusClienteDataProvider() {
+		return statusClienteDataProvider;
+	}
+
+	public void setStatusClienteDataProvider(
+			StatusClienteDataProvider statusClienteDataProvider) {
+		this.statusClienteDataProvider = statusClienteDataProvider;
+	}
 
 	@Override
 	public HistoricoClienteView getObjectByPk(Object idPk) {
@@ -160,31 +170,50 @@ public class HistoricoClienteDataProvider extends HibernateDataProvider<Historic
 	}
 
 	public void insereHistoricoClienteEntradaParque(Cliente cliente,Dispositivo dispositivo,StatusDispositivo statusDispositivo){
+		try {
+		Long clienteRealPrimario = Long.valueOf(1);
+		StatusCliente statCliRealPrimario = statusClienteDataProvider.consultar(clienteRealPrimario);
 
+		
 		HistoricoCliente historicoCliente = new HistoricoCliente();
 		historicoCliente.setCliente(cliente);
 		historicoCliente.setDispositivo(dispositivo);
 		historicoCliente.setStatusDispositivo(statusDispositivo);
 		historicoCliente.setDataHoraEntradaParque(new Date());
-
+		getHistoricoClienteDao().envia_sms(cliente.getCelular().toString(),"Seja bem vindo ao Parque de Diversão!");
+		getHistoricoClienteDao().inclui_cliente_fila(dispositivo, statCliRealPrimario);
+		
 		try {
 			incluir(historicoCliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
-	public void insereHistoricoClienteSaidaParque(Cliente cliente){
+	public void insereHistoricoClienteSaidaParque(Cliente cliente, Long idDispositivo){
 		
-		HistoricoCliente historicoCliente = getHistoricoClienteDao().retornaHistoricoCliente(cliente.getIdCliente());
 		
+		
+		HistoricoCliente historicoCliente = getHistoricoClienteDao().retornaHistoricoCliente(cliente.getIdCliente());		
 		historicoCliente.setDataHoraSaidaParque(new Date());
+		getHistoricoClienteDao().envia_sms(cliente.getCelular().toString(),"Obrigado por visitar o nosso Parque! Volte Sempre!");
+		getHistoricoClienteDao().retira_cliente_fila(idDispositivo);
 		
 		try {
 			alterar(historicoCliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void envia_sms(String nro_celular, String mensagem){
+		
+		getHistoricoClienteDao().envia_sms(nro_celular, mensagem);		
 		
 	}
 
