@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import qcs.base.lov.web.mb.LovAssociaDispositivoMB;
 import qcs.base.negocio.Cliente;
 import qcs.base.negocio.Dispositivo;
+import qcs.base.negocio.StatusCliente;
 import qcs.base.negocio.web.dataprov.ClienteDataProvider;
 import qcs.base.negocio.web.dataprov.DispositivoDataProvider;
 import qcs.base.negocio.web.dataprov.HistoricoClienteDataProvider;
@@ -280,6 +281,7 @@ public class ClienteMB extends BaseMB {
 				dispositivo.setCliente(cliente);
 				dispositivoDataProvider.alterar(dispositivo);
 				historicoClienteDataProvider.insereHistoricoClienteEntradaParque(cliente, dispositivo, dispositivo.getStatusDispositivo());
+				
 			}else{
 				dispositivo = lovAssociaDispositivoMB.getDispositivoSelecionado();	
 				cliente.setDispositivo(dispositivo);
@@ -291,6 +293,9 @@ public class ClienteMB extends BaseMB {
 		}
 	}
 	public void removerSelecao(){
+		
+		Long idDispositivo;
+		
 		try{
 
 			if(!isAdicionarState()){	
@@ -298,11 +303,12 @@ public class ClienteMB extends BaseMB {
 					cliente = getDataProvider().consultar(view.getIdCliente());
 				
 				dispositivo = cliente.getDispositivo();
+				idDispositivo = dispositivo.getIdDispositivo();
 				dispositivo.setCliente(null);
 				dispositivoDataProvider.alterar(dispositivo);			
 				cliente.setDispositivo(null);
 				editar();
-				historicoClienteDataProvider.insereHistoricoClienteSaidaParque(cliente);
+				historicoClienteDataProvider.insereHistoricoClienteSaidaParque(cliente,idDispositivo);
 			}else{
 				cliente.setDispositivo(null);
 				dispositivo = null;
