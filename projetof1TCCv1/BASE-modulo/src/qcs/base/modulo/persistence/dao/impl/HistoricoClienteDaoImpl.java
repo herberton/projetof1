@@ -1,8 +1,12 @@
 package qcs.base.modulo.persistence.dao.impl;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import oracle.jdbc.pool.OracleDataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,13 +20,14 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import qcs.base.modulo.persistence.dao.HistoricoClienteDao;
+import qcs.base.negocio.Dispositivo;
+import qcs.base.negocio.Fila;
 import qcs.base.negocio.HistoricoCliente;
+import qcs.base.negocio.StatusCliente;
 import qcs.persistence.hibernate.exception.InfrastructureException;
 import qcs.persistence.rhdefensoria.transformer.HistoricoClienteTransformer;
 import qcs.persistence.rhdefensoria.view.HistoricoClienteView;
 import qcs.persistence.template.hibernate.impl.HibernateDaoImpl;
-
-import com.mysql.jdbc.PreparedStatement;
 
 public class HistoricoClienteDaoImpl extends HibernateDaoImpl<HistoricoCliente, Long>
 implements HistoricoClienteDao {
@@ -72,16 +77,16 @@ implements HistoricoClienteDao {
 				if(dataEntrada != null){				
 					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
 				}	
-				
+
 				//filtra HistoricoCliente pela data de saida
 				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
 				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
 				if(dataSaida != null){				
 					c.add(Restrictions.eq("dataHoraSaidaParque", dataSaida));
 				}				
-				
-				
-				
+
+
+
 			}
 
 			//informa qual a primeira posição para retorno
@@ -139,7 +144,7 @@ implements HistoricoClienteDao {
 				if(dataEntrada != null){				
 					c.add(Restrictions.eq("dataHoraEntradaParque", dataEntrada));
 				}	
-				
+
 				//filtra HistoricoCliente pela data de saida
 				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
 				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
@@ -201,7 +206,7 @@ implements HistoricoClienteDao {
 				if(dataEntrada != null){				
 					c.add(Restrictions.ge("dataHoraEntradaParque", dataEntrada));
 				}	
-				
+
 				//filtra HistoricoCliente pela data de saida
 				Date dataSaida = (Date)atributosFiltros.get("dataSaida");
 				log.debug("\tStatus do HistoricoCliente listWithFilterToView: "+dataSaida);
@@ -234,5 +239,55 @@ implements HistoricoClienteDao {
 			throw new InfrastructureException(ex);
 		}		
 	}
-		
+
+	public void envia_sms (String nro_celular, String mensagem){
+
+		try{
+
+			OracleDataSource ods = new OracleDataSource();
+			ods.setURL("jdbc:oracle:thin:@192.168.216.128:1521:orcl");
+			ods.setUser("system");
+			ods.setPassword("qazwsx");
+			Connection conn = ods.getConnection();
+
+			CallableStatement cs = conn.prepareCall( "{ call PROC_ENVIA_SMS_ORACLE(?,?) }" );  
+			cs.setString(1, nro_celular);    
+			cs.setString(2, mensagem);  
+			cs.execute();			     
+
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+
+	}
+
+
+	public void inclui_cliente_fila (Dispositivo dispositivo, StatusCliente statusCliente){
+
+		Fila fila = new Fila();         
+
+		try {  
+
+
+			fila.setDispositivo(dispositivo);
+			fila.setStatusCliente(statusCliente);
+			getSession().save(fila);
+
+
+		} catch (Exception erro)  
+		{  
+			erro.printStackTrace();    
+		}  	               			   		
+	}
+
+	public void retira_cliente_fila (Long idDispositivo){
+
+		Criteria c = getSession().createCriteria(Fila.class);
+		c.createAlias("dispositivo", "disp", Criteria.LEFT_JOIN);
+		c.add(Restrictions.eq("disp.idDispositivo",idDispositivo));
+		Fila fila = (Fila)c.uniqueResult();
+		getSession().delete(fila);
+	}
+
+
 }
