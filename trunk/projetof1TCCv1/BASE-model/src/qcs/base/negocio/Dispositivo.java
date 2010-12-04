@@ -38,7 +38,6 @@ public class Dispositivo implements Serializable {
 	@Column(name="DATA_CADASTRO")
 	private Date dataCadastro;
     
-    @NotNull
     @Length(min=0,max=15)
 	private String ip;
 
